@@ -578,4 +578,49 @@ public class ToStringStyleTest {
             ToStringStyle.unregister(testPerson);
         }
     }
+
+    @Test
+    public void testUnregister_EmptyRegistry() {
+        // Test line 212-213: REGISTRY.remove() when registry becomes empty
+        // This tests the path where m.isEmpty() is true after removing an object
+        
+        final Person person = new Person();
+        person.name = "Test";
+        
+        // Register the person
+        ToStringStyle.register(person);
+        assertTrue("Person should be registered", ToStringStyle.isRegistered(person));
+        
+        // Unregister - this should make the registry empty and trigger REGISTRY.remove()
+        ToStringStyle.unregister(person);
+        assertFalse("Person should be unregistered", ToStringStyle.isRegistered(person));
+        
+        // Verify registry is cleaned up by registering and unregistering again
+        final Person person2 = new Person();
+        person2.name = "Test2";
+        ToStringStyle.register(person2);
+        assertTrue("Person2 should be registered", ToStringStyle.isRegistered(person2));
+        ToStringStyle.unregister(person2);
+        assertFalse("Person2 should be unregistered", ToStringStyle.isRegistered(person2));
+    }
+
+    @Test
+    public void testUnregister_NullValue() {
+        // Test line 208: null value path
+        // Unregistering null should not throw exception
+        ToStringStyle.unregister(null);
+        // Should complete without error
+    }
+
+    @Test
+    public void testUnregister_NullRegistry() {
+        // Test line 210: null registry path
+        // This is hard to test directly since getRegistry() creates a new map if null
+        // But we can test that unregister works even when registry might be null
+        final Person person = new Person();
+        person.name = "Test";
+        // Unregister without registering first - should handle gracefully
+        ToStringStyle.unregister(person);
+        // Should complete without error
+    }
 }

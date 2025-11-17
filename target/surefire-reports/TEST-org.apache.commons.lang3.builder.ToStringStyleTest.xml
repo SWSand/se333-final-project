@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="27" failures="0" name="org.apache.commons.lang3.builder.ToStringStyleTest" time="0" errors="0" skipped="0">
+<testsuite tests="30" failures="0" name="org.apache.commons.lang3.builder.ToStringStyleTest" time="0.008" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -63,29 +63,32 @@
   </properties>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternal_ComprehensiveEdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetContentEnd" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveNoFieldNamesStyle" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithPrimitiveArraysDetailTrue" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveNoFieldNamesStyle" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithPrimitiveArraysDetailTrue" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithObjectArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetSizeStartText" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetContentStart" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveDefaultStyle" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetNullText" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetSizeEndText" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testUnregister_NullRegistry" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetFieldNameValueSeparator" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithNumberBooleanCharacter" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetArrayEnd" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetSummaryObjectStartText" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithGenericArray" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testUnregister_NullValue" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithCyclicObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveMultiLineStyle" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveShortPrefixStyle" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetFieldSeparator" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveShortPrefixStyle" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetFieldSeparator" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetArraySeparator" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithRegularObjects" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetArrayStart" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithCollections" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testReadResolveSimpleStyle" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testUnregister_EmptyRegistry" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithObjectArrayDetailTrue" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testSetSummaryObjectEndText" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithPrimitiveArrays" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.ToStringStyleTest" name="testAppendInternalWithPrimitiveArrays" time="0.001"/>
 </testsuite>

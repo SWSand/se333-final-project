@@ -143,7 +143,7 @@ public final class Fraction extends Number implements Comparable&lt;Fraction&gt;
 <span class="fc" id="L143">            throw new ArithmeticException(&quot;The denominator must not be zero&quot;);</span>
         }
 <span class="fc bfc" id="L145" title="All 2 branches covered.">        if (denominator &lt; 0) {</span>
-<span class="pc bpc" id="L146" title="1 of 4 branches missed.">            if (numerator==Integer.MIN_VALUE ||</span>
+<span class="fc bfc" id="L146" title="All 4 branches covered.">            if (numerator==Integer.MIN_VALUE ||</span>
                     denominator==Integer.MIN_VALUE) {
 <span class="fc" id="L148">                throw new ArithmeticException(&quot;overflow: can't negate&quot;);</span>
             }
@@ -345,7 +345,7 @@ public final class Fraction extends Number implements Comparable&lt;Fraction&gt;
 <span class="fc" id="L345">        pos = str.indexOf('/');</span>
 <span class="fc bfc" id="L346" title="All 2 branches covered.">        if (pos &lt; 0) {</span>
             // simple whole number
-<span class="nc" id="L348">            return getFraction(Integer.parseInt(str), 1);</span>
+<span class="fc" id="L348">            return getFraction(Integer.parseInt(str), 1);</span>
         } else {
 <span class="fc" id="L350">            final int numer = Integer.parseInt(str.substring(0, pos));</span>
 <span class="fc" id="L351">            final int denom = Integer.parseInt(str.substring(pos + 1));</span>

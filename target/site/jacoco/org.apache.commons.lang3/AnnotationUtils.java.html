@@ -89,8 +89,8 @@ public class AnnotationUtils {
          */
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, Object value) {
-<span class="pc bpc" id="L92" title="1 of 2 branches missed.">            if (value instanceof Annotation) {</span>
-<span class="nc" id="L93">                value = AnnotationUtils.toString((Annotation) value);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (value instanceof Annotation) {</span>
+<span class="fc" id="L93">                value = AnnotationUtils.toString((Annotation) value);</span>
             }
 <span class="fc" id="L95">            super.appendDetail(buffer, fieldName, value);</span>
 <span class="fc" id="L96">        }</span>

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1763347501647
+Bnd-LastModified: 1763355725711
 Build-Jdk: 25.0.1
 Built-By: jsandoval
 Bundle-Description: Commons Lang, a package of Java utility classes for 

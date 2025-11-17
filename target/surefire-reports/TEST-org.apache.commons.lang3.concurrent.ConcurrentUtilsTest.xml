@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="40" failures="0" name="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="40" failures="0" name="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -78,7 +78,7 @@
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testConcurrentExceptionCauseNull" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseNullCause" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseUncheckedUncheckedException" time="0"/>
-  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseUncheckedError" time="0"/>
+  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseUncheckedError" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testHandleCauseNull" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseUncheckedChecked" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testConstantFuture_null" time="0"/>
@@ -89,10 +89,10 @@
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testConcurrentRuntimeExceptionCauseUnchecked" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testExtractCauseError" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testInitializeNull" time="0"/>
-  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testCreateIfAbsentUncheckedException" time="0"/>
-  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testPutIfAbsentKeyPresent" time="0"/>
+  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testCreateIfAbsentUncheckedException" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testPutIfAbsentKeyPresent" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testInitializeUnchecked" time="0"/>
-  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testCreateIfAbsentNullMap" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testCreateIfAbsentNullMap" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testConcurrentRuntimeExceptionCauseNull" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testConcurrentRuntimeExceptionCauseError" time="0"/>
   <testcase classname="org.apache.commons.lang3.concurrent.ConcurrentUtilsTest" name="testCreateIfAbsentUncheckedSuccess" time="0"/>

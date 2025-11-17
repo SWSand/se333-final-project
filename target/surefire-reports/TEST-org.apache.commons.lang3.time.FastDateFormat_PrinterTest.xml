@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="26" failures="0" name="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" time="0.204" errors="1" skipped="0">
+<testsuite tests="26" failures="0" name="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" time="0.704" errors="1" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -61,11 +61,11 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testSimpleDate" time="0.014"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testShortDateStyleWithLocales" time="0.011"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testSimpleDate" time="0.05"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testShortDateStyleWithLocales" time="0.033"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testMilleniumBug" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLocaleMatches" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTwentyFourHourField_AppendTo" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTwentyFourHourField_AppendTo" time="0.021"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testGetMaxLengthEstimate" time="0">
     <error message="class org.apache.commons.lang3.time.FastDateFormat cannot be cast to class org.apache.commons.lang3.time.FastDatePrinter (org.apache.commons.lang3.time.FastDateFormat and org.apache.commons.lang3.time.FastDatePrinter are in unnamed module of loader &apos;app&apos;)" type="java.lang.ClassCastException">java.lang.ClassCastException: class org.apache.commons.lang3.time.FastDateFormat cannot be cast to class org.apache.commons.lang3.time.FastDatePrinter (org.apache.commons.lang3.time.FastDateFormat and org.apache.commons.lang3.time.FastDatePrinter are in unnamed module of loader &apos;app&apos;)
 	at org.apache.commons.lang3.time.FastDatePrinterTest.testGetMaxLengthEstimate(FastDatePrinterTest.java:478)
@@ -99,21 +99,21 @@
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLowYearPadding" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testCalendarTimezoneRespected" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testAppendTo_InnerClasses" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLang303" time="0.006"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLang303" time="0.012"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLang538" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLang645" time="0.004"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testLang645" time="0.03"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testToStringContainsName" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testPaddedNumberField_AppendTo_YearPattern" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTwelveHourField_AppendTo_Int" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testPaddedNumberField_AppendTo_LargeValues" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testPaddedNumberField" time="0.006"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testPaddedNumberField" time="0.009"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testUnpaddedNumberField_AppendTo_Int" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testEquals" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testFormat" time="0.16"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTimeZoneDisplayKeyEquals" time="0.002"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testFormat_Object_StringBuffer_FieldPosition" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testFormat" time="0.544"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTimeZoneDisplayKeyEquals" time="0.004"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testFormat_Object_StringBuffer_FieldPosition" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testFormat_Long_StringBuffer" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTimeZoneMatches" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testPatternMatches" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTwelveHourField_AppendTo" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_PrinterTest" name="testTwelveHourField_AppendTo" time="0"/>
 </testsuite>

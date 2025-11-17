@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="42" failures="12" name="org.apache.commons.lang3.time.DateUtilsTest" time="0.046" errors="5" skipped="0">
+<testsuite tests="42" failures="12" name="org.apache.commons.lang3.time.DateUtilsTest" time="0.295" errors="5" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -61,11 +61,11 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testParseDateWithLeniency" time="0.003"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddMinutes" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testMonthIterator" time="0.003"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testRoundLang346" time="0.002"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_DE_OK" time="0.006">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testParseDateWithLeniency" time="0.081"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddMinutes" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testMonthIterator" time="0.031"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testRoundLang346" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_DE_OK" time="0.056">
     <error message="Unable to parse the date: Mi, 09 Apr 2008 23:55:38 GMT" type="java.text.ParseException">java.text.ParseException: Unable to parse the date: Mi, 09 Apr 2008 23:55:38 GMT
 	at org.apache.commons.lang3.time.DateUtils.parseDateWithLeniency(DateUtils.java:390)
 	at org.apache.commons.lang3.time.DateUtils.parseDate(DateUtils.java:290)
@@ -145,33 +145,33 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	... 57 more
 </system-err>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_OK" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetMilliseconds" time="0.002"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncate" time="0.005"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedEquals_Date" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testIsSameLocalTime_Cal" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddDays" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_WITH_DE_LOCALE" time="0">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_OK" time="0.005"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetMilliseconds" time="0.003"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncate" time="0.011"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedEquals_Date" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testIsSameLocalTime_Cal" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddDays" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_WITH_DE_LOCALE" time="0.002">
     <error message="Unable to parse the date: Mi, 09 Apr 2008 23:55:38 GMT" type="java.text.ParseException">java.text.ParseException: Unable to parse the date: Mi, 09 Apr 2008 23:55:38 GMT
 	at org.apache.commons.lang3.time.DateUtils.parseDateWithLeniency(DateUtils.java:390)
 	at org.apache.commons.lang3.time.DateUtils.parseDate(DateUtils.java:290)
 	at org.apache.commons.lang3.time.DateUtilsTest.testLANG799_EN_WITH_DE_LOCALE(DateUtilsTest.java:1767)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testRound" time="0.002">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testRound" time="0.035">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.time.DateUtilsTest.testRound(DateUtilsTest.java:848)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testParseDate" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testCeil" time="0.002">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testParseDate" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testCeil" time="0.004">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.time.DateUtilsTest.testCeil(DateUtilsTest.java:1571)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddSeconds" time="0">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddSeconds" time="0.001">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -182,7 +182,7 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testAddSeconds(DateUtilsTest.java:439)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_FAIL" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_EN_FAIL" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetMinutes" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
@@ -195,7 +195,7 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testToCalendar" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddHours" time="0.001">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddHours" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -217,7 +217,7 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testAddWeeks(DateUtilsTest.java:359)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddYears" time="0">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddYears" time="0.018">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -228,14 +228,14 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testAddYears(DateUtilsTest.java:319)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncateLang59" time="0.001">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncateLang59" time="0">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.time.DateUtilsTest.testTruncateLang59(DateUtilsTest.java:1137)
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testIsSameInstant_Date" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLang530" time="0.004"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLang530" time="0.028"/>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetSeconds" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
@@ -247,10 +247,10 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testSetSeconds(DateUtilsTest.java:587)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedEquals_Calendar" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedEquals_Calendar" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testIsSameInstant_Cal" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedCompareTo_Date" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddMonths" time="0.001">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testAddMonths" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -261,9 +261,9 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testAddMonths(DateUtilsTest.java:339)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testWeekIterator" time="0.003"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testWeekIterator" time="0.015"/>
   <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testTruncatedCompareTo_Calendar" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetMonths" time="0.001">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetMonths" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -274,7 +274,7 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testSetMonths(DateUtilsTest.java:499)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetDays" time="0.002">
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testSetDays" time="0">
     <failure message="expected:&lt;4&gt; but was:&lt;11&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;4&gt; but was:&lt;11&gt;
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -322,5 +322,5 @@ Caused by: java.lang.IllegalArgumentException: Unsupported class file major vers
 	at org.apache.commons.lang3.time.DateUtilsTest.testSetYears(DateUtilsTest.java:479)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_DE_FAIL" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.DateUtilsTest" name="testLANG799_DE_FAIL" time="0"/>
 </testsuite>

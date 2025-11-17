@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="1" name="org.apache.commons.lang3.reflect.ConstructorUtilsTest" time="0.007" errors="0" skipped="0">
+<testsuite tests="7" failures="1" name="org.apache.commons.lang3.reflect.ConstructorUtilsTest" time="0.022" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -61,16 +61,16 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testInvokeConstructor" time="0.006">
+  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testInvokeConstructor" time="0.012">
     <failure message="Should have thrown NoSuchMethodException" type="java.lang.AssertionError">java.lang.AssertionError: Should have thrown NoSuchMethodException
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor(ConstructorUtilsTest.java:132)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testGetAccessibleConstructorFromDescription" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testGetAccessibleConstructorFromDescription" time="0.002"/>
   <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testInvokeExactConstructor" time="0"/>
   <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testNullArgument" time="0"/>
   <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testGetAccessibleConstructor" time="0"/>
-  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testGetMatchingAccessibleMethod" time="0"/>
-  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testConstructor" time="0"/>
+  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testGetMatchingAccessibleMethod" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.reflect.ConstructorUtilsTest" name="testConstructor" time="0.007"/>
 </testsuite>

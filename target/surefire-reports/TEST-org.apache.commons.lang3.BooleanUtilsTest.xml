@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="71" failures="0" name="org.apache.commons.lang3.BooleanUtilsTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="71" failures="0" name="org.apache.commons.lang3.BooleanUtilsTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -61,7 +61,7 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testXor_primitive_nullInput" time="0"/>
+  <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testXor_primitive_nullInput" time="0.002"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testAnd_object_nullElementInput" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toStringTrueFalse_boolean" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toBooleanObject_int" time="0"/>
@@ -119,7 +119,7 @@
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toBoolean_String_String_String" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testAnd_primitive_emptyInput" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toBooleanObject_int_int_int_noMatch" time="0"/>
-  <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testOr_object_nullElementInput" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="testOr_object_nullElementInput" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toInteger_Boolean_int_int_int" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_negate_Boolean" time="0"/>
   <testcase classname="org.apache.commons.lang3.BooleanUtilsTest" name="test_toString_Boolean_String_String_String" time="0"/>

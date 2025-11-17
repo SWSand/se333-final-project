@@ -1,6 +1,7 @@
 org/apache/commons/lang3/reflect/ConstructorUtilsTest.class
 org/apache/commons/lang3/concurrent/AtomicSafeInitializerTest$AtomicSafeInitializerTestImpl.class
 org/apache/commons/lang3/reflect/AClass$GClass.class
+org/apache/commons/lang3/ObjectUtilsTest$ThrowingCloneable.class
 org/apache/commons/lang3/builder/ToStringStyleConcurrencyTest$CollectionHolder.class
 org/apache/commons/lang3/text/CompositeFormatTest$2.class
 org/apache/commons/lang3/reflect/testbed/Ambig.class

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="28" failures="0" name="org.apache.commons.lang3.builder.StandardToStringStyleTest" time="0.002" errors="0" skipped="0">
+<testsuite tests="28" failures="0" name="org.apache.commons.lang3.builder.StandardToStringStyleTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -67,7 +67,7 @@
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetContentEnd" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetSizeStartText" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testBlank" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testLong" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testLong" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetContentStart" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetUseClassName" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testLongArrayArray" time="0"/>
@@ -80,12 +80,12 @@
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetFieldSeparator" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetArraySeparator" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetFieldSeparatorAtEnd" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetUseIdentityHashCode" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetUseIdentityHashCode" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testLongArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetArrayStart" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetArrayContentDetail" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testObject" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testPerson" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testPerson" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetUseShortClassName" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testAppendSuper" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.StandardToStringStyleTest" name="testSetSummaryObjectEndText" time="0"/>

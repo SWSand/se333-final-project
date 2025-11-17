@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="53" failures="0" name="org.apache.commons.lang3.builder.EqualsBuilderTest" time="0.008" errors="0" skipped="0">
+<testsuite tests="53" failures="0" name="org.apache.commons.lang3.builder.EqualsBuilderTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -99,7 +99,7 @@
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testBooleanArrayHiddenByObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testAppend_ObjectArray_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testIntArrayHiddenByObject" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testUnrelatedClasses" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testUnrelatedClasses" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testLongArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testShortArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testAppendPrimitives_WhenIsEqualsFalse" time="0"/>
@@ -108,7 +108,7 @@
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testFloatArrayHiddenByObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testIntArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testDouble" time="0"/>
-  <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testReflectionHierarchyEquals" time="0.006"/>
+  <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testReflectionHierarchyEquals" time="0.002"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testDoubleArrayHiddenByObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.EqualsBuilderTest" name="testMultiDoubleArray" time="0"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="17" failures="0" name="org.apache.commons.lang3.mutable.MutableLongTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="17" failures="0" name="org.apache.commons.lang3.mutable.MutableLongTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -74,7 +74,7 @@
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testSubtractValueObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testDecrement" time="0"/>
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testEquals" time="0"/>
-  <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testGetSet" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testGetSet" time="0"/>
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testSetNull" time="0"/>
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testToLong" time="0"/>
   <testcase classname="org.apache.commons.lang3.mutable.MutableLongTest" name="testAddValueObject" time="0"/>

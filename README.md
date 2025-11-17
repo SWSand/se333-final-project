@@ -12,15 +12,17 @@ This project demonstrates automated test generation for Java projects using:
 ## 📁 Project Structure
 
 ```
-codebase/
-├── README_TESTING_AGENT.md   # This file
+se333-final-project/
+├── README.md                  # This file
 ├── QUICKSTART.md              # Getting started guide
 ├── PROJECT_SUMMARY.md         # Detailed project summary
 ├── PROGRESS_CHECKLIST.md      # Track your progress
-├── [`server.py`](server.py )                  # MCP tools server
-├── [`pom.xml`](pom.xml )                   # Maven config with JaCoCo
+├── PHASE_3_4_5_DOCUMENTATION.md # Phase 3-5 implementation docs
+├── IMPLEMENTATION_SUMMARY.md  # Quick reference summary
+├── server.py                  # MCP tools server (19 tools)
+├── pom.xml                    # Maven config with JaCoCo
 ├── .github/prompts/
-│   ├── tester.prompt.md       # Original instructions
+│   ├── tester.prompt.md       # Agent instructions
 │   └── test-workflow.prompt.md # Detailed workflow
 └── src/
     ├── main/java/             # Source code to test
@@ -32,12 +34,11 @@ codebase/
 ### 1. Initial Setup (DONE ✅)
 The project is already configured with:
 - JaCoCo plugin in Maven
-- 8 MCP tools for automation
+- 19 MCP tools for automation (Phases 1-5)
 - Comprehensive documentation
 
 ### 2. Generate Baseline Coverage
 ```bash
-cd /Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase
 mvn clean test jacoco:report
 ```
 
@@ -68,16 +69,34 @@ Continue with the next 4 classes.
 
 ## 🛠️ Available MCP Tools
 
-| Tool | Purpose |
-|------|---------|
-| `find_source_files()` | Find all Java source files in the project |
-| `analyze_java_class()` | Extract methods, fields, and structure |
-| `jacoco_find_path()` | Locate the JaCoCo XML report |
-| `jacoco_coverage()` | Get overall coverage percentage |
-| `missing_coverage()` | Get detailed uncovered code segments |
-| `check_test_exists()` | Check if a test file already exists |
-| `get_uncovered_methods()` | Find methods that need testing |
-| `add()` | Example tool (adds two numbers) |
+**Total: 19 MCP Tools** (see IMPLEMENTATION_SUMMARY.md for complete list)
+
+### Phase 1-2: Core Testing Tools
+- `find_source_files()` - Find all Java source files
+- `analyze_java_class()` - Extract methods, fields, and structure
+- `jacoco_find_path()` - Locate the JaCoCo XML report
+- `jacoco_coverage()` - Get overall coverage percentage
+- `missing_coverage()` - Get detailed uncovered code segments
+- `check_test_exists()` - Check if a test file already exists
+- `get_uncovered_methods()` - Find methods that need testing
+- `search_codebase()` - Search for text patterns in source files
+- `get_class_coverage_summary()` - Get coverage summary for all classes
+- `read_java_file()` - Read Java source files
+
+### Phase 3: Git Integration Tools
+- `git_status()` - Get repository status
+- `git_add_all()` - Stage changes with intelligent filtering
+- `git_commit()` - Automated commit with coverage stats
+- `git_push()` - Push to remote repository
+- `git_pull_request()` - Create PR with standardized templates
+
+### Phase 4: Intelligent Test Iteration
+- `detect_bugs_from_tests()` - Analyze test failures to detect bugs
+- `generate_quality_metrics_dashboard()` - Track coverage and test quality
+
+### Phase 5: Creative Extensions
+- `generate_specification_based_tests()` - Generate tests using boundary value analysis
+- `ai_code_review()` - Perform static analysis and code review
 
 ## 📊 Coverage Goals
 
@@ -90,11 +109,14 @@ Continue with the next 4 classes.
 
 ## 📚 Documentation Files
 
+- **[README.md](README.md)** - Project overview and quick start (this file)
 - **[QUICKSTART.md](QUICKSTART.md)** - Setup guide and first steps
 - **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Complete project overview
 - **[PROGRESS_CHECKLIST.md](PROGRESS_CHECKLIST.md)** - Track your progress
+- **[PHASE_3_4_5_DOCUMENTATION.md](PHASE_3_4_5_DOCUMENTATION.md)** - Comprehensive Phase 3-5 documentation
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Quick reference for all implementations
 - **[.github/prompts/test-workflow.prompt.md](.github/prompts/test-workflow.prompt.md)** - Detailed workflow
-- **[.github/prompts/tester.prompt.md](.github/prompts/tester.prompt.md)** - Original instructions
+- **[.github/prompts/tester.prompt.md](.github/prompts/tester.prompt.md)** - Agent instructions
 
 ## 🎯 Workflow Summary
 
@@ -169,7 +191,6 @@ ls -la target/site/jacoco/jacoco.xml
 ### MCP tools not working
 ```bash
 # Restart the MCP server
-cd /path/to/codebase
 python server.py
 ```
 

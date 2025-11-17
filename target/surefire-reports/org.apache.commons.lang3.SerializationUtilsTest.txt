@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.SerializationUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 26, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.019 sec <<< FAILURE!
+Tests run: 26, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.014 sec <<< FAILURE!
 testClassLoaderAwareObjectInputStreamResolveClass(org.apache.commons.lang3.SerializationUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.reflect.InvocationTargetException: null
 	at org.apache.commons.lang3.SerializationUtils$ClassLoaderAwareObjectInputStream.resolveClass(SerializationUtils.java:306)

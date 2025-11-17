@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.time.FastDateFormat_PrinterTest
 -------------------------------------------------------------------------------
-Tests run: 26, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.094 sec <<< FAILURE!
+Tests run: 26, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.093 sec <<< FAILURE!
 testGetMaxLengthEstimate(org.apache.commons.lang3.time.FastDateFormat_PrinterTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.ClassCastException: class org.apache.commons.lang3.time.FastDateFormat cannot be cast to class org.apache.commons.lang3.time.FastDatePrinter (org.apache.commons.lang3.time.FastDateFormat and org.apache.commons.lang3.time.FastDatePrinter are in unnamed module of loader 'app')
 	at org.apache.commons.lang3.time.FastDatePrinterTest.testGetMaxLengthEstimate(FastDatePrinterTest.java:478)

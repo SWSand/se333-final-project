@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="24" failures="6" name="org.apache.commons.lang3.AnnotationUtilsTest" time="0.013" errors="4" skipped="0">
+<testsuite tests="24" failures="6" name="org.apache.commons.lang3.AnnotationUtilsTest" time="0.016" errors="4" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="java.vm.version" value="25+36-3489"/>
-    <property name="sun.boot.library.path" value="/Users/evo/Library/Java/JavaVirtualMachines/openjdk-25/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/se333-final-project"/>
-    <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="java.vm.version" value="25.0.1"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="path.separator" value=":"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
@@ -14,11 +14,11 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="stdin.encoding" value="UTF-8"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/se333-final-project"/>
+    <property name="user.dir" value="/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
-    <property name="java.runtime.version" value="25+36-3489"/>
+    <property name="java.runtime.version" value="25.0.1"/>
     <property name="os.arch" value="aarch64"/>
-    <property name="java.io.tmpdir" value="/var/folders/kc/0_5b0sfj3y9btj59nly49bvw0000gn/T/"/>
+    <property name="java.io.tmpdir" value="/var/folders/39/8bxp_t4j3d3clpk6k8ccxp_w0000gp/T/"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
@@ -27,41 +27,41 @@
     <property name="classworlds.conf" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="stdout.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/evo/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.library.path" value="/Users/jsandoval/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="maven.conf" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/conf"/>
     <property name="jdk.debug" value="release"/>
     <property name="java.class.version" value="69.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="skipTests" value="false"/>
-    <property name="os.version" value="15.6.1"/>
+    <property name="os.version" value="15.7.2"/>
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
-    <property name="user.home" value="/Users/evo"/>
+    <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
-    <property name="user.name" value="evo"/>
+    <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -DskipTests=false clean test"/>
-    <property name="java.home" value="/Users/evo/Library/Java/JavaVirtualMachines/openjdk-25/Contents/Home"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.version" value="25"/>
+    <property name="java.version" value="25.0.1"/>
     <property name="native.encoding" value="UTF-8"/>
-    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor" value="Homebrew"/>
     <property name="maven.home" value="/opt/homebrew/Cellar/maven/3.9.11/libexec"/>
     <property name="file.separator" value="/"/>
-    <property name="java.version.date" value="2025-09-16"/>
-    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_ExceptionPaths" time="0.005"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_WithException" time="0.001">
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_ExceptionPaths" time="0.006"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_WithException" time="0.002">
     <failure message="Should wrap Exception" type="java.lang.AssertionError">java.lang.AssertionError: Should wrap Exception
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -69,8 +69,8 @@
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testOneArgNull" time="0"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString_ExceptionPaths" time="0.002"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString" time="0"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString_ExceptionPaths" time="0.003"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testSameInstance" time="0"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquals_WithIllegalAccessException" time="0">
     <failure message="Different annotations should not be equal" type="java.lang.AssertionError">java.lang.AssertionError: Different annotations should not be equal
@@ -80,8 +80,8 @@
 	at org.apache.commons.lang3.AnnotationUtilsTest.testEquals_WithIllegalAccessException(AnnotationUtilsTest.java:698)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquivalence" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquals_WithInvocationTargetException" time="0">
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquivalence" time="0"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquals_WithInvocationTargetException" time="0.001">
     <error message="object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.checkReceiver(DirectMethodHandleAccessor.java:199)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:100)
@@ -98,7 +98,7 @@
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testAnnotationsOfDifferingTypes" time="0"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquals_ExceptionPaths" time="0.001">
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testEquals_ExceptionPaths" time="0">
     <failure message="Different annotations should not be equal" type="java.lang.AssertionError">java.lang.AssertionError: Different annotations should not be equal
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -113,7 +113,7 @@
 	at org.apache.commons.lang3.AnnotationUtilsTest.testIsValidAnnotationMemberType_EdgeCases(AnnotationUtilsTest.java:788)
 </failure>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode" time="0"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testGeneratedAnnotationEquivalentToRealAnnotation" time="0"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_WithNullReturn" time="0">
     <error message="object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
@@ -124,7 +124,7 @@
 	at org.apache.commons.lang3.AnnotationUtilsTest.testHashCode_WithNullReturn(AnnotationUtilsTest.java:643)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString_EdgeCases" time="0.001">
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testToString_EdgeCases" time="0">
     <error message="object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.checkReceiver(DirectMethodHandleAccessor.java:199)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:100)
@@ -133,7 +133,7 @@
 	at org.apache.commons.lang3.AnnotationUtilsTest.testToString_EdgeCases(AnnotationUtilsTest.java:565)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_EdgeCases" time="0">
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testHashCode_EdgeCases" time="0.001">
     <error message="Cannot invoke &quot;java.lang.annotation.Annotation.annotationType()&quot; because &quot;a&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.lang.annotation.Annotation.annotationType()&quot; because &quot;a&quot; is null
 	at org.apache.commons.lang3.AnnotationUtils.hashCode(AnnotationUtils.java:169)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testHashCode_EdgeCases(AnnotationUtilsTest.java:520)
@@ -141,7 +141,7 @@
   </testcase>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testAnnotationArrayMemberEquals_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testBothArgsNull" time="0"/>
-  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testNonEquivalentAnnotationsOfSameType" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testNonEquivalentAnnotationsOfSameType" time="0"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testIsValidAnnotationMemberType" time="0"/>
   <testcase classname="org.apache.commons.lang3.AnnotationUtilsTest" name="testMemberEquals_EdgeCases" time="0">
     <failure message="Different annotations should not be equal" type="java.lang.AssertionError">java.lang.AssertionError: Different annotations should not be equal

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.AnnotationUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 24, Failures: 6, Errors: 4, Skipped: 0, Time elapsed: 0.02 sec <<< FAILURE!
-testHashCode_WithException(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+Tests run: 24, Failures: 6, Errors: 4, Skipped: 0, Time elapsed: 0.021 sec <<< FAILURE!
+testHashCode_WithException(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.002 sec  <<< FAILURE!
 java.lang.AssertionError: Should wrap Exception
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -15,7 +15,7 @@ java.lang.AssertionError: Different annotations should not be equal
 	at org.junit.Assert.assertFalse(Assert.java:64)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testEquals_WithIllegalAccessException(AnnotationUtilsTest.java:698)
 
-testEquals_WithInvocationTargetException(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testEquals_WithInvocationTargetException(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.checkReceiver(DirectMethodHandleAccessor.java:199)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:100)
@@ -29,7 +29,7 @@ org.junit.ComparisonFailure: expected:<[Test exception]> but was:<[Cannot invoke
 	at org.junit.Assert.assertEquals(Assert.java:144)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testToString_WithException(AnnotationUtilsTest.java:605)
 
-testEquals_ExceptionPaths(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+testEquals_ExceptionPaths(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Different annotations should not be equal
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -50,7 +50,7 @@ java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an
 	at org.apache.commons.lang3.AnnotationUtils.hashCode(AnnotationUtils.java:172)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testHashCode_WithNullReturn(AnnotationUtilsTest.java:643)
 
-testToString_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testToString_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.checkReceiver(DirectMethodHandleAccessor.java:199)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:100)
@@ -58,7 +58,7 @@ java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an
 	at org.apache.commons.lang3.AnnotationUtils.toString(AnnotationUtils.java:202)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testToString_EdgeCases(AnnotationUtilsTest.java:565)
 
-testHashCode_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testHashCode_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "java.lang.annotation.Annotation.annotationType()" because "a" is null
 	at org.apache.commons.lang3.AnnotationUtils.hashCode(AnnotationUtils.java:169)
 	at org.apache.commons.lang3.AnnotationUtilsTest.testHashCode_EdgeCases(AnnotationUtilsTest.java:520)

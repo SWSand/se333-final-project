@@ -24,7 +24,6 @@ Main issues detected:
 
 ### 1. Generate Initial Coverage Report
 ```bash
-cd /Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase
 mvn clean test jacoco:report
 ```
 
@@ -97,13 +96,13 @@ Track these metrics after each iteration:
 
 ### Find all source files
 ```python
-files = find_source_files("/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase")
+files = find_source_files(".")
 print(f"Found {len(files)} source files")
 ```
 
 ### Get coverage stats
 ```python
-jacoco_path = jacoco_find_path("/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase")
+jacoco_path = jacoco_find_path(".")
 coverage = jacoco_coverage(jacoco_path)
 print(f"Current coverage: {coverage}%")
 ```
@@ -141,11 +140,12 @@ Make sure to track:
 
 ## 🔗 Important Paths
 
-- **POM**: `/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase/pom.xml`
-- **MCP Server**: `/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase/server.py`
-- **Source Code**: `/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase/src/main/java`
-- **Tests**: `/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase/src/test/java`
-- **JaCoCo Report**: `/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase/target/site/jacoco/jacoco.xml`
+All paths are relative to the project root:
+- **POM**: `pom.xml`
+- **MCP Server**: `server.py`
+- **Source Code**: `src/main/java`
+- **Tests**: `src/test/java`
+- **JaCoCo Report**: `target/site/jacoco/jacoco.xml`
 
 ---
 

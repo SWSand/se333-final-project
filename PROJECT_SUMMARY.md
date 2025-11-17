@@ -11,8 +11,9 @@
    - Coverage data saved to `target/jacoco.exec`
    - HTML reports at `target/site/jacoco/`
 
-2. **MCP Tools** ([`server.py`](server.py ))
-   - `add()` - Example tool for testing
+2. **MCP Tools** (`server.py`) - **19 total tools**
+   
+   **Phase 1-2 (Core Testing)**: 10 tools
    - `find_source_files()` - Find all Java source files
    - `analyze_java_class()` - Extract methods and structure
    - `jacoco_find_path()` - Locate JaCoCo XML report
@@ -20,11 +21,28 @@
    - `missing_coverage()` - Get detailed uncovered segments
    - `check_test_exists()` - Verify test file exists
    - `get_uncovered_methods()` - Find untested methods
+   - `search_codebase()` - Search for text patterns
+   - `get_class_coverage_summary()` - Coverage summary for all classes
+   - `read_java_file()` - Read Java source files
+   
+   **Phase 3 (Git Integration)**: 5 tools
+   - `git_status()`, `git_add_all()`, `git_commit()`, `git_push()`, `git_pull_request()`
+   
+   **Phase 4 (Intelligent Iteration)**: 2 tools
+   - `detect_bugs_from_tests()`, `generate_quality_metrics_dashboard()`
+   
+   **Phase 5 (Creative Extensions)**: 2 tools
+   - `generate_specification_based_tests()`, `ai_code_review()`
 
 3. **Documentation**
+   - `README.md` - Project overview and quick start
    - `QUICKSTART.md` - Setup and getting started guide
+   - `PROJECT_SUMMARY.md` - This file
+   - `PROGRESS_CHECKLIST.md` - Progress tracking
+   - `PHASE_3_4_5_DOCUMENTATION.md` - Comprehensive Phase 3-5 documentation
+   - `IMPLEMENTATION_SUMMARY.md` - Quick reference summary
    - `.github/prompts/test-workflow.prompt.md` - Detailed workflow instructions
-   - `.github/prompts/tester.prompt.md` - Original tester instructions
+   - `.github/prompts/tester.prompt.md` - Agent instructions
 
 ## Current Status
 
@@ -54,7 +72,7 @@
 ## Project Structure
 
 ```
-codebase/
+se333-final-project/
 ├── src/
 │   ├── main/java/          # Source code (108 classes)
 │   │   └── org/apache/commons/lang3/
@@ -64,10 +82,15 @@ codebase/
 │   ├── jacoco.exec         # Coverage data
 │   ├── site/jacoco/        # HTML reports
 │   └── surefire-reports/   # Test results
-├── [`pom.xml`](pom.xml )                 # Maven configuration
-├── [`server.py`](server.py )              # MCP tools server
+├── pom.xml                 # Maven configuration
+├── server.py               # MCP tools server (19 tools)
+├── README.md               # Project overview
+├── QUICKSTART.md           # Getting started guide
+├── PROJECT_SUMMARY.md      # This file
+├── PROGRESS_CHECKLIST.md   # Progress tracking
+├── PHASE_3_4_5_DOCUMENTATION.md # Phase 3-5 docs
+├── IMPLEMENTATION_SUMMARY.md # Quick reference
 └── .github/prompts/        # Agent instructions
-
 ```
 
 ## How to Use

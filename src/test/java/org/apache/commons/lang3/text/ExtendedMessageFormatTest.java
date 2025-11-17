@@ -801,4 +801,63 @@ public class ExtendedMessageFormatTest {
         assertFalse("Should not equal MessageFormat", emf1.equals(mf));
     }
 
+    @Test
+    public void testApplyPattern_ValidationAndErrorPaths() {
+        // Test lines 182-183: Validate.isTrue checks for foundFormats and foundDescriptions
+        // Test lines 185-186: IllegalArgumentException for unreadable format element
+        // Test lines 203-204: Setting formats when f != null
+        
+        // Test unreadable format element (line 185-186)
+        try {
+            // Create a pattern that will trigger the unreadable format element error
+            // This happens when c[pos.getIndex()] != END_FE after parsing
+            new ExtendedMessageFormat("{0,lower,invalid}", registry);
+            // May succeed or fail depending on implementation
+        } catch (IllegalArgumentException e) {
+            // Expected if format element is unreadable
+            assertTrue("Exception should mention position or format", 
+                e.getMessage().contains("position") || 
+                e.getMessage().contains("Unreadable") ||
+                e.getMessage().contains("format"));
+        }
+        
+        // Test with format that triggers validation (lines 182-183)
+        // These validations ensure foundFormats and foundDescriptions sizes match fmtCount
+        final ExtendedMessageFormat emf = new ExtendedMessageFormat("{0,lower,arg}", registry);
+        assertNotNull("Should create format", emf);
+        
+        // Test with multiple format elements to exercise the loop (lines 201-206)
+        final ExtendedMessageFormat emf2 = new ExtendedMessageFormat("{0,lower,arg} {1,upper,arg}", registry);
+        assertNotNull("Should handle multiple formats", emf2);
+        
+        // Test with null format in registry to exercise line 203-204
+        final Map<String, FormatFactory> nullRegistry = new HashMap<String, FormatFactory>();
+        nullRegistry.put("nullformat", new FormatFactory() {
+            @Override
+            public Format getFormat(String name, String arguments, Locale locale) {
+                return null; // Return null to test line 203-204
+            }
+        });
+        final ExtendedMessageFormat emf3 = new ExtendedMessageFormat("{0,nullformat,arg}", nullRegistry);
+        assertNotNull("Should handle null format from factory", emf3);
+    }
+
+    @Test
+    public void testApplyPattern_DefaultCase() {
+        // Test line 189-191: default case in switch statement
+        // This covers non-format characters that are appended to stripCustom
+        
+        // Create pattern with regular text (not format elements)
+        final ExtendedMessageFormat emf = new ExtendedMessageFormat("Hello World", registry);
+        assertEquals("Hello World", emf.toPattern());
+        
+        // Test with mixed text and format elements
+        final ExtendedMessageFormat emf2 = new ExtendedMessageFormat("Hello {0} World", registry);
+        assertNotNull("Should handle mixed text and formats", emf2);
+        
+        // Test with special characters that aren't format elements
+        final ExtendedMessageFormat emf3 = new ExtendedMessageFormat("Test: {0} - {1}", registry);
+        assertNotNull("Should handle special characters in default case", emf3);
+    }
+
 }

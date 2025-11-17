@@ -339,8 +339,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @since 2.0
      */
     public CompareToBuilder appendSuper(final int superCompareTo) {
-<span class="pc bpc" id="L342" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L343">            return this;</span>
+<span class="fc bfc" id="L342" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L343">            return this;</span>
         }
 <span class="fc" id="L345">        comparison = superCompareTo;</span>
 <span class="fc" id="L346">        return this;</span>
@@ -460,8 +460,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final long lhs, final long rhs) {
-<span class="pc bpc" id="L463" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L464">            return this;</span>
+<span class="fc bfc" id="L463" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L464">            return this;</span>
         }
 <span class="fc bfc" id="L466" title="All 4 branches covered.">        comparison = ((lhs &lt; rhs) ? -1 : ((lhs &gt; rhs) ? 1 : 0));</span>
 <span class="fc" id="L467">        return this;</span>
@@ -476,8 +476,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final int lhs, final int rhs) {
-<span class="pc bpc" id="L479" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L480">            return this;</span>
+<span class="fc bfc" id="L479" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L480">            return this;</span>
         }
 <span class="fc bfc" id="L482" title="All 4 branches covered.">        comparison = ((lhs &lt; rhs) ? -1 : ((lhs &gt; rhs) ? 1 : 0));</span>
 <span class="fc" id="L483">        return this;</span>
@@ -492,8 +492,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final short lhs, final short rhs) {
-<span class="pc bpc" id="L495" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L496">            return this;</span>
+<span class="fc bfc" id="L495" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L496">            return this;</span>
         }
 <span class="fc bfc" id="L498" title="All 4 branches covered.">        comparison = ((lhs &lt; rhs) ? -1 : ((lhs &gt; rhs) ? 1 : 0));</span>
 <span class="fc" id="L499">        return this;</span>
@@ -508,8 +508,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final char lhs, final char rhs) {
-<span class="pc bpc" id="L511" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L512">            return this;</span>
+<span class="fc bfc" id="L511" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L512">            return this;</span>
         }
 <span class="fc bfc" id="L514" title="All 4 branches covered.">        comparison = ((lhs &lt; rhs) ? -1 : ((lhs &gt; rhs) ? 1 : 0));</span>
 <span class="fc" id="L515">        return this;</span>
@@ -524,8 +524,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final byte lhs, final byte rhs) {
-<span class="pc bpc" id="L527" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L528">            return this;</span>
+<span class="fc bfc" id="L527" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L528">            return this;</span>
         }
 <span class="fc bfc" id="L530" title="All 4 branches covered.">        comparison = ((lhs &lt; rhs) ? -1 : ((lhs &gt; rhs) ? 1 : 0));</span>
 <span class="fc" id="L531">        return this;</span>
@@ -545,8 +545,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final double lhs, final double rhs) {
-<span class="pc bpc" id="L548" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L549">            return this;</span>
+<span class="fc bfc" id="L548" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L549">            return this;</span>
         }
 <span class="fc" id="L551">        comparison = Double.compare(lhs, rhs);</span>
 <span class="fc" id="L552">        return this;</span>
@@ -566,8 +566,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
      */
     public CompareToBuilder append(final float lhs, final float rhs) {
-<span class="pc bpc" id="L569" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L570">            return this;</span>
+<span class="fc bfc" id="L569" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L570">            return this;</span>
         }
 <span class="fc" id="L572">        comparison = Float.compare(lhs, rhs);</span>
 <span class="fc" id="L573">        return this;</span>
@@ -582,8 +582,8 @@ public class CompareToBuilder implements Builder&lt;Integer&gt; {
      * @return this - used to chain append calls
       */
     public CompareToBuilder append(final boolean lhs, final boolean rhs) {
-<span class="pc bpc" id="L585" title="1 of 2 branches missed.">        if (comparison != 0) {</span>
-<span class="nc" id="L586">            return this;</span>
+<span class="fc bfc" id="L585" title="All 2 branches covered.">        if (comparison != 0) {</span>
+<span class="fc" id="L586">            return this;</span>
         }
 <span class="fc bfc" id="L588" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L589">            return this;</span>

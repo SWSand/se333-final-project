@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="43" failures="1" name="org.apache.commons.lang3.time.FastDateFormat_ParserTest" time="0.568" errors="2" skipped="0">
+<testsuite tests="43" failures="1" name="org.apache.commons.lang3.time.FastDateFormat_ParserTest" time="0.572" errors="2" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -136,30 +136,30 @@
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParseZone" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testAmPm" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLowYearPadding" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Long_AD" time="0.105"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Long_AD" time="0.111"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Long_BC" time="0.013"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testTextStrategy_AddRegex" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParseNumerics" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLang303" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLang303" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLang538" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testGetLocaleSpecificStrategy" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testToStringContainsName" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testJapaneseImperialLocale_ExceptionPath" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLANG_831" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLANG_832" time="0"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLANG_832" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="test_Equality_Hash" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_ShortNoEra_AD" time="0.09"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_ShortNoEra_AD" time="0.091"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_ShortNoEra_BC" time="0.008"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testAdjustYear_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParseLongShort" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testEscapeRegex_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testTextStrategy_SetCalendar_MoreExceptionPaths" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testGetLocaleSpecificStrategy_CachePath" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_LongNoEra_AD" time="0.117"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_LongNoEra_BC" time="0.011"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Short_AD" time="0.092"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Short_BC" time="0.009"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParseObject_String" time="0.001">
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_LongNoEra_AD" time="0.119"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_LongNoEra_BC" time="0.01"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Short_AD" time="0.093"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testLocales_Short_BC" time="0.01"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParseObject_String" time="0">
     <failure message="Exception should mention Unparseable date" type="java.lang.AssertionError">java.lang.AssertionError: Exception should mention Unparseable date
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -194,7 +194,7 @@
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParse_String_AllPaths" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testTimeZoneStrategy_SetCalendar_ExceptionPaths" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testEquals" time="0"/>
-  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParses" time="0.121"/>
+  <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testParses" time="0.116"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testQuotes" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testTimeZoneMatches" time="0"/>
   <testcase classname="org.apache.commons.lang3.time.FastDateFormat_ParserTest" name="testPatternMatches" time="0"/>

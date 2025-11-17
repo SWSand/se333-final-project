@@ -375,7 +375,7 @@ public class ExtendedMessageFormat extends MessageFormat {
 <span class="fc" id="L375">        final int text = pos.getIndex();</span>
 <span class="fc" id="L376">        int depth = 1;</span>
 <span class="fc bfc" id="L377" title="All 2 branches covered.">        for (; pos.getIndex() &lt; pattern.length(); next(pos)) {</span>
-<span class="pc bpc" id="L378" title="1 of 4 branches missed.">            switch (pattern.charAt(pos.getIndex())) {</span>
+<span class="fc bfc" id="L378" title="All 4 branches covered.">            switch (pattern.charAt(pos.getIndex())) {</span>
             case START_FE:
 <span class="fc" id="L380">                depth++;</span>
 <span class="fc" id="L381">                break;</span>
@@ -386,7 +386,7 @@ public class ExtendedMessageFormat extends MessageFormat {
                 }
                 break;
             case QUOTE:
-<span class="nc" id="L389">                getQuotedString(pattern, pos, false);</span>
+<span class="fc" id="L389">                getQuotedString(pattern, pos, false);</span>
                 break;
             }
         }

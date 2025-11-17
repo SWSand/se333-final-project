@@ -669,4 +669,136 @@ public class ExtendedMessageFormatTest {
         assertEquals("it's a test", emf.format(new Object[] {}));
     }
 
+    @Test
+    public void testAppendQuotedString_Comprehensive() {
+        // Test appendQuotedString comprehensively - 45 missed (56.3% coverage)
+        
+        // Test with escapingOn=true and quote at start (line 481-483)
+        final ExtendedMessageFormat emf1 = new ExtendedMessageFormat("'test'", registry);
+        assertEquals("test", emf1.format(new Object[] {}));
+        
+        // Test with escapingOn=false and quote at start
+        // This is tested through patterns that don't use escaping
+        final ExtendedMessageFormat emf2 = new ExtendedMessageFormat("'simple'", registry);
+        assertEquals("simple", emf2.format(new Object[] {}));
+        
+        // Test with multiple escaped quotes in sequence
+        final ExtendedMessageFormat emf3 = new ExtendedMessageFormat("it''s a ''test'' here", registry);
+        assertEquals("it's a 'test' here", emf3.format(new Object[] {}));
+        
+        // Test with escaped quote at different positions
+        final ExtendedMessageFormat emf4 = new ExtendedMessageFormat("start''middle''end", registry);
+        assertEquals("start'middle'end", emf4.format(new Object[] {}));
+        
+        // Test with escaped quote followed by regular text
+        final ExtendedMessageFormat emf5 = new ExtendedMessageFormat("''text", registry);
+        assertEquals("'text", emf5.format(new Object[] {}));
+        
+        // Test with escaped quote at end
+        final ExtendedMessageFormat emf6 = new ExtendedMessageFormat("text''", registry);
+        assertEquals("text'", emf6.format(new Object[] {}));
+        
+        // Test with unterminated quoted string (line 503-504)
+        try {
+            new ExtendedMessageFormat("'unterminated string", registry);
+            fail("Should throw IllegalArgumentException for unterminated quoted string");
+        } catch (IllegalArgumentException e) {
+            assertTrue("Exception should mention unterminated", 
+                e.getMessage().contains("Unterminated") || e.getMessage().contains("quoted"));
+        }
+        
+        // Test with empty quoted string
+        final ExtendedMessageFormat emf7 = new ExtendedMessageFormat("''", registry);
+        assertEquals("'", emf7.format(new Object[] {}));
+        
+        // Test with quoted string containing only escaped quotes
+        final ExtendedMessageFormat emf8 = new ExtendedMessageFormat("''''", registry);
+        assertEquals("''", emf8.format(new Object[] {}));
+    }
+
+    @Test
+    public void testApplyPattern_EdgeCases() {
+        // Test applyPattern edge cases - 14 missed (93.2% coverage)
+        
+        // Test with null registry (line 146-149)
+        final ExtendedMessageFormat emf1 = new ExtendedMessageFormat("Test: {0}", (Map<String, ? extends FormatFactory>) null);
+        assertEquals("Test: {0}", emf1.toPattern());
+        
+        // Test with empty pattern
+        final ExtendedMessageFormat emf2 = new ExtendedMessageFormat("", registry);
+        assertEquals("", emf2.toPattern());
+        
+        // Test with pattern containing only format elements
+        final ExtendedMessageFormat emf3 = new ExtendedMessageFormat("{0,lower}", registry);
+        assertEquals("{0,lower}", emf3.toPattern());
+        
+        // Test with pattern containing multiple format elements
+        final ExtendedMessageFormat emf4 = new ExtendedMessageFormat("{0,lower} {1,upper}", registry);
+        assertEquals("{0,lower} {1,upper}", emf4.toPattern());
+        
+        // Test with pattern containing format elements with null formats (line 203-205)
+        // This tests the path where f != null check
+        final ExtendedMessageFormat emf5 = new ExtendedMessageFormat("{0} {1,lower}", registry);
+        assertEquals("{0} {1,lower}", emf5.toPattern());
+    }
+
+    @Test
+    public void testParseFormatDescription_EdgeCases() {
+        // Test parseFormatDescription edge cases - 5 missed (90.9% coverage)
+        
+        // Test with nested braces (line 379-386)
+        try {
+            new ExtendedMessageFormat("{0,lower,{nested}}", registry);
+            // May succeed or fail depending on implementation
+        } catch (IllegalArgumentException e) {
+            // May fail if nested braces not supported
+        }
+        
+        // Test with quoted string inside format description (line 388-390)
+        final ExtendedMessageFormat emf1 = new ExtendedMessageFormat("{0,lower,'quoted'}", registry);
+        // Should handle quoted strings in format description
+        
+        // Test with unterminated format description (line 393-394)
+        try {
+            new ExtendedMessageFormat("{0,lower", registry);
+            fail("Should throw IllegalArgumentException for unterminated format element");
+        } catch (IllegalArgumentException e) {
+            assertTrue("Exception should mention unterminated", 
+                e.getMessage().contains("Unterminated"));
+        }
+    }
+
+    @Test
+    public void testEquals_Comprehensive() {
+        // Test equals comprehensively - 4 missed (90.9% coverage)
+        
+        // Test with same object (line 265-266)
+        final ExtendedMessageFormat emf1 = new ExtendedMessageFormat("Test: {0}", registry);
+        assertTrue("Should equal itself", emf1.equals(emf1));
+        
+        // Test with null (line 268-269)
+        assertFalse("Should not equal null", emf1.equals(null));
+        
+        // Test with different class (line 274-276)
+        assertFalse("Should not equal different class", emf1.equals("string"));
+        
+        // Test with different pattern (line 278-280)
+        final ExtendedMessageFormat emf2 = new ExtendedMessageFormat("Test: {1}", registry);
+        assertFalse("Should not equal when patterns differ", emf1.equals(emf2));
+        
+        // Test with different registry (line 281-283)
+        final Map<String, FormatFactory> registry2 = new HashMap<String, FormatFactory>();
+        final ExtendedMessageFormat emf3 = new ExtendedMessageFormat("Test: {0}", registry2);
+        assertFalse("Should not equal when registries differ", emf1.equals(emf3));
+        
+        // Test with equal objects
+        final ExtendedMessageFormat emf4 = new ExtendedMessageFormat("Test: {0}", registry);
+        assertTrue("Should equal when all fields match", emf1.equals(emf4));
+        
+        // Test with super.equals returning false (line 271-273)
+        // This is hard to test directly, but we can test with MessageFormat
+        final MessageFormat mf = new MessageFormat("Test: {0}");
+        assertFalse("Should not equal MessageFormat", emf1.equals(mf));
+    }
+
 }

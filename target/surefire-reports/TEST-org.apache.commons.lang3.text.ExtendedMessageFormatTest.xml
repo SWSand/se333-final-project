@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="25" failures="1" name="org.apache.commons.lang3.text.ExtendedMessageFormatTest" time="0.065" errors="6" skipped="0">
+<testsuite tests="29" failures="2" name="org.apache.commons.lang3.text.ExtendedMessageFormatTest" time="0.078" errors="7" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -61,8 +61,8 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedString_ContinuePath" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testBuiltInDateTimeFormat" time="0.013">
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedString_ContinuePath" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testBuiltInDateTimeFormat" time="0.016">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.assertPatternsEqual(ExtendedMessageFormatTest.java:361)
@@ -72,9 +72,9 @@
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.testBuiltInDateTimeFormat(ExtendedMessageFormatTest.java:211)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEqualsHashcode" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testReadArgumentIndexEdgeCases" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testOverriddenBuiltinFormat" time="0.002">
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEqualsHashcode" time="0.002"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testReadArgumentIndexEdgeCases" time="0"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testOverriddenBuiltinFormat" time="0.001">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.assertPatternsEqual(ExtendedMessageFormatTest.java:361)
@@ -84,7 +84,8 @@
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEquals_WithNullRegistry" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testBuiltInChoiceFormat" time="0.02">
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEquals_Comprehensive" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testBuiltInChoiceFormat" time="0.017">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.assertPatternsEqual(ExtendedMessageFormatTest.java:361)
@@ -95,9 +96,16 @@
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedString_WithEscaping" time="0"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedString_Comprehensive" time="0">
+    <failure message="Should throw IllegalArgumentException for unterminated quoted string" type="java.lang.AssertionError">java.lang.AssertionError: Should throw IllegalArgumentException for unterminated quoted string
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.testAppendQuotedString_Comprehensive(ExtendedMessageFormatTest.java:704)
+</failure>
+  </testcase>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testApplyPattern_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testParseFormatDescription_Unterminated" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testReadArgumentIndex_NumberFormatException" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEscapedQuote_LANG_477" time="0"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEscapedQuote_LANG_477" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEqualsWithNullPattern" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testReadArgumentIndex_WhitespaceError" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testExtendedFormats" time="0">
@@ -107,15 +115,15 @@
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.testExtendedFormats(ExtendedMessageFormatTest.java:64)
 </error>
   </testcase>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testGetQuotedString" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedStringEdgeCases" time="0.002">
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testGetQuotedString" time="0.003"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedStringEdgeCases" time="0">
     <failure message="Should throw IllegalArgumentException for unterminated quoted string" type="java.lang.AssertionError">java.lang.AssertionError: Should throw IllegalArgumentException for unterminated quoted string
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.testAppendQuotedStringEdgeCases(ExtendedMessageFormatTest.java:520)
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testUnsupportedOperationExceptions" time="0"/>
-  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testExtendedAndBuiltInFormats" time="0.026">
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testExtendedAndBuiltInFormats" time="0.035">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.assertPatternsEqual(ExtendedMessageFormatTest.java:361)
@@ -135,6 +143,15 @@
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEquals_WithNullPattern" time="0"/>
+  <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testParseFormatDescription_EdgeCases" time="0">
+    <error message="Unterminated format element at position 3" type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException: Unterminated format element at position 3
+	at org.apache.commons.lang3.text.ExtendedMessageFormat.parseFormatDescription(ExtendedMessageFormat.java:393)
+	at org.apache.commons.lang3.text.ExtendedMessageFormat.applyPattern(ExtendedMessageFormat.java:173)
+	at org.apache.commons.lang3.text.ExtendedMessageFormat.&lt;init&gt;(ExtendedMessageFormat.java:128)
+	at org.apache.commons.lang3.text.ExtendedMessageFormat.&lt;init&gt;(ExtendedMessageFormat.java:113)
+	at org.apache.commons.lang3.text.ExtendedMessageFormatTest.testParseFormatDescription_EdgeCases(ExtendedMessageFormatTest.java:758)
+</error>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testAppendQuotedString_WithNullAppendTo" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testParseFormatDescriptionWithNestedBraces" time="0"/>
   <testcase classname="org.apache.commons.lang3.text.ExtendedMessageFormatTest" name="testEqualsWithNull" time="0"/>

@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -63,7 +63,7 @@
   </properties>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testSqueeze_StringString" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testDelete_StringString" time="0"/>
-  <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testKeep_StringString" time="0"/>
+  <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testKeep_StringString" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testDelete_StringStringarray" time="0"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testCount_StringStringarray" time="0"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testContainsAny_StringString" time="0"/>
@@ -71,5 +71,5 @@
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testCount_StringString" time="0"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testContainsAny_StringStringarray" time="0"/>
   <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testSqueeze_StringStringarray" time="0"/>
-  <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testConstructor" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.CharSetUtilsTest" name="testConstructor" time="0"/>
 </testsuite>

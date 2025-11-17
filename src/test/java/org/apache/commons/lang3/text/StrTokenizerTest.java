@@ -876,4 +876,112 @@ public class StrTokenizerTest {
         assertEquals("StrTokenizer[a, b, c, d, e]", tkn.toString());
     }
 
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_StringDelimiter() {
+        // Test constructor: StrTokenizer(String input, String delim)
+        final StrTokenizer tkn1 = new StrTokenizer("a,b,c", ",");
+        assertEquals("a", tkn1.next());
+        assertEquals("b", tkn1.next());
+        assertEquals("c", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((String) null, ",");
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty string
+        final StrTokenizer tkn3 = new StrTokenizer("", ",");
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_StrMatcherDelimiter() {
+        // Test constructor: StrTokenizer(String input, StrMatcher delim)
+        final StrTokenizer tkn1 = new StrTokenizer("a,b,c", StrMatcher.commaMatcher());
+        assertEquals("a", tkn1.next());
+        assertEquals("b", tkn1.next());
+        assertEquals("c", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((String) null, StrMatcher.commaMatcher());
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty string
+        final StrTokenizer tkn3 = new StrTokenizer("", StrMatcher.commaMatcher());
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_StrMatcherDelimiterAndQuote() {
+        // Test constructor: StrTokenizer(String input, StrMatcher delim, StrMatcher quote)
+        final StrTokenizer tkn1 = new StrTokenizer("a,'b,c',d", StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertEquals("a", tkn1.next());
+        assertEquals("b,c", tkn1.next());
+        assertEquals("d", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((String) null, StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty string
+        final StrTokenizer tkn3 = new StrTokenizer("", StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_CharArrayStringDelimiter() {
+        // Test constructor: StrTokenizer(char[] input, String delim)
+        final StrTokenizer tkn1 = new StrTokenizer("a,b,c".toCharArray(), ",");
+        assertEquals("a", tkn1.next());
+        assertEquals("b", tkn1.next());
+        assertEquals("c", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((char[]) null, ",");
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty array
+        final StrTokenizer tkn3 = new StrTokenizer(new char[0], ",");
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_CharArrayStrMatcherDelimiter() {
+        // Test constructor: StrTokenizer(char[] input, StrMatcher delim)
+        final StrTokenizer tkn1 = new StrTokenizer("a,b,c".toCharArray(), StrMatcher.commaMatcher());
+        assertEquals("a", tkn1.next());
+        assertEquals("b", tkn1.next());
+        assertEquals("c", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((char[]) null, StrMatcher.commaMatcher());
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty array
+        final StrTokenizer tkn3 = new StrTokenizer(new char[0], StrMatcher.commaMatcher());
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
+    //-----------------------------------------------------------------------
+    @Test
+    public void testConstructors_CharArrayStrMatcherDelimiterAndQuote() {
+        // Test constructor: StrTokenizer(char[] input, StrMatcher delim, StrMatcher quote)
+        final StrTokenizer tkn1 = new StrTokenizer("a,'b,c',d".toCharArray(), StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertEquals("a", tkn1.next());
+        assertEquals("b,c", tkn1.next());
+        assertEquals("d", tkn1.next());
+        
+        // Test with null input
+        final StrTokenizer tkn2 = new StrTokenizer((char[]) null, StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertFalse("Should have no tokens", tkn2.hasNext());
+        
+        // Test with empty array
+        final StrTokenizer tkn3 = new StrTokenizer(new char[0], StrMatcher.commaMatcher(), StrMatcher.quoteMatcher());
+        assertFalse("Should have no tokens", tkn3.hasNext());
+    }
+
 }

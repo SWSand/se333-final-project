@@ -633,19 +633,19 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final Object[] lhs, final Object[] rhs) {
-<span class="pc bpc" id="L636" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L637">            return this;</span>
+<span class="fc bfc" id="L636" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L637">            return this;</span>
         }
 <span class="fc bfc" id="L639" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L640">            return this;</span>
         }
-<span class="pc bpc" id="L642" title="1 of 4 branches missed.">        if (lhs == null || rhs == null) {</span>
+<span class="fc bfc" id="L642" title="All 4 branches covered.">        if (lhs == null || rhs == null) {</span>
 <span class="fc" id="L643">            this.setEquals(false);</span>
 <span class="fc" id="L644">            return this;</span>
         }
-<span class="pc bpc" id="L646" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L647">            this.setEquals(false);</span>
-<span class="nc" id="L648">            return this;</span>
+<span class="fc bfc" id="L646" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L647">            this.setEquals(false);</span>
+<span class="fc" id="L648">            return this;</span>
         }
 <span class="fc bfc" id="L650" title="All 4 branches covered.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L651">            append(lhs[i], rhs[i]);</span>
@@ -664,8 +664,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final long[] lhs, final long[] rhs) {
-<span class="pc bpc" id="L667" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L668">            return this;</span>
+<span class="fc bfc" id="L667" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L668">            return this;</span>
         }
 <span class="fc bfc" id="L670" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L671">            return this;</span>
@@ -674,9 +674,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L674">            this.setEquals(false);</span>
 <span class="fc" id="L675">            return this;</span>
         }
-<span class="pc bpc" id="L677" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L678">            this.setEquals(false);</span>
-<span class="nc" id="L679">            return this;</span>
+<span class="fc bfc" id="L677" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L678">            this.setEquals(false);</span>
+<span class="fc" id="L679">            return this;</span>
         }
 <span class="pc bpc" id="L681" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L682">            append(lhs[i], rhs[i]);</span>
@@ -695,8 +695,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final int[] lhs, final int[] rhs) {
-<span class="pc bpc" id="L698" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L699">            return this;</span>
+<span class="fc bfc" id="L698" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L699">            return this;</span>
         }
 <span class="fc bfc" id="L701" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L702">            return this;</span>
@@ -705,9 +705,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L705">            this.setEquals(false);</span>
 <span class="fc" id="L706">            return this;</span>
         }
-<span class="pc bpc" id="L708" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L709">            this.setEquals(false);</span>
-<span class="nc" id="L710">            return this;</span>
+<span class="fc bfc" id="L708" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L709">            this.setEquals(false);</span>
+<span class="fc" id="L710">            return this;</span>
         }
 <span class="pc bpc" id="L712" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L713">            append(lhs[i], rhs[i]);</span>
@@ -726,8 +726,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final short[] lhs, final short[] rhs) {
-<span class="pc bpc" id="L729" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L730">            return this;</span>
+<span class="fc bfc" id="L729" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L730">            return this;</span>
         }
 <span class="fc bfc" id="L732" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L733">            return this;</span>
@@ -736,9 +736,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L736">            this.setEquals(false);</span>
 <span class="fc" id="L737">            return this;</span>
         }
-<span class="pc bpc" id="L739" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L740">            this.setEquals(false);</span>
-<span class="nc" id="L741">            return this;</span>
+<span class="fc bfc" id="L739" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L740">            this.setEquals(false);</span>
+<span class="fc" id="L741">            return this;</span>
         }
 <span class="pc bpc" id="L743" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L744">            append(lhs[i], rhs[i]);</span>
@@ -757,8 +757,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final char[] lhs, final char[] rhs) {
-<span class="pc bpc" id="L760" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L761">            return this;</span>
+<span class="fc bfc" id="L760" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L761">            return this;</span>
         }
 <span class="fc bfc" id="L763" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L764">            return this;</span>
@@ -767,9 +767,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L767">            this.setEquals(false);</span>
 <span class="fc" id="L768">            return this;</span>
         }
-<span class="pc bpc" id="L770" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L771">            this.setEquals(false);</span>
-<span class="nc" id="L772">            return this;</span>
+<span class="fc bfc" id="L770" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L771">            this.setEquals(false);</span>
+<span class="fc" id="L772">            return this;</span>
         }
 <span class="pc bpc" id="L774" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L775">            append(lhs[i], rhs[i]);</span>
@@ -788,8 +788,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final byte[] lhs, final byte[] rhs) {
-<span class="pc bpc" id="L791" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L792">            return this;</span>
+<span class="fc bfc" id="L791" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L792">            return this;</span>
         }
 <span class="fc bfc" id="L794" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L795">            return this;</span>
@@ -798,9 +798,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L798">            this.setEquals(false);</span>
 <span class="fc" id="L799">            return this;</span>
         }
-<span class="pc bpc" id="L801" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L802">            this.setEquals(false);</span>
-<span class="nc" id="L803">            return this;</span>
+<span class="fc bfc" id="L801" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L802">            this.setEquals(false);</span>
+<span class="fc" id="L803">            return this;</span>
         }
 <span class="pc bpc" id="L805" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L806">            append(lhs[i], rhs[i]);</span>
@@ -819,8 +819,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final double[] lhs, final double[] rhs) {
-<span class="pc bpc" id="L822" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L823">            return this;</span>
+<span class="fc bfc" id="L822" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L823">            return this;</span>
         }
 <span class="fc bfc" id="L825" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L826">            return this;</span>
@@ -829,9 +829,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L829">            this.setEquals(false);</span>
 <span class="fc" id="L830">            return this;</span>
         }
-<span class="pc bpc" id="L832" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L833">            this.setEquals(false);</span>
-<span class="nc" id="L834">            return this;</span>
+<span class="fc bfc" id="L832" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L833">            this.setEquals(false);</span>
+<span class="fc" id="L834">            return this;</span>
         }
 <span class="pc bpc" id="L836" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L837">            append(lhs[i], rhs[i]);</span>
@@ -850,8 +850,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final float[] lhs, final float[] rhs) {
-<span class="pc bpc" id="L853" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L854">            return this;</span>
+<span class="fc bfc" id="L853" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L854">            return this;</span>
         }
 <span class="fc bfc" id="L856" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L857">            return this;</span>
@@ -860,9 +860,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L860">            this.setEquals(false);</span>
 <span class="fc" id="L861">            return this;</span>
         }
-<span class="pc bpc" id="L863" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L864">            this.setEquals(false);</span>
-<span class="nc" id="L865">            return this;</span>
+<span class="fc bfc" id="L863" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L864">            this.setEquals(false);</span>
+<span class="fc" id="L865">            return this;</span>
         }
 <span class="pc bpc" id="L867" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L868">            append(lhs[i], rhs[i]);</span>
@@ -881,8 +881,8 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
      * @return EqualsBuilder - used to chain calls.
      */
     public EqualsBuilder append(final boolean[] lhs, final boolean[] rhs) {
-<span class="pc bpc" id="L884" title="1 of 2 branches missed.">        if (isEquals == false) {</span>
-<span class="nc" id="L885">            return this;</span>
+<span class="fc bfc" id="L884" title="All 2 branches covered.">        if (isEquals == false) {</span>
+<span class="fc" id="L885">            return this;</span>
         }
 <span class="fc bfc" id="L887" title="All 2 branches covered.">        if (lhs == rhs) {</span>
 <span class="fc" id="L888">            return this;</span>
@@ -891,9 +891,9 @@ public class EqualsBuilder implements Builder&lt;Boolean&gt; {
 <span class="fc" id="L891">            this.setEquals(false);</span>
 <span class="fc" id="L892">            return this;</span>
         }
-<span class="pc bpc" id="L894" title="1 of 2 branches missed.">        if (lhs.length != rhs.length) {</span>
-<span class="nc" id="L895">            this.setEquals(false);</span>
-<span class="nc" id="L896">            return this;</span>
+<span class="fc bfc" id="L894" title="All 2 branches covered.">        if (lhs.length != rhs.length) {</span>
+<span class="fc" id="L895">            this.setEquals(false);</span>
+<span class="fc" id="L896">            return this;</span>
         }
 <span class="pc bpc" id="L898" title="1 of 4 branches missed.">        for (int i = 0; i &lt; lhs.length &amp;&amp; isEquals; ++i) {</span>
 <span class="fc" id="L899">            append(lhs[i], rhs[i]);</span>

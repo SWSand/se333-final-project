@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="82" failures="2" name="org.apache.commons.lang3.math.NumberUtilsTest" time="0.013" errors="1" skipped="0">
+<testsuite tests="85" failures="3" name="org.apache.commons.lang3.math.NumberUtilsTest" time="0.014" errors="2" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -72,10 +72,16 @@
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
 	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber(NumberUtilsTest.java:250)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber(NumberUtilsTest.java:251)
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToLongString" time="0"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumber_EdgeCases" time="0">
+    <error message="Infinityf is not a valid number." type="java.lang.NumberFormatException">java.lang.NumberFormatException: Infinityf is not a valid number.
+	at org.apache.commons.lang3.math.NumberUtils.createNumber(NumberUtils.java:564)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber_EdgeCases(NumberUtilsTest.java:1564)
+</error>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxByte_emptyArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToIntStringI" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxShort_nullArray" time="0"/>
@@ -89,13 +95,13 @@
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxDouble_emptyArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxInt_emptyArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxLong_emptyArray" time="0"/>
-  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToByteStringI" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToByteStringI" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToFloatString" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinFloat_emptyArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinFloat" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxFloat_emptyArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinShort" time="0"/>
-  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumberMagnitude" time="0"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumberMagnitude" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinFloat_nullArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToByteString" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testLang300" time="0"/>
@@ -110,11 +116,11 @@
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCompareDouble" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinimumByte" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinimumLong" time="0"/>
-  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testIsNumber" time="0.001">
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testIsNumber" time="0.002">
     <failure message="isNumber with valid hex uppercase should pass" type="java.lang.AssertionError">java.lang.AssertionError: isNumber with valid hex uppercase should pass
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
-	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber(NumberUtilsTest.java:1341)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber(NumberUtilsTest.java:1342)
 </failure>
   </testcase>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinDouble" time="0"/>
@@ -130,6 +136,13 @@
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumberFailure_2" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumberFailure_3" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateNumberFailure_4" time="0"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testIsNumber_EdgeCases" time="0">
+    <failure message="Should recognize 0X prefix" type="java.lang.AssertionError">java.lang.AssertionError: Should recognize 0X prefix
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber_EdgeCases(NumberUtilsTest.java:1483)
+</failure>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaximumByte" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaximumLong" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxFloat" time="0"/>
@@ -142,7 +155,7 @@
 	at java.base/java.lang.Integer.decode(Integer.java:1373)
 	at org.apache.commons.lang3.math.NumberUtils.createInteger(NumberUtils.java:684)
 	at org.apache.commons.lang3.math.NumberUtils.createNumber(NumberUtils.java:474)
-	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:272)
+	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:273)
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinInt_emptyArray" time="0"/>
@@ -151,14 +164,15 @@
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinInt" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinInt_nullArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMinShort_nullArray" time="0"/>
-  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxInt_nullArray" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaxInt_nullArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testStringToDoubleString" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaximumFloat" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testMaximumShort" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToShortStringI" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testCreateInteger" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToLongStringL" time="0"/>
-  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testStringToDoubleStringD" time="0"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testStringToDoubleStringD" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testIsAllZeros_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testToShortString" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testConstructor" time="0"/>
   <testcase classname="org.apache.commons.lang3.math.NumberUtilsTest" name="testStringCreateNumberEnsureNoPrecisionLoss" time="0"/>

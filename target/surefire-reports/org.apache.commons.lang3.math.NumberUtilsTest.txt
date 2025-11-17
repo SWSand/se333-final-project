@@ -1,19 +1,30 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.math.NumberUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 82, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.013 sec <<< FAILURE!
+Tests run: 85, Failures: 3, Errors: 2, Skipped: 0, Time elapsed: 0.014 sec <<< FAILURE!
 testCreateNumber(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0.009 sec  <<< FAILURE!
 java.lang.AssertionError: createNumber with empty mantissa failed expected: java.lang.Float<0.0> but was: java.math.BigDecimal<0.0>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
 	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber(NumberUtilsTest.java:250)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber(NumberUtilsTest.java:251)
 
-testIsNumber(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+testCreateNumber_EdgeCases(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NumberFormatException: Infinityf is not a valid number.
+	at org.apache.commons.lang3.math.NumberUtils.createNumber(NumberUtils.java:564)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber_EdgeCases(NumberUtilsTest.java:1564)
+
+testIsNumber(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0.002 sec  <<< FAILURE!
 java.lang.AssertionError: isNumber with valid hex uppercase should pass
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
-	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber(NumberUtilsTest.java:1341)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber(NumberUtilsTest.java:1342)
+
+testIsNumber_EdgeCases(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Should recognize 0X prefix
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber_EdgeCases(NumberUtilsTest.java:1483)
 
 TestLang747(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NumberFormatException: For input string: "80000000" under radix 16
@@ -22,5 +33,5 @@ java.lang.NumberFormatException: For input string: "80000000" under radix 16
 	at java.base/java.lang.Integer.decode(Integer.java:1373)
 	at org.apache.commons.lang3.math.NumberUtils.createInteger(NumberUtils.java:684)
 	at org.apache.commons.lang3.math.NumberUtils.createNumber(NumberUtils.java:474)
-	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:272)
+	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:273)
 

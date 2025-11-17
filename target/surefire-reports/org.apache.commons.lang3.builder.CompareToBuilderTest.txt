@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.builder.CompareToBuilderTest
 -------------------------------------------------------------------------------
-Tests run: 50, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 53, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
 testReflectionHierarchyCompareExcludeFields(org.apache.commons.lang3.builder.CompareToBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field private final byte[] java.lang.String.value accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
@@ -12,10 +12,10 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field private fina
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields(CompareToBuilderTest.java:163)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields(CompareToBuilderTest.java:164)
 
 testReflectionHierarchyCompare(org.apache.commons.lang3.builder.CompareToBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field private final byte[] java.lang.String.value accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
@@ -27,10 +27,10 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field private fina
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:157)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:158)
 
 testReflectionHierarchyCompareTransients(org.apache.commons.lang3.builder.CompareToBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field private final byte[] java.lang.String.value accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
@@ -42,8 +42,8 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field private fina
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients(CompareToBuilderTest.java:182)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients(CompareToBuilderTest.java:183)
 

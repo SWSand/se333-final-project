@@ -1288,6 +1288,260 @@ public class ClassUtilsTest  {
     }
 
     @Test
+    public void testIsAssignable_TwoParameterVersion() {
+        // Test isAssignable(Class<?> class, Class<?> toClass) - 2 parameter version (0% coverage)
+        // This uses default autoboxing based on Java version
+        
+        // Test with same class
+        assertTrue("String should be assignable to String", 
+            ClassUtils.isAssignable(String.class, String.class));
+        
+        // Test with subclass
+        assertTrue("String should be assignable to Object", 
+            ClassUtils.isAssignable(String.class, Object.class));
+        assertFalse("Object should not be assignable to String", 
+            ClassUtils.isAssignable(Object.class, String.class));
+        
+        // Test with null (null is assignable to any non-primitive)
+        assertTrue("null should be assignable to String", 
+            ClassUtils.isAssignable(null, String.class));
+        assertFalse("null should not be assignable to int", 
+            ClassUtils.isAssignable(null, Integer.TYPE));
+        
+        // Test with primitives
+        assertTrue("int should be assignable to long (primitive widening)", 
+            ClassUtils.isAssignable(Integer.TYPE, Long.TYPE));
+        assertTrue("byte should be assignable to int (primitive widening)", 
+            ClassUtils.isAssignable(Byte.TYPE, Integer.TYPE));
+        
+        // Test with interfaces
+        assertTrue("ArrayList should be assignable to List", 
+            ClassUtils.isAssignable(ArrayList.class, List.class));
+    }
+
+    @Test
+    public void testIsAssignable_ArrayVarargsVersion() {
+        // Test isAssignable(Class<?>[] classArray, Class<?>... toClassArray) - varargs version (0% coverage)
+        
+        // Test with matching arrays
+        final Class<?>[] fromArray = {String.class, Integer.class};
+        final Class<?>[] toArray = {String.class, Integer.class};
+        assertTrue("Matching arrays should be assignable", 
+            ClassUtils.isAssignable(fromArray, toArray));
+        
+        // Test with compatible types
+        final Class<?>[] fromArray2 = {String.class, Integer.TYPE};
+        final Class<?>[] toArray2 = {Object.class, Long.TYPE};
+        assertTrue("Compatible arrays should be assignable", 
+            ClassUtils.isAssignable(fromArray2, toArray2));
+        
+        // Test with incompatible types
+        final Class<?>[] fromArray3 = {String.class};
+        final Class<?>[] toArray3 = {Integer.class};
+        assertFalse("Incompatible arrays should not be assignable", 
+            ClassUtils.isAssignable(fromArray3, toArray3));
+        
+        // Test with different lengths
+        final Class<?>[] fromArray4 = {String.class, Integer.class};
+        final Class<?>[] toArray4 = {String.class};
+        assertFalse("Different length arrays should not be assignable", 
+            ClassUtils.isAssignable(fromArray4, toArray4));
+        
+        // Test with null arrays
+        assertTrue("null arrays should be assignable", 
+            ClassUtils.isAssignable((Class<?>[]) null, (Class<?>[]) null));
+        
+        // Test with empty arrays
+        assertTrue("Empty arrays should be assignable", 
+            ClassUtils.isAssignable(new Class<?>[0], new Class<?>[0]));
+        
+        // Test varargs with single argument
+        assertTrue("Single vararg should work", 
+            ClassUtils.isAssignable(new Class<?>[]{String.class}, Object.class));
+    }
+
+    @Test
+    public void testIsAssignable_ArrayThreeParameterVersion_EdgeCases() {
+        // Test isAssignable(Class<?>[] classArray, Class<?>[] toClassArray, boolean autoboxing) - edge cases
+        
+        // Test with null arrays and autoboxing=false
+        assertTrue("null arrays should be assignable with autoboxing=false", 
+            ClassUtils.isAssignable((Class<?>[]) null, (Class<?>[]) null, false));
+        
+        // Test with null arrays and autoboxing=true
+        assertTrue("null arrays should be assignable with autoboxing=true", 
+            ClassUtils.isAssignable((Class<?>[]) null, (Class<?>[]) null, true));
+        
+        // Test with different lengths and autoboxing=false
+        final Class<?>[] fromArray = {String.class, Integer.class};
+        final Class<?>[] toArray = {String.class};
+        assertFalse("Different length arrays should not be assignable", 
+            ClassUtils.isAssignable(fromArray, toArray, false));
+        
+        // Test with null in array
+        final Class<?>[] fromArray2 = {String.class, null};
+        final Class<?>[] toArray2 = {String.class, Object.class};
+        assertTrue("null in array should be assignable to non-primitive", 
+            ClassUtils.isAssignable(fromArray2, toArray2, false));
+    }
+
+    @Test
+    public void testGetShortCanonicalName() {
+        // Test getShortCanonicalName methods - 2 missed (75% coverage)
+        
+        // Test with Class parameter
+        assertEquals("String", ClassUtils.getShortCanonicalName(String.class));
+        assertEquals("Integer", ClassUtils.getShortCanonicalName(Integer.class));
+        assertEquals("ArrayList", ClassUtils.getShortCanonicalName(ArrayList.class));
+        
+        // Test with null Class
+        assertEquals("", ClassUtils.getShortCanonicalName((Class<?>) null));
+        
+        // Test with Object parameter
+        assertEquals("String", ClassUtils.getShortCanonicalName("test", "default"));
+        assertEquals("default", ClassUtils.getShortCanonicalName((Object) null, "default"));
+        
+        // Test with String parameter (canonical name)
+        assertEquals("String", ClassUtils.getShortCanonicalName("java.lang.String"));
+        assertEquals("String[]", ClassUtils.getShortCanonicalName("java.lang.String[]"));
+        assertEquals("int[]", ClassUtils.getShortCanonicalName("int[]"));
+        
+        // Test with JVM array format
+        assertEquals("String", ClassUtils.getShortCanonicalName("[Ljava.lang.String;"));
+        assertEquals("int", ClassUtils.getShortCanonicalName("[I"));
+    }
+
+    @Test
+    public void testGetPackageCanonicalName() {
+        // Test getPackageCanonicalName methods - 2 missed (75% coverage)
+        
+        // Test with Class parameter
+        assertEquals("java.lang", ClassUtils.getPackageCanonicalName(String.class));
+        assertEquals("java.util", ClassUtils.getPackageCanonicalName(ArrayList.class));
+        assertEquals("", ClassUtils.getPackageCanonicalName(Object.class)); // No package for java.lang.Object in some contexts
+        
+        // Test with null Class
+        assertEquals("", ClassUtils.getPackageCanonicalName((Class<?>) null));
+        
+        // Test with Object parameter
+        assertEquals("java.lang", ClassUtils.getPackageCanonicalName("test", "default"));
+        assertEquals("default", ClassUtils.getPackageCanonicalName((Object) null, "default"));
+        
+        // Test with String parameter (canonical name)
+        assertEquals("java.lang", ClassUtils.getPackageCanonicalName("java.lang.String"));
+        assertEquals("java.lang", ClassUtils.getPackageCanonicalName("java.lang.String[]"));
+        assertEquals("", ClassUtils.getPackageCanonicalName("int[]"));
+        
+        // Test with JVM array format
+        assertEquals("java.lang", ClassUtils.getPackageCanonicalName("[Ljava.lang.String;"));
+        assertEquals("", ClassUtils.getPackageCanonicalName("[I"));
+    }
+
+    @Test
+    public void testGetCanonicalName_EdgeCases() {
+        // Test getCanonicalName(String) indirectly - 2 missed (97.3% coverage)
+        // This is a private method, but we can test it through public methods
+        
+        // Test with array formats that might have edge cases
+        // Test with empty string (should be handled)
+        final String result1 = ClassUtils.getShortCanonicalName("");
+        assertNotNull("Should return result for empty string", result1);
+        
+        // Test with null (should be handled)
+        final String result2 = ClassUtils.getShortCanonicalName((String) null);
+        assertNotNull("Should return result for null", result2);
+        
+        // Test with whitespace (getCanonicalName deletes whitespace)
+        final String result3 = ClassUtils.getShortCanonicalName("  java.lang.String  ");
+        assertEquals("Should handle whitespace", "String", result3);
+    }
+
+    @Test
+    public void testGetClass_WithInitialize() {
+        // Test getClass(String className, boolean initialize) - 3 missed (80% coverage)
+        try {
+            // Test with initialize=true
+            final Class<?> cls1 = ClassUtils.getClass("java.lang.String", true);
+            assertEquals("Should load String class", String.class, cls1);
+            
+            // Test with initialize=false
+            final Class<?> cls2 = ClassUtils.getClass("java.lang.Integer", false);
+            assertEquals("Should load Integer class", Integer.class, cls2);
+            
+            // Test with array class
+            final Class<?> cls3 = ClassUtils.getClass("java.lang.String[]", true);
+            assertTrue("Should load array class", cls3.isArray());
+            
+            // Test with primitive array
+            final Class<?> cls4 = ClassUtils.getClass("int[]", true);
+            assertTrue("Should load primitive array", cls4.isArray());
+            assertEquals("Should be int array", int.class, cls4.getComponentType());
+        } catch (ClassNotFoundException e) {
+            fail("Should not throw ClassNotFoundException: " + e.getMessage());
+        }
+        
+        // Test with invalid class name
+        try {
+            ClassUtils.getClass("InvalidClassName123", true);
+            fail("Should throw ClassNotFoundException for invalid class");
+        } catch (ClassNotFoundException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testGetPublicMethod_EdgeCases() throws Exception {
+        // Test getPublicMethod edge cases - 21 missed (71.6% coverage)
+        
+        // Test with interface method
+        final Method listSizeMethod = ClassUtils.getPublicMethod(List.class, "size", new Class[0]);
+        assertNotNull("Should find size method in List interface", listSizeMethod);
+        assertTrue("Method should be public", Modifier.isPublic(listSizeMethod.getModifiers()));
+        
+        // Test with method from superclass
+        final Method toStringMethod = ClassUtils.getPublicMethod(String.class, "toString", new Class[0]);
+        assertNotNull("Should find toString method", toStringMethod);
+        assertEquals("Should find method from Object", Object.class, toStringMethod.getDeclaringClass());
+        
+        // Test with method that has parameters
+        final Method substringMethod = ClassUtils.getPublicMethod(String.class, "substring", 
+            new Class[]{int.class, int.class});
+        assertNotNull("Should find substring method", substringMethod);
+        assertEquals("Should find method in String", String.class, substringMethod.getDeclaringClass());
+        
+        // Test with method from superclass that's not public in subclass
+        // Create a scenario where method is in non-public superclass
+        class PublicClass {
+            public void publicMethod() {}
+        }
+        class NonPublicSubclass extends PublicClass {
+            // Inherits publicMethod but subclass is package-private
+        }
+        
+        final Method publicMethod = ClassUtils.getPublicMethod(NonPublicSubclass.class, "publicMethod", new Class[0]);
+        assertNotNull("Should find public method even from non-public subclass", publicMethod);
+        
+        // Test with NoSuchMethodException - method doesn't exist
+        try {
+            ClassUtils.getPublicMethod(String.class, "nonExistentMethod", new Class[0]);
+            fail("Should throw NoSuchMethodException");
+        } catch (NoSuchMethodException e) {
+            // Expected
+            assertTrue("Exception message should mention method name", 
+                e.getMessage().contains("nonExistentMethod") || e.getMessage().contains("Can't find"));
+        }
+        
+        // Test with method that exists but is not public in any accessible class
+        try {
+            // This might throw NoSuchMethodException if method is not accessible
+            ClassUtils.getPublicMethod(Object.class, "clone", new Class[0]);
+            // clone() is protected, so this should work if accessible
+        } catch (NoSuchMethodException e) {
+            // May throw if clone is not accessible
+        }
+    }
+
+    @Test
     public void testToClass_object() {
 //        assertNull(ClassUtils.toClass(null)); // generates warning
         assertNull(ClassUtils.toClass((Object[]) null)); // equivalent explicit cast

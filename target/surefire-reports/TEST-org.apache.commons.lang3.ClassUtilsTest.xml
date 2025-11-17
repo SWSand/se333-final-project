@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="61" failures="0" name="org.apache.commons.lang3.ClassUtilsTest" time="0.007" errors="4" skipped="0">
+<testsuite tests="69" failures="3" name="org.apache.commons.lang3.ClassUtilsTest" time="0.005" errors="6" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -61,8 +61,8 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="java.vendor.version" value="Homebrew"/>
   </properties>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortClassName_Class" time="0.001"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable" time="0">
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortClassName_Class" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable" time="0.001">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -79,6 +79,7 @@
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getAllSuperclasses_Class" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testPrimitiveToWrapper" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getPackageCanonicalName_Object" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClass_WithInitialize" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_Widening" time="0">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
@@ -88,9 +89,24 @@
   </testcase>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getPackageCanonicalName_String" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassWithArrayClasses" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetPublicMethod_NoSuchMethodException" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getPackageCanonicalName_Class" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetPublicMethod_NoSuchMethodException" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_TwoParameterVersion" time="0">
+    <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
+	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
+	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
+	at org.apache.commons.lang3.ClassUtilsTest.testIsAssignable_TwoParameterVersion(ClassUtilsTest.java:1297)
+</error>
+  </testcase>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getPackageCanonicalName_Class" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_ArrayVarargsVersion" time="0">
+    <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
+	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
+	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:470)
+	at org.apache.commons.lang3.ClassUtilsTest.testIsAssignable_ArrayVarargsVersion(ClassUtilsTest.java:1330)
+</error>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortClassName_Object" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetCanonicalName_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortClassName_String" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsPrimitiveOrWrapper" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_NoAutoboxing" time="0"/>
@@ -103,13 +119,27 @@
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_ClassArray_ClassArray_NoAutoboxing" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testWrapperToPrimitiveNull" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassByNormalNameArrays2D" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_WithAutoboxing" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetShortCanonicalName" time="0.001">
+    <failure message="expected:&lt;String[]&gt; but was:&lt;String[[]]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;String[]&gt; but was:&lt;String[[]]&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.apache.commons.lang3.ClassUtilsTest.testGetShortCanonicalName(ClassUtilsTest.java:1410)
+</failure>
+  </testcase>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_WithAutoboxing" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsPrimitiveWrapper" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testWithInterleavingWhitespace" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetPackageCanonicalName" time="0">
+    <failure message="expected:&lt;[]&gt; but was:&lt;[java.lang]&gt;" type="org.junit.ComparisonFailure">org.junit.ComparisonFailure: expected:&lt;[]&gt; but was:&lt;[java.lang]&gt;
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.apache.commons.lang3.ClassUtilsTest.testGetPackageCanonicalName(ClassUtilsTest.java:1421)
+</failure>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getPackageName_Class" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortCanonicalName_Object" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortCanonicalName_String" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortCanonicalName_Class" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getShortCanonicalName_Class" time="0.001"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_DefaultUnboxing_Widening" time="0">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
@@ -120,10 +150,18 @@
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassInvalidArguments" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testPrimitivesToWrappers" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassClassNotFound" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getSimpleName_Class" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getSimpleName_Class" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testWrappersToPrimitivesNull" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetPublicMethod_EdgeCases" time="0">
+    <failure message="Should find method from Object expected:&lt;class java.lang.Object&gt; but was:&lt;class java.lang.String&gt;" type="java.lang.AssertionError">java.lang.AssertionError: Should find method from Object expected:&lt;class java.lang.Object&gt; but was:&lt;class java.lang.String&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.apache.commons.lang3.ClassUtilsTest.testGetPublicMethod_EdgeCases(ClassUtilsTest.java:1504)
+</failure>
+  </testcase>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isInnerClass_Class" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassWithInitialize" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetClassWithInitialize" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_PrimitiveToWrapperWithAutoboxing" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_ClassArray_ClassArray" time="0">
     <error message="Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)&quot; because &quot;org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM&quot; is null
@@ -134,12 +172,13 @@
   </testcase>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getSimpleName_Object" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_Unboxing_Widening" time="0"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_ArrayThreeParameterVersion_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testWrappersToPrimitivesEmpty" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testWrapperToPrimitiveNoWrapper" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_convertClassNamesToClasses_List" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_isAssignable_Autoboxing" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_convertClassesToClassNames_List" time="0"/>
-  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_PrimitiveWidening" time="0.001"/>
+  <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testIsAssignable_PrimitiveWidening" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetPublicMethod" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="test_getAllInterfaces_Class" time="0"/>
   <testcase classname="org.apache.commons.lang3.ClassUtilsTest" name="testGetCanonicalName_NoSemicolon" time="0"/>

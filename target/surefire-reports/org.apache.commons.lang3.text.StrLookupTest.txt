@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.text.StrLookupTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
-testSystemProperiesLookup(org.apache.commons.lang3.text.StrLookupTest)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 6, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+testSystemProperiesLookup(org.apache.commons.lang3.text.StrLookupTest)  Time elapsed: 0.002 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Setting a Security Manager is not supported
 	at java.base/java.lang.System.setSecurityManager(System.java:303)
 	at org.apache.commons.lang3.text.StrLookupTest.tearDown(StrLookupTest.java:48)
@@ -27,7 +27,7 @@ java.lang.UnsupportedOperationException: Setting a Security Manager is not suppo
 	at java.base/java.lang.System.setSecurityManager(System.java:303)
 	at org.apache.commons.lang3.text.StrLookupTest.tearDown(StrLookupTest.java:48)
 
-testMapLookup(org.apache.commons.lang3.text.StrLookupTest)  Time elapsed: 0 sec  <<< ERROR!
+testMapLookup(org.apache.commons.lang3.text.StrLookupTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.UnsupportedOperationException: Setting a Security Manager is not supported
 	at java.base/java.lang.System.setSecurityManager(System.java:303)
 	at org.apache.commons.lang3.text.StrLookupTest.tearDown(StrLookupTest.java:48)

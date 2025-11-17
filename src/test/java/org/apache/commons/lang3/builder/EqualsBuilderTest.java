@@ -1249,5 +1249,225 @@ public class EqualsBuilderTest {
         assertSame("Should return same builder", builder8, builder8.append(true, false));
         assertFalse("Should remain false", builder8.isEquals());
     }
+
+    @Test
+    public void testAppend_ObjectArray_EdgeCases() {
+        // Test append(Object[], Object[]) - 7 missed (86.3% coverage)
+        
+        // Test early return when isEquals == false
+        final EqualsBuilder builder1 = new EqualsBuilder();
+        builder1.setEquals(false);
+        final Object[] arr1 = {1, 2, 3};
+        final Object[] arr2 = {1, 2, 3};
+        assertSame("Should return early when isEquals == false", builder1, builder1.append(arr1, arr2));
+        assertFalse("Should remain false", builder1.isEquals());
+        
+        // Test with same array reference
+        final EqualsBuilder builder2 = new EqualsBuilder();
+        final Object[] arr3 = {1, 2, 3};
+        assertSame("Should return early for same reference", builder2, builder2.append(arr3, arr3));
+        assertTrue("Should remain true", builder2.isEquals());
+        
+        // Test with null arrays
+        final EqualsBuilder builder3 = new EqualsBuilder();
+        builder3.append((Object[]) null, (Object[]) null);
+        assertTrue("Both null should be equal", builder3.isEquals());
+        
+        final EqualsBuilder builder4 = new EqualsBuilder();
+        builder4.append(arr1, null);
+        assertFalse("One null should be false", builder4.isEquals());
+        
+        final EqualsBuilder builder5 = new EqualsBuilder();
+        builder5.append(null, arr2);
+        assertFalse("One null should be false", builder5.isEquals());
+        
+        // Test with different length arrays
+        final EqualsBuilder builder6 = new EqualsBuilder();
+        final Object[] arr4 = {1, 2};
+        builder6.append(arr1, arr4);
+        assertFalse("Different lengths should be false", builder6.isEquals());
+        
+        // Test with arrays that become unequal during iteration
+        final EqualsBuilder builder7 = new EqualsBuilder();
+        final Object[] arr5 = {1, 2, 3};
+        final Object[] arr6 = {1, 2, 4};
+        builder7.append(arr5, arr6);
+        assertFalse("Different elements should be false", builder7.isEquals());
+    }
+
+    @Test
+    public void testAppend_PrimitiveArrays_EdgeCases() {
+        // Test append methods for primitive arrays - 7 missed each (86.3% coverage)
+        
+        // Test long[] - early return, null, different lengths, early exit
+        EqualsBuilder builder1 = new EqualsBuilder();
+        builder1.setEquals(false);
+        final long[] longArr1 = {1L, 2L, 3L};
+        final long[] longArr2 = {1L, 2L, 3L};
+        assertSame("Should return early", builder1, builder1.append(longArr1, longArr2));
+        
+        builder1 = new EqualsBuilder();
+        builder1.append((long[]) null, (long[]) null);
+        assertTrue("Both null should be equal", builder1.isEquals());
+        
+        builder1 = new EqualsBuilder();
+        builder1.append(longArr1, null);
+        assertFalse("One null should be false", builder1.isEquals());
+        
+        builder1 = new EqualsBuilder();
+        final long[] longArr3 = {1L, 2L};
+        builder1.append(longArr1, longArr3);
+        assertFalse("Different lengths should be false", builder1.isEquals());
+        
+        builder1 = new EqualsBuilder();
+        final long[] longArr4 = {1L, 2L, 4L};
+        builder1.append(longArr1, longArr4);
+        assertFalse("Different elements should be false", builder1.isEquals());
+        
+        // Test int[] - same patterns
+        EqualsBuilder builder2 = new EqualsBuilder();
+        builder2.setEquals(false);
+        final int[] intArr1 = {1, 2, 3};
+        final int[] intArr2 = {1, 2, 3};
+        assertSame("Should return early", builder2, builder2.append(intArr1, intArr2));
+        
+        builder2 = new EqualsBuilder();
+        builder2.append((int[]) null, (int[]) null);
+        assertTrue("Both null should be equal", builder2.isEquals());
+        
+        builder2 = new EqualsBuilder();
+        builder2.append(intArr1, null);
+        assertFalse("One null should be false", builder2.isEquals());
+        
+        builder2 = new EqualsBuilder();
+        final int[] intArr3 = {1, 2};
+        builder2.append(intArr1, intArr3);
+        assertFalse("Different lengths should be false", builder2.isEquals());
+        
+        builder2 = new EqualsBuilder();
+        final int[] intArr4 = {1, 2, 4};
+        builder2.append(intArr1, intArr4);
+        assertFalse("Different elements should be false", builder2.isEquals());
+        
+        // Test short[] - same patterns
+        EqualsBuilder builder3 = new EqualsBuilder();
+        builder3.setEquals(false);
+        final short[] shortArr1 = {1, 2, 3};
+        final short[] shortArr2 = {1, 2, 3};
+        assertSame("Should return early", builder3, builder3.append(shortArr1, shortArr2));
+        
+        builder3 = new EqualsBuilder();
+        builder3.append((short[]) null, (short[]) null);
+        assertTrue("Both null should be equal", builder3.isEquals());
+        
+        builder3 = new EqualsBuilder();
+        builder3.append(shortArr1, null);
+        assertFalse("One null should be false", builder3.isEquals());
+        
+        builder3 = new EqualsBuilder();
+        final short[] shortArr3 = {1, 2};
+        builder3.append(shortArr1, shortArr3);
+        assertFalse("Different lengths should be false", builder3.isEquals());
+        
+        // Test byte[] - same patterns
+        EqualsBuilder builder4 = new EqualsBuilder();
+        builder4.setEquals(false);
+        final byte[] byteArr1 = {1, 2, 3};
+        final byte[] byteArr2 = {1, 2, 3};
+        assertSame("Should return early", builder4, builder4.append(byteArr1, byteArr2));
+        
+        builder4 = new EqualsBuilder();
+        builder4.append((byte[]) null, (byte[]) null);
+        assertTrue("Both null should be equal", builder4.isEquals());
+        
+        builder4 = new EqualsBuilder();
+        builder4.append(byteArr1, null);
+        assertFalse("One null should be false", builder4.isEquals());
+        
+        builder4 = new EqualsBuilder();
+        final byte[] byteArr3 = {1, 2};
+        builder4.append(byteArr1, byteArr3);
+        assertFalse("Different lengths should be false", builder4.isEquals());
+        
+        // Test char[] - same patterns
+        EqualsBuilder builder5 = new EqualsBuilder();
+        builder5.setEquals(false);
+        final char[] charArr1 = {'a', 'b', 'c'};
+        final char[] charArr2 = {'a', 'b', 'c'};
+        assertSame("Should return early", builder5, builder5.append(charArr1, charArr2));
+        
+        builder5 = new EqualsBuilder();
+        builder5.append((char[]) null, (char[]) null);
+        assertTrue("Both null should be equal", builder5.isEquals());
+        
+        builder5 = new EqualsBuilder();
+        builder5.append(charArr1, null);
+        assertFalse("One null should be false", builder5.isEquals());
+        
+        builder5 = new EqualsBuilder();
+        final char[] charArr3 = {'a', 'b'};
+        builder5.append(charArr1, charArr3);
+        assertFalse("Different lengths should be false", builder5.isEquals());
+        
+        // Test double[] - same patterns
+        EqualsBuilder builder6 = new EqualsBuilder();
+        builder6.setEquals(false);
+        final double[] doubleArr1 = {1.0, 2.0, 3.0};
+        final double[] doubleArr2 = {1.0, 2.0, 3.0};
+        assertSame("Should return early", builder6, builder6.append(doubleArr1, doubleArr2));
+        
+        builder6 = new EqualsBuilder();
+        builder6.append((double[]) null, (double[]) null);
+        assertTrue("Both null should be equal", builder6.isEquals());
+        
+        builder6 = new EqualsBuilder();
+        builder6.append(doubleArr1, null);
+        assertFalse("One null should be false", builder6.isEquals());
+        
+        builder6 = new EqualsBuilder();
+        final double[] doubleArr3 = {1.0, 2.0};
+        builder6.append(doubleArr1, doubleArr3);
+        assertFalse("Different lengths should be false", builder6.isEquals());
+        
+        // Test float[] - same patterns
+        EqualsBuilder builder7 = new EqualsBuilder();
+        builder7.setEquals(false);
+        final float[] floatArr1 = {1.0f, 2.0f, 3.0f};
+        final float[] floatArr2 = {1.0f, 2.0f, 3.0f};
+        assertSame("Should return early", builder7, builder7.append(floatArr1, floatArr2));
+        
+        builder7 = new EqualsBuilder();
+        builder7.append((float[]) null, (float[]) null);
+        assertTrue("Both null should be equal", builder7.isEquals());
+        
+        builder7 = new EqualsBuilder();
+        builder7.append(floatArr1, null);
+        assertFalse("One null should be false", builder7.isEquals());
+        
+        builder7 = new EqualsBuilder();
+        final float[] floatArr3 = {1.0f, 2.0f};
+        builder7.append(floatArr1, floatArr3);
+        assertFalse("Different lengths should be false", builder7.isEquals());
+        
+        // Test boolean[] - same patterns
+        EqualsBuilder builder8 = new EqualsBuilder();
+        builder8.setEquals(false);
+        final boolean[] boolArr1 = {true, false, true};
+        final boolean[] boolArr2 = {true, false, true};
+        assertSame("Should return early", builder8, builder8.append(boolArr1, boolArr2));
+        
+        builder8 = new EqualsBuilder();
+        builder8.append((boolean[]) null, (boolean[]) null);
+        assertTrue("Both null should be equal", builder8.isEquals());
+        
+        builder8 = new EqualsBuilder();
+        builder8.append(boolArr1, null);
+        assertFalse("One null should be false", builder8.isEquals());
+        
+        builder8 = new EqualsBuilder();
+        final boolean[] boolArr3 = {true, false};
+        builder8.append(boolArr1, boolArr3);
+        assertFalse("Different lengths should be false", builder8.isEquals());
+    }
 }
 

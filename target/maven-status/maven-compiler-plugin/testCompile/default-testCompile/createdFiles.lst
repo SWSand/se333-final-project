@@ -114,6 +114,7 @@ org/apache/commons/lang3/reflect/MethodUtilsTest$ChildInterface.class
 org/apache/commons/lang3/math/IEEE754rUtilsTest.class
 org/apache/commons/lang3/CharRangeTest.class
 org/apache/commons/lang3/builder/ReflectionToStringBuilderConcurrencyTest.class
+org/apache/commons/lang3/ClassUtilsTest$1NonPublicSubclass.class
 org/apache/commons/lang3/reflect/MethodUtilsTest$ChildObject.class
 org/apache/commons/lang3/exception/ExceptionUtilsTest$ExceptionWithoutCause.class
 org/apache/commons/lang3/event/EventUtilsTest$ExceptionEventSource.class
@@ -162,6 +163,7 @@ org/apache/commons/lang3/mutable/MutableIntTest.class
 org/apache/commons/lang3/reflect/TypeUtilsTest$TypeVarClass.class
 org/apache/commons/lang3/StringUtilsTrimEmptyTest.class
 org/apache/commons/lang3/reflect/AAAClass.class
+org/apache/commons/lang3/ClassUtilsTest$1PublicClass.class
 org/apache/commons/lang3/time/DateFormatUtilsTest.class
 org/apache/commons/lang3/builder/IDKeyTest.class
 org/apache/commons/lang3/ClassUtilsTest$IC.class
@@ -259,6 +261,7 @@ org/apache/commons/lang3/reflect/MethodUtilsTest$TestMutable.class
 org/apache/commons/lang3/text/CompositeFormatTest.class
 org/apache/commons/lang3/CharSequenceUtilsTest.class
 org/apache/commons/lang3/event/EventUtilsTest$EventCounterWithEvent.class
+org/apache/commons/lang3/AnnotationUtilsTest$6.class
 org/apache/commons/lang3/builder/ToStringBuilderTest$SimpleReflectionTestFixture.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestObject.class
 org/apache/commons/lang3/reflect/testbed/PrivatelyShadowedChild.class
@@ -288,6 +291,7 @@ org/apache/commons/lang3/builder/StandardToStringStyleTest.class
 org/apache/commons/lang3/event/EventUtilsTest$EventCountingInvociationHandler.class
 org/apache/commons/lang3/ObjectUtilsTest$CharSequenceComparator.class
 org/apache/commons/lang3/text/translate/OctalUnescaperTest.class
+org/apache/commons/lang3/AnnotationUtilsTest$4.class
 org/apache/commons/lang3/reflect/AClass$CClass.class
 org/apache/commons/lang3/builder/ReflectionToStringBuilderConcurrencyTest$2.class
 org/apache/commons/lang3/text/ExtendedMessageFormatTest$LowerCaseFormat.class
@@ -303,6 +307,7 @@ org/apache/commons/lang3/event/EventUtilsTest$EventCounter.class
 org/apache/commons/lang3/event/EventUtilsTest$MultipleEventSource.class
 org/apache/commons/lang3/reflect/testbed/StaticContainerChild.class
 org/apache/commons/lang3/time/FastDateFormat_PrinterTest.class
+org/apache/commons/lang3/AnnotationUtilsTest$5.class
 org/apache/commons/lang3/ObjectUtilsTest$UncloneableString.class
 org/apache/commons/lang3/builder/HashCodeBuilderTest$ReflectionTestCycleA.class
 org/apache/commons/lang3/reflect/TypeUtilsTest$This.class

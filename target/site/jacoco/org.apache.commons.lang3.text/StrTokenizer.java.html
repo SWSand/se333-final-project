@@ -275,9 +275,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param delim  the field delimiter string
      */
     public StrTokenizer(final String input, final String delim) {
-<span class="nc" id="L278">        this(input);</span>
-<span class="nc" id="L279">        setDelimiterString(delim);</span>
-<span class="nc" id="L280">    }</span>
+<span class="fc" id="L278">        this(input);</span>
+<span class="fc" id="L279">        setDelimiterString(delim);</span>
+<span class="fc" id="L280">    }</span>
 
     /**
      * Constructs a tokenizer splitting using the specified delimiter matcher.
@@ -286,9 +286,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param delim  the field delimiter matcher
      */
     public StrTokenizer(final String input, final StrMatcher delim) {
-<span class="nc" id="L289">        this(input);</span>
-<span class="nc" id="L290">        setDelimiterMatcher(delim);</span>
-<span class="nc" id="L291">    }</span>
+<span class="fc" id="L289">        this(input);</span>
+<span class="fc" id="L290">        setDelimiterMatcher(delim);</span>
+<span class="fc" id="L291">    }</span>
 
     /**
      * Constructs a tokenizer splitting on the specified delimiter character
@@ -312,9 +312,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param quote  the field quoted string matcher
      */
     public StrTokenizer(final String input, final StrMatcher delim, final StrMatcher quote) {
-<span class="nc" id="L315">        this(input, delim);</span>
-<span class="nc" id="L316">        setQuoteMatcher(quote);</span>
-<span class="nc" id="L317">    }</span>
+<span class="fc" id="L315">        this(input, delim);</span>
+<span class="fc" id="L316">        setQuoteMatcher(quote);</span>
+<span class="fc" id="L317">    }</span>
 
     /**
      * Constructs a tokenizer splitting on space, tab, newline and formfeed
@@ -345,9 +345,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param delim the field delimiter string
      */
     public StrTokenizer(final char[] input, final String delim) {
-<span class="nc" id="L348">        this(input);</span>
-<span class="nc" id="L349">        setDelimiterString(delim);</span>
-<span class="nc" id="L350">    }</span>
+<span class="fc" id="L348">        this(input);</span>
+<span class="fc" id="L349">        setDelimiterString(delim);</span>
+<span class="fc" id="L350">    }</span>
 
     /**
      * Constructs a tokenizer splitting using the specified delimiter matcher.
@@ -356,9 +356,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param delim  the field delimiter matcher
      */
     public StrTokenizer(final char[] input, final StrMatcher delim) {
-<span class="nc" id="L359">        this(input);</span>
-<span class="nc" id="L360">        setDelimiterMatcher(delim);</span>
-<span class="nc" id="L361">    }</span>
+<span class="fc" id="L359">        this(input);</span>
+<span class="fc" id="L360">        setDelimiterMatcher(delim);</span>
+<span class="fc" id="L361">    }</span>
 
     /**
      * Constructs a tokenizer splitting on the specified delimiter character
@@ -382,9 +382,9 @@ public class StrTokenizer implements ListIterator&lt;String&gt;, Cloneable {
      * @param quote  the field quoted string character
      */
     public StrTokenizer(final char[] input, final StrMatcher delim, final StrMatcher quote) {
-<span class="nc" id="L385">        this(input, delim);</span>
-<span class="nc" id="L386">        setQuoteMatcher(quote);</span>
-<span class="nc" id="L387">    }</span>
+<span class="fc" id="L385">        this(input, delim);</span>
+<span class="fc" id="L386">        setQuoteMatcher(quote);</span>
+<span class="fc" id="L387">    }</span>
 
     // API
     //-----------------------------------------------------------------------

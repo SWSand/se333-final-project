@@ -514,7 +514,7 @@ public class NumberUtils {
             }
             //Requesting a specific type..
 <span class="fc" id="L516">            final String numeric = str.substring(0, str.length() - 1);</span>
-<span class="pc bpc" id="L517" title="3 of 4 branches missed.">            final boolean allZeros = isAllZeros(mant) &amp;&amp; isAllZeros(exp);</span>
+<span class="pc bpc" id="L517" title="1 of 4 branches missed.">            final boolean allZeros = isAllZeros(mant) &amp;&amp; isAllZeros(exp);</span>
 <span class="fc bfc" id="L518" title="All 4 branches covered.">            switch (lastChar) {</span>
                 case 'l' :
                 case 'L' :
@@ -534,7 +534,7 @@ public class NumberUtils {
                 case 'F' :
                     try {
 <span class="fc" id="L536">                        final Float f = NumberUtils.createFloat(numeric);</span>
-<span class="pc bpc" id="L537" title="2 of 6 branches missed.">                        if (!(f.isInfinite() || (f.floatValue() == 0.0F &amp;&amp; !allZeros))) {</span>
+<span class="fc bfc" id="L537" title="All 6 branches covered.">                        if (!(f.isInfinite() || (f.floatValue() == 0.0F &amp;&amp; !allZeros))) {</span>
                             //If it's too big for a float or the float value = 0 and the string
                             //has non-zeros in it, then float does not have the precision we want
 <span class="fc" id="L540">                            return f;</span>
@@ -548,7 +548,7 @@ public class NumberUtils {
                 case 'D' :
                     try {
 <span class="fc" id="L550">                        final Double d = NumberUtils.createDouble(numeric);</span>
-<span class="pc bpc" id="L551" title="2 of 6 branches missed.">                        if (!(d.isInfinite() || (d.floatValue() == 0.0D &amp;&amp; !allZeros))) {</span>
+<span class="pc bpc" id="L551" title="1 of 6 branches missed.">                        if (!(d.isInfinite() || (d.floatValue() == 0.0D &amp;&amp; !allZeros))) {</span>
 <span class="fc" id="L552">                            return d;</span>
                         }
 <span class="fc" id="L554">                    } catch (final NumberFormatException nfe) { // NOPMD</span>
@@ -588,11 +588,11 @@ public class NumberUtils {
         }
 
         //Must be a Float, Double, BigDecimal
-<span class="pc bpc" id="L591" title="3 of 4 branches missed.">        final boolean allZeros = isAllZeros(mant) &amp;&amp; isAllZeros(exp);</span>
+<span class="pc bpc" id="L591" title="1 of 4 branches missed.">        final boolean allZeros = isAllZeros(mant) &amp;&amp; isAllZeros(exp);</span>
         try {
 <span class="fc bfc" id="L593" title="All 2 branches covered.">            if(numDecimals &lt;= 7){// If number has 7 or fewer digits past the decimal point then make it a float</span>
 <span class="fc" id="L594">                final Float f = createFloat(str);</span>
-<span class="pc bpc" id="L595" title="1 of 6 branches missed.">                if (!(f.isInfinite() || (f.floatValue() == 0.0F &amp;&amp; !allZeros))) {</span>
+<span class="fc bfc" id="L595" title="All 6 branches covered.">                if (!(f.isInfinite() || (f.floatValue() == 0.0F &amp;&amp; !allZeros))) {</span>
 <span class="fc" id="L596">                    return f;</span>
                 }
             }
@@ -622,15 +622,15 @@ public class NumberUtils {
      * @return if it is all zeros or &lt;code&gt;null&lt;/code&gt;
      */
     private static boolean isAllZeros(final String str) {
-<span class="pc bpc" id="L625" title="1 of 2 branches missed.">        if (str == null) {</span>
-<span class="nc" id="L626">            return true;</span>
+<span class="fc bfc" id="L625" title="All 2 branches covered.">        if (str == null) {</span>
+<span class="fc" id="L626">            return true;</span>
         }
-<span class="pc bfc" id="L628" title="All 2 branches covered.">        for (int i = str.length() - 1; i &gt;= 0; i--) {</span>
-<span class="pc bpc" id="L629" title="1 of 2 branches missed.">            if (str.charAt(i) != '0') {</span>
+<span class="fc bfc" id="L628" title="All 2 branches covered.">        for (int i = str.length() - 1; i &gt;= 0; i--) {</span>
+<span class="fc bfc" id="L629" title="All 2 branches covered.">            if (str.charAt(i) != '0') {</span>
 <span class="fc" id="L630">                return false;</span>
             }
         }
-<span class="pc bpc" id="L633" title="1 of 2 branches missed.">        return str.length() &gt; 0;</span>
+<span class="fc bfc" id="L633" title="All 2 branches covered.">        return str.length() &gt; 0;</span>
     }
 
     //-----------------------------------------------------------------------

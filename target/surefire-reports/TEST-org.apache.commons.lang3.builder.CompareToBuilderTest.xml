@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="50" failures="0" name="org.apache.commons.lang3.builder.CompareToBuilderTest" time="0" errors="3" skipped="0">
+<testsuite tests="53" failures="0" name="org.apache.commons.lang3.builder.CompareToBuilderTest" time="0" errors="3" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="25.0.1"/>
@@ -37,14 +37,14 @@
     <property name="library.jansi.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/lib/jansi-native"/>
     <property name="user.home" value="/Users/jsandoval"/>
     <property name="user.timezone" value="America/Chicago"/>
+    <property name="testFailureIgnore" value="true"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="25"/>
     <property name="user.name" value="jsandoval"/>
     <property name="java.class.path" value="/opt/homebrew/Cellar/maven/3.9.11/libexec/boot/plexus-classworlds-2.9.0.jar"/>
-    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="error"/>
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test jacoco:report -q"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report -DtestFailureIgnore=true"/>
     <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
     <property name="apple.awt.application.name" value="Launcher"/>
     <property name="user.language" value="en"/>
@@ -76,10 +76,10 @@
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields(CompareToBuilderTest.java:163)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareExcludeFields(CompareToBuilderTest.java:164)
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testObjectComparatorNull" time="0"/>
@@ -93,14 +93,15 @@
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:157)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:158)
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testMultiCharArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testByteArrayHiddenByObject" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testAppendSuper_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testInt" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testByteArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testRaggedArray" time="0"/>
@@ -124,6 +125,7 @@
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testReflectionCompareWithCollection" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testBoolean" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testMultiIntArray" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testAppend_Primitives_EdgeCases" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testBooleanArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testBooleanArrayHiddenByObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testIntArrayHiddenByObject" time="0"/>
@@ -138,10 +140,10 @@
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionAppend(CompareToBuilder.java:314)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:286)
 	at org.apache.commons.lang3.builder.CompareToBuilder.reflectionCompare(CompareToBuilder.java:167)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:276)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:248)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:225)
-	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients(CompareToBuilderTest.java:182)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.reflectionCompareSignum(CompareToBuilderTest.java:277)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.assertReflectionCompareContract(CompareToBuilderTest.java:249)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompare(CompareToBuilderTest.java:226)
+	at org.apache.commons.lang3.builder.CompareToBuilderTest.testReflectionHierarchyCompareTransients(CompareToBuilderTest.java:183)
 </error>
   </testcase>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testShortArray" time="0"/>
@@ -154,6 +156,7 @@
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testObject" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testMultiDoubleArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testAppendSuper" time="0"/>
+  <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testAppend_Primitives_EarlyReturn" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testMultiShortArray" time="0"/>
   <testcase classname="org.apache.commons.lang3.builder.CompareToBuilderTest" name="testDoubleArray" time="0"/>
 </testsuite>

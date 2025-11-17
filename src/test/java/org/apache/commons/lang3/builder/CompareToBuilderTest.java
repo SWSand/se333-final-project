@@ -17,6 +17,7 @@
 package org.apache.commons.lang3.builder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
@@ -276,6 +277,28 @@ public class CompareToBuilderTest {
         return BigInteger.valueOf(CompareToBuilder.reflectionCompare(lhs, rhs, testTransients)).signum();
     }
     
+    @Test
+    public void testAppendSuper_EdgeCases() {
+        // Test appendSuper edge cases - 2 missed (80% coverage)
+        // Test early return when comparison != 0
+        final CompareToBuilder builder1 = new CompareToBuilder();
+        builder1.append(1, 2); // Sets comparison to -1
+        final CompareToBuilder result1 = builder1.appendSuper(5);
+        assertEquals("Should return early when comparison != 0", -1, result1.toComparison());
+        assertSame("Should return same builder", builder1, result1);
+        
+        // Test normal path when comparison == 0
+        final CompareToBuilder builder2 = new CompareToBuilder();
+        final CompareToBuilder result2 = builder2.appendSuper(3);
+        assertEquals("Should set comparison to superCompareTo", 3, result2.toComparison());
+        assertSame("Should return same builder", builder2, result2);
+        
+        // Test with zero
+        final CompareToBuilder builder3 = new CompareToBuilder();
+        final CompareToBuilder result3 = builder3.appendSuper(0);
+        assertEquals("Should set comparison to 0", 0, result3.toComparison());
+    }
+
     @Test
     public void testAppendSuper() {
         final TestObject o1 = new TestObject(4);
@@ -1193,5 +1216,110 @@ public class CompareToBuilderTest {
         assertTrue(new CompareToBuilder().append(obj1, obj2).toComparison() > 0);
         assertTrue(new CompareToBuilder().append(obj2, obj1).toComparison() < 0);
     }
+
+    @Test
+    public void testAppend_Primitives_EarlyReturn() {
+        // Test append methods for primitives with early return when comparison != 0
+        // These test the missed coverage paths (2 missed each)
+        
+        // Test int append with early return
+        CompareToBuilder builder1 = new CompareToBuilder();
+        builder1.append(1, 2); // Sets comparison to -1
+        CompareToBuilder result1 = builder1.append(5, 10);
+        assertEquals("Should return early when comparison != 0", -1, result1.toComparison());
+        assertSame("Should return same builder", builder1, result1);
+        
+        // Test long append with early return
+        CompareToBuilder builder2 = new CompareToBuilder();
+        builder2.append(1L, 2L); // Sets comparison to -1
+        CompareToBuilder result2 = builder2.append(5L, 10L);
+        assertEquals("Should return early when comparison != 0", -1, result2.toComparison());
+        
+        // Test short append with early return
+        CompareToBuilder builder3 = new CompareToBuilder();
+        builder3.append((short)1, (short)2); // Sets comparison to -1
+        CompareToBuilder result3 = builder3.append((short)5, (short)10);
+        assertEquals("Should return early when comparison != 0", -1, result3.toComparison());
+        
+        // Test byte append with early return
+        CompareToBuilder builder4 = new CompareToBuilder();
+        builder4.append((byte)1, (byte)2); // Sets comparison to -1
+        CompareToBuilder result4 = builder4.append((byte)5, (byte)10);
+        assertEquals("Should return early when comparison != 0", -1, result4.toComparison());
+        
+        // Test char append with early return
+        CompareToBuilder builder5 = new CompareToBuilder();
+        builder5.append('a', 'b'); // Sets comparison to -1
+        CompareToBuilder result5 = builder5.append('x', 'y');
+        assertEquals("Should return early when comparison != 0", -1, result5.toComparison());
+        
+        // Test double append with early return
+        CompareToBuilder builder6 = new CompareToBuilder();
+        builder6.append(1.0, 2.0); // Sets comparison to -1
+        CompareToBuilder result6 = builder6.append(5.0, 10.0);
+        assertEquals("Should return early when comparison != 0", -1, result6.toComparison());
+        
+        // Test float append with early return
+        CompareToBuilder builder7 = new CompareToBuilder();
+        builder7.append(1.0f, 2.0f); // Sets comparison to -1
+        CompareToBuilder result7 = builder7.append(5.0f, 10.0f);
+        assertEquals("Should return early when comparison != 0", -1, result7.toComparison());
+        
+        // Test boolean append with early return
+        CompareToBuilder builder8 = new CompareToBuilder();
+        builder8.append(false, true); // Sets comparison to -1
+        CompareToBuilder result8 = builder8.append(false, true);
+        assertEquals("Should return early when comparison != 0", -1, result8.toComparison());
+    }
+
+    @Test
+    public void testAppend_Primitives_EdgeCases() {
+        // Test append methods for primitives with edge cases to cover all branches
+        
+        // Test int: lhs < rhs, lhs > rhs, lhs == rhs
+        assertEquals(-1, new CompareToBuilder().append(1, 2).toComparison());
+        assertEquals(1, new CompareToBuilder().append(2, 1).toComparison());
+        assertEquals(0, new CompareToBuilder().append(1, 1).toComparison());
+        
+        // Test long: lhs < rhs, lhs > rhs, lhs == rhs
+        assertEquals(-1, new CompareToBuilder().append(1L, 2L).toComparison());
+        assertEquals(1, new CompareToBuilder().append(2L, 1L).toComparison());
+        assertEquals(0, new CompareToBuilder().append(1L, 1L).toComparison());
+        
+        // Test short: lhs < rhs, lhs > rhs, lhs == rhs
+        assertEquals(-1, new CompareToBuilder().append((short)1, (short)2).toComparison());
+        assertEquals(1, new CompareToBuilder().append((short)2, (short)1).toComparison());
+        assertEquals(0, new CompareToBuilder().append((short)1, (short)1).toComparison());
+        
+        // Test byte: lhs < rhs, lhs > rhs, lhs == rhs
+        assertEquals(-1, new CompareToBuilder().append((byte)1, (byte)2).toComparison());
+        assertEquals(1, new CompareToBuilder().append((byte)2, (byte)1).toComparison());
+        assertEquals(0, new CompareToBuilder().append((byte)1, (byte)1).toComparison());
+        
+        // Test char: lhs < rhs, lhs > rhs, lhs == rhs
+        assertEquals(-1, new CompareToBuilder().append('a', 'b').toComparison());
+        assertEquals(1, new CompareToBuilder().append('b', 'a').toComparison());
+        assertEquals(0, new CompareToBuilder().append('a', 'a').toComparison());
+        
+        // Test double: NaN, Infinity, -0.0 cases
+        assertEquals(1, new CompareToBuilder().append(Double.NaN, 1.0).toComparison());
+        assertEquals(-1, new CompareToBuilder().append(1.0, Double.NaN).toComparison());
+        assertEquals(0, new CompareToBuilder().append(Double.NaN, Double.NaN).toComparison());
+        assertEquals(1, new CompareToBuilder().append(Double.POSITIVE_INFINITY, 1.0).toComparison());
+        assertEquals(-1, new CompareToBuilder().append(1.0, Double.POSITIVE_INFINITY).toComparison());
+        
+        // Test float: NaN, Infinity, -0.0 cases
+        assertEquals(1, new CompareToBuilder().append(Float.NaN, 1.0f).toComparison());
+        assertEquals(-1, new CompareToBuilder().append(1.0f, Float.NaN).toComparison());
+        assertEquals(0, new CompareToBuilder().append(Float.NaN, Float.NaN).toComparison());
+        assertEquals(1, new CompareToBuilder().append(Float.POSITIVE_INFINITY, 1.0f).toComparison());
+        assertEquals(-1, new CompareToBuilder().append(1.0f, Float.POSITIVE_INFINITY).toComparison());
+        
+        // Test boolean: false < true, false == false, true == true
+        assertEquals(-1, new CompareToBuilder().append(false, true).toComparison());
+        assertEquals(1, new CompareToBuilder().append(true, false).toComparison());
+        assertEquals(0, new CompareToBuilder().append(false, false).toComparison());
+        assertEquals(0, new CompareToBuilder().append(true, true).toComparison());
+    }
   
- }
+}

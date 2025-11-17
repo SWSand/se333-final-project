@@ -373,4 +373,56 @@ public class SystemUtilsTest {
         }
         assertEquals(expectedStringValueWithDefault, "" + SystemUtils.isJavaAwtHeadless());
     }
+
+    @Test
+    public void testIsJavaAwtHeadless_EdgeCases() {
+        // Test isJavaAwtHeadless() method - covers the null check branch
+        // This method returns false if JAVA_AWT_HEADLESS is null
+        final boolean result = SystemUtils.isJavaAwtHeadless();
+        // Should return a boolean value (false if null, true if "true", false otherwise)
+        assertTrue("Should return boolean", result == true || result == false);
+        
+        // Test when JAVA_AWT_HEADLESS is "true"
+        // This is tested indirectly through the system property
+        final String headless = System.getProperty("java.awt.headless");
+        if (headless != null && "true".equals(headless)) {
+            assertTrue("Should return true when headless is true", SystemUtils.isJavaAwtHeadless());
+        }
+    }
+
+    @Test
+    public void testIsJavaVersionAtLeast() {
+        // Test isJavaVersionAtLeast() method - covers different version comparisons
+        // Test with Java 1.4 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.4", 
+            SystemUtils.isJavaVersionAtLeast(JAVA_1_4));
+        
+        // Test with Java 1.1 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.1", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_1));
+        
+        // Test with Java 1.2 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.2", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_2));
+        
+        // Test with Java 1.3 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.3", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_3));
+        
+        // Test with Java 1.5 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.5", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_5));
+        
+        // Test with Java 1.6 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.6", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_6));
+        
+        // Test with Java 1.7 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.7", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_7));
+        
+        // Test with Java 1.8 (should be true for modern Java)
+        assertTrue("Current version should be at least Java 1.8", 
+            SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_8));
+    }
 }

@@ -1016,8 +1016,8 @@ public class ClassUtils {
      * @since 2.4
      */
     public static String getShortCanonicalName(final Class&lt;?&gt; cls) {
-<span class="pc bpc" id="L1019" title="1 of 2 branches missed.">        if (cls == null) {</span>
-<span class="nc" id="L1020">            return StringUtils.EMPTY;</span>
+<span class="fc bfc" id="L1019" title="All 2 branches covered.">        if (cls == null) {</span>
+<span class="fc" id="L1020">            return StringUtils.EMPTY;</span>
         }
 <span class="fc" id="L1022">        return getShortCanonicalName(cls.getName());</span>
     }
@@ -1098,8 +1098,8 @@ public class ClassUtils {
      */
     private static String getCanonicalName(String className) {
 <span class="fc" id="L1100">        className = StringUtils.deleteWhitespace(className);</span>
-<span class="pc bpc" id="L1101" title="1 of 2 branches missed.">        if (className == null) {</span>
-<span class="nc" id="L1102">            return null;</span>
+<span class="fc bfc" id="L1101" title="All 2 branches covered.">        if (className == null) {</span>
+<span class="fc" id="L1102">            return null;</span>
         } else {
 <span class="fc" id="L1104">            int dim = 0;</span>
 <span class="fc bfc" id="L1105" title="All 2 branches covered.">            while (className.startsWith(&quot;[&quot;)) {</span>

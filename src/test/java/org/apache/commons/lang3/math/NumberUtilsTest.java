@@ -19,6 +19,7 @@ package org.apache.commons.lang3.math;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -1471,6 +1472,145 @@ public class NumberUtilsTest {
         
         final float[] dF = new float[] { Float.NaN, 1.2f, 3.7f };
         assertTrue(Float.isNaN(NumberUtils.min(dF)));
+    }
+
+    @Test
+    public void testIsNumber_EdgeCases() {
+        // Test isNumber edge cases - 19 missed (93.2% coverage)
+        
+        // Test with hex prefixes (0x, 0X, -0x, -0X, #, -#)
+        assertTrue("Should recognize 0x prefix", NumberUtils.isNumber("0x123"));
+        assertTrue("Should recognize 0X prefix", NumberUtils.isNumber("0X123"));
+        assertTrue("Should recognize -0x prefix", NumberUtils.isNumber("-0x123"));
+        assertTrue("Should recognize -0X prefix", NumberUtils.isNumber("-0X123"));
+        assertTrue("Should recognize # prefix", NumberUtils.isNumber("#123"));
+        assertTrue("Should recognize -# prefix", NumberUtils.isNumber("-#123"));
+        
+        // Test with hex numbers that are too large for Long
+        assertTrue("Should recognize large hex as BigInteger", NumberUtils.isNumber("0x1234567890ABCDEF1234"));
+        assertTrue("Should recognize large hex with #", NumberUtils.isNumber("#1234567890ABCDEF1234"));
+        
+        // Test with hex numbers that are too large for Integer but fit in Long
+        assertTrue("Should recognize medium hex as Long", NumberUtils.isNumber("0x1234567890"));
+        
+        // Test with octal numbers
+        assertTrue("Should recognize octal", NumberUtils.isNumber("0123"));
+        assertTrue("Should recognize negative octal", NumberUtils.isNumber("-0123"));
+        
+        // Test with type qualifiers (f, F, d, D, l, L)
+        assertTrue("Should recognize float qualifier", NumberUtils.isNumber("123.45f"));
+        assertTrue("Should recognize Float qualifier", NumberUtils.isNumber("123.45F"));
+        assertTrue("Should recognize double qualifier", NumberUtils.isNumber("123.45d"));
+        assertTrue("Should recognize Double qualifier", NumberUtils.isNumber("123.45D"));
+        assertTrue("Should recognize long qualifier", NumberUtils.isNumber("123l"));
+        assertTrue("Should recognize Long qualifier", NumberUtils.isNumber("123L"));
+        
+        // Test with scientific notation
+        assertTrue("Should recognize scientific notation with e", NumberUtils.isNumber("1.23e10"));
+        assertTrue("Should recognize scientific notation with E", NumberUtils.isNumber("1.23E10"));
+        assertTrue("Should recognize negative exponent", NumberUtils.isNumber("1.23e-10"));
+        assertTrue("Should recognize positive exponent", NumberUtils.isNumber("1.23e+10"));
+        
+        // Test edge cases that might be missed
+        assertFalse("Should reject invalid hex", NumberUtils.isNumber("0x"));
+        assertFalse("Should reject invalid hex with minus", NumberUtils.isNumber("-0x"));
+        assertFalse("Should reject invalid #", NumberUtils.isNumber("#"));
+        assertFalse("Should reject invalid -#", NumberUtils.isNumber("-#"));
+        
+        // Test with numbers that have many decimal places
+        assertTrue("Should handle many decimal places", NumberUtils.isNumber("1.1234567890123456")); // 16 decimals
+        assertTrue("Should handle 7 decimal places (Float)", NumberUtils.isNumber("1.1234567"));
+        assertTrue("Should handle 8 decimal places (Double)", NumberUtils.isNumber("1.12345678"));
+    }
+
+    @Test
+    public void testCreateNumber_EdgeCases() {
+        // Test createNumber edge cases - 10 missed (97.6% coverage)
+        
+        // Test with hex numbers that create BigInteger
+        final Number bigHex = NumberUtils.createNumber("0x1234567890ABCDEF1234");
+        assertNotNull("Should create BigInteger for large hex", bigHex);
+        assertTrue("Should be BigInteger", bigHex instanceof java.math.BigInteger);
+        
+        // Test with hex numbers that create Long
+        final Number longHex = NumberUtils.createNumber("0x1234567890");
+        assertNotNull("Should create Long for medium hex", longHex);
+        assertTrue("Should be Long", longHex instanceof Long);
+        
+        // Test with numbers that have exactly 7 decimal places (Float path)
+        final Number floatNum = NumberUtils.createNumber("1.1234567f");
+        assertNotNull("Should create Float", floatNum);
+        assertTrue("Should be Float", floatNum instanceof Float);
+        
+        // Test with numbers that have exactly 16 decimal places (Double path)
+        final Number doubleNum = NumberUtils.createNumber("1.1234567890123456");
+        assertNotNull("Should create Double", doubleNum);
+        assertTrue("Should be Double", doubleNum instanceof Double);
+        
+        // Test with numbers that have more than 16 decimal places (BigDecimal path)
+        final Number bigDecimalNum = NumberUtils.createNumber("1.12345678901234567");
+        assertNotNull("Should create BigDecimal", bigDecimalNum);
+        assertTrue("Should be BigDecimal", bigDecimalNum instanceof java.math.BigDecimal);
+        
+        // Test with allZeros=true cases (Float with zero but not all zeros)
+        final Number floatZero = NumberUtils.createNumber("0.0f");
+        assertNotNull("Should create Float for 0.0f", floatZero);
+        
+        // Test with allZeros=false cases
+        final Number floatNonZero = NumberUtils.createNumber("0.0000001f");
+        assertNotNull("Should create Float for small non-zero", floatNonZero);
+        
+        // Test with infinity cases
+        final Number infFloat = NumberUtils.createNumber("Infinityf");
+        assertNotNull("Should handle Infinity", infFloat);
+        
+        // Test with numbers that fail Float but succeed Double
+        // This tests the fall-through from Float to Double
+        final Number fallThrough = NumberUtils.createNumber("1.12345678"); // 8 decimals
+        assertNotNull("Should create Double when Float fails", fallThrough);
+    }
+
+    @Test
+    public void testIsAllZeros_EdgeCases() {
+        // Test isAllZeros edge cases - 6 missed (77.8% coverage)
+        // This is a private method, tested indirectly through createNumber
+        
+        // Test with null (should return true)
+        // This is tested through createNumber with null
+        final Number nullNum = NumberUtils.createNumber(null);
+        assertNull("Should return null for null input", nullNum);
+        
+        // Test with empty string (should return true)
+        // This is tested through createNumber with empty string
+        try {
+            NumberUtils.createNumber("");
+            fail("Should throw NumberFormatException for empty string");
+        } catch (NumberFormatException e) {
+            // Expected
+        }
+        
+        // Test with all zeros string
+        // This is tested through createNumber with "0" or "0.0"
+        final Number zero1 = NumberUtils.createNumber("0");
+        assertNotNull("Should create number for 0", zero1);
+        
+        final Number zero2 = NumberUtils.createNumber("0.0");
+        assertNotNull("Should create number for 0.0", zero2);
+        
+        final Number zero3 = NumberUtils.createNumber("000");
+        assertNotNull("Should create number for 000", zero3);
+        
+        // Test with string containing non-zero (should return false)
+        // This is tested through createNumber with non-zero numbers
+        final Number nonZero = NumberUtils.createNumber("0.0000001");
+        assertNotNull("Should create number for small non-zero", nonZero);
+        
+        // Test with string of length 0 (should return false per line 633)
+        // This is tested through createNumber with empty string which throws exception
+        
+        // Test with string containing only zeros but with length > 0
+        final Number manyZeros = NumberUtils.createNumber("0000.0000");
+        assertNotNull("Should create number for many zeros", manyZeros);
     }
 
 }

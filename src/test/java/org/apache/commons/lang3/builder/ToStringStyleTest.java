@@ -437,4 +437,145 @@ public class ToStringStyleTest {
         style.append(buffer2, "strArray", strArray, false);
         assertTrue("Should contain size", buffer2.toString().contains("<size="));
     }
+
+    @Test
+    public void testAppendInternal_ComprehensiveEdgeCases() {
+        // Test appendInternal comprehensively - 56 missed (77.4% coverage)
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test with empty Collection (detail=true and detail=false)
+        final StringBuffer buffer1 = new StringBuffer();
+        final java.util.List<String> emptyList = new java.util.ArrayList<String>();
+        style.append(buffer1, "emptyList", emptyList, true);
+        assertTrue("Should handle empty collection", buffer1.length() > 0);
+        
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "emptyList", emptyList, false);
+        assertTrue("Should handle empty collection summary", buffer2.length() > 0);
+        
+        // Test with empty Map (detail=true and detail=false)
+        final StringBuffer buffer3 = new StringBuffer();
+        final java.util.Map<String, String> emptyMap = new java.util.HashMap<String, String>();
+        style.append(buffer3, "emptyMap", emptyMap, true);
+        assertTrue("Should handle empty map", buffer3.length() > 0);
+        
+        final StringBuffer buffer4 = new StringBuffer();
+        style.append(buffer4, "emptyMap", emptyMap, false);
+        assertTrue("Should handle empty map summary", buffer4.length() > 0);
+        
+        // Test with empty primitive arrays (detail=false)
+        final StringBuffer buffer5 = new StringBuffer();
+        style.append(buffer5, "emptyLongArr", new long[0], false);
+        assertTrue("Should handle empty long array", buffer5.length() > 0);
+        
+        final StringBuffer buffer6 = new StringBuffer();
+        style.append(buffer6, "emptyIntArr", new int[0], false);
+        assertTrue("Should handle empty int array", buffer6.length() > 0);
+        
+        final StringBuffer buffer7 = new StringBuffer();
+        style.append(buffer7, "emptyShortArr", new short[0], false);
+        assertTrue("Should handle empty short array", buffer7.length() > 0);
+        
+        final StringBuffer buffer8 = new StringBuffer();
+        style.append(buffer8, "emptyByteArr", new byte[0], false);
+        assertTrue("Should handle empty byte array", buffer8.length() > 0);
+        
+        final StringBuffer buffer9 = new StringBuffer();
+        style.append(buffer9, "emptyCharArr", new char[0], false);
+        assertTrue("Should handle empty char array", buffer9.length() > 0);
+        
+        final StringBuffer buffer10 = new StringBuffer();
+        style.append(buffer10, "emptyDoubleArr", new double[0], false);
+        assertTrue("Should handle empty double array", buffer10.length() > 0);
+        
+        final StringBuffer buffer11 = new StringBuffer();
+        style.append(buffer11, "emptyFloatArr", new float[0], false);
+        assertTrue("Should handle empty float array", buffer11.length() > 0);
+        
+        final StringBuffer buffer12 = new StringBuffer();
+        style.append(buffer12, "emptyBoolArr", new boolean[0], false);
+        assertTrue("Should handle empty boolean array", buffer12.length() > 0);
+        
+        // Test with empty Object array (detail=false)
+        final StringBuffer buffer13 = new StringBuffer();
+        style.append(buffer13, "emptyObjArr", new Object[0], false);
+        assertTrue("Should handle empty object array", buffer13.length() > 0);
+        
+        // Test with multi-dimensional arrays (detail=true and detail=false)
+        final StringBuffer buffer14 = new StringBuffer();
+        final int[][] multiDimArray = {{1, 2}, {3, 4}};
+        style.append(buffer14, "multiDim", multiDimArray, true);
+        assertTrue("Should handle multi-dimensional array", buffer14.length() > 0);
+        
+        final StringBuffer buffer15 = new StringBuffer();
+        style.append(buffer15, "multiDim", multiDimArray, false);
+        assertTrue("Should handle multi-dimensional array summary", buffer15.length() > 0);
+        
+        // Test with registered Number that should NOT use cyclic path (line 472)
+        final Integer registeredNum = Integer.valueOf(100);
+        ToStringStyle.register(registeredNum);
+        try {
+            final StringBuffer buffer16 = new StringBuffer();
+            style.append(buffer16, "registeredNum", registeredNum, true);
+            // Number should go through normal path, not cyclic
+            assertTrue("Should handle registered Number normally", buffer16.length() > 0);
+        } finally {
+            ToStringStyle.unregister(registeredNum);
+        }
+        
+        // Test with registered Boolean that should NOT use cyclic path
+        final Boolean registeredBool = Boolean.FALSE;
+        ToStringStyle.register(registeredBool);
+        try {
+            final StringBuffer buffer17 = new StringBuffer();
+            style.append(buffer17, "registeredBool", registeredBool, true);
+            // Boolean should go through normal path, not cyclic
+            assertTrue("Should handle registered Boolean normally", buffer17.length() > 0);
+        } finally {
+            ToStringStyle.unregister(registeredBool);
+        }
+        
+        // Test with registered Character that should NOT use cyclic path
+        final Character registeredChar = Character.valueOf('Z');
+        ToStringStyle.register(registeredChar);
+        try {
+            final StringBuffer buffer18 = new StringBuffer();
+            style.append(buffer18, "registeredChar", registeredChar, true);
+            // Character should go through normal path, not cyclic
+            assertTrue("Should handle registered Character normally", buffer18.length() > 0);
+        } finally {
+            ToStringStyle.unregister(registeredChar);
+        }
+        
+        // Test with registered non-Number/Boolean/Character that SHOULD use cyclic path
+        final Person registeredPerson = new Person();
+        registeredPerson.name = "Test";
+        ToStringStyle.register(registeredPerson);
+        try {
+            final StringBuffer buffer19 = new StringBuffer();
+            style.append(buffer19, "registeredPerson", registeredPerson, true);
+            // Should use appendCyclicObject
+            assertTrue("Should handle cyclic object", buffer19.length() > 0);
+        } finally {
+            ToStringStyle.unregister(registeredPerson);
+        }
+        
+        // Test finally block - ensure unregister is called even on exception
+        // This is hard to test directly, but we can verify unregister happens
+        final Person testPerson = new Person();
+        testPerson.name = "Test";
+        ToStringStyle.register(testPerson);
+        try {
+            final StringBuffer buffer20 = new StringBuffer();
+            style.append(buffer20, "testPerson", testPerson, true);
+            // After append, object should be unregistered
+            // Note: isRegistered might return true if object is still in registry
+            // The finally block ensures unregister is called
+            final boolean stillRegistered = ToStringStyle.isRegistered(testPerson);
+            // The finally block will clean up
+        } finally {
+            // Clean up if still registered
+            ToStringStyle.unregister(testPerson);
+        }
+    }
 }

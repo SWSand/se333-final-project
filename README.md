@@ -1,4 +1,4 @@
-chmod +x scripts/git_mcp.sh# 🧪 Testing Agent with MCP Tools
+# SE333 - Final Project -  Testing Agent with MCP Tools
 
 ## Overview
 

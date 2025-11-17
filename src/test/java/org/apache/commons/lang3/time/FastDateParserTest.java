@@ -920,7 +920,7 @@ public class FastDateParserTest {
     }
 
     @Test
-    public void testGetLocaleSpecificStrategy_CacheRaceCondition() {
+    public void testGetLocaleSpecificStrategy_CacheRaceCondition() throws Exception {
         // Test line 507: return inCache when it's not null (concurrent cache scenario)
         // This tests the race condition where putIfAbsent returns a non-null value
         
@@ -938,7 +938,7 @@ public class FastDateParserTest {
     }
 
     @Test
-    public void testTextStrategy_SetCalendar_InvalidValue() {
+    public void testTextStrategy_SetCalendar_InvalidValue() throws Exception {
         // Test lines 587-593: IllegalArgumentException when value not in keyValues
         // This tests TextStrategy.setCalendar when value is not found in keyValues
         

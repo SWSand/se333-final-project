@@ -13,6 +13,7 @@ org/apache/commons/lang3/text/StrBuilderAppendInsertTest$3.class
 org/apache/commons/lang3/text/ExtendedMessageFormatTest$UpperCaseFormat.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.class
 org/apache/commons/lang3/Traffic.class
+org/apache/commons/lang3/ClassUtilsExtraTest.class
 org/apache/commons/lang3/SerializationUtilsTest$3.class
 org/apache/commons/lang3/time/FastDateFormatTest$2.class
 org/apache/commons/lang3/builder/HashCodeBuilderTest$ReflectionTestCycleB.class
@@ -39,6 +40,7 @@ org/apache/commons/lang3/RangeTest.class
 org/apache/commons/lang3/time/DateUtilsRoundingTest.class
 org/apache/commons/lang3/mutable/MutableByteTest.class
 org/apache/commons/lang3/ClassUtilsTest$IF.class
+org/apache/commons/lang3/ClassUtilsExtraTest$1Local.class
 org/apache/commons/lang3/exception/CloneFailedExceptionTest.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest$9.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestSubObject.class
@@ -159,6 +161,7 @@ org/apache/commons/lang3/concurrent/AtomicInitializerTest$1.class
 org/apache/commons/lang3/text/WordUtilsTest.class
 org/apache/commons/lang3/tuple/TripleTest.class
 org/apache/commons/lang3/RangeTest$2.class
+org/apache/commons/lang3/ObjectUtilsExtraTest.class
 org/apache/commons/lang3/ArrayUtilsTest.class
 org/apache/commons/lang3/mutable/MutableIntTest.class
 org/apache/commons/lang3/reflect/TypeUtilsTest$TypeVarClass.class
@@ -183,6 +186,7 @@ org/apache/commons/lang3/builder/EqualsBuilderTest$TestTTLeafObject.class
 org/apache/commons/lang3/concurrent/BackgroundInitializerTest$1.class
 org/apache/commons/lang3/RandomStringUtilsTest.class
 org/apache/commons/lang3/mutable/MutableObjectTest.class
+org/apache/commons/lang3/StringUtilsExtraTest.class
 org/apache/commons/lang3/text/StrTokenizerTest$3.class
 org/apache/commons/lang3/ClassUtilsTest$ID.class
 org/apache/commons/lang3/mutable/MutableLongTest.class
@@ -207,6 +211,7 @@ org/apache/commons/lang3/text/translate/EntityArraysTest.class
 org/apache/commons/lang3/text/translate/NumericEntityEscaperTest.class
 org/apache/commons/lang3/builder/ToStringBuilderTest$ObjectCycle.class
 org/apache/commons/lang3/time/StopWatchTest.class
+org/apache/commons/lang3/ArrayUtilsExtraTest.class
 org/apache/commons/lang3/concurrent/AbstractConcurrentInitializerTest$1GetThread.class
 org/apache/commons/lang3/AnnotationUtilsTest$1.class
 org/apache/commons/lang3/reflect/testbed/PublicChild.class

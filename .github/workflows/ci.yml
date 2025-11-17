@@ -1,0 +1,90 @@
+name: SE333_CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Cache Maven local repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Run static analysis (Checkstyle)
+        run: mvn -B validate
+
+      - name: Run Maven tests and JaCoCo
+        run: mvn -B -DskipTests=false clean test jacoco:report
+
+      - name: Upload Surefire JUnit test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+
+      - name: Upload JaCoCo XML and HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: |
+            target/site/jacoco/jacoco.xml
+            target/site/jacoco/index.html
+
+      - name: Set up Python for coverage parsing
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Parse JaCoCo and fail if below threshold
+        id: coverage
+        run: |
+          python3 tools/coverage_parser.py --input target/site/jacoco/jacoco.xml --min-line 80
+
+      - name: Comment coverage summary on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            JaCoCo coverage results:
+            
+            ${{ steps.coverage.outputs.summary || 'Coverage summary not available' }}
+
+  ci-report:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download jacoco artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jacoco-report
+
+      - name: Print jacoco files
+        run: ls -la

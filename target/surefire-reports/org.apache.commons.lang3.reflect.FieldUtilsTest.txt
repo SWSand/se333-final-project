@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.reflect.FieldUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 44, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.067 sec <<< FAILURE!
-testGetAllFieldsList(org.apache.commons.lang3.reflect.FieldUtilsTest)  Time elapsed: 0.002 sec  <<< FAILURE!
+Tests run: 44, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec <<< FAILURE!
+testGetAllFieldsList(org.apache.commons.lang3.reflect.FieldUtilsTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: expected:<5> but was:<7>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -11,7 +11,7 @@ java.lang.AssertionError: expected:<5> but was:<7>
 	at org.junit.Assert.assertEquals(Assert.java:542)
 	at org.apache.commons.lang3.reflect.FieldUtilsTest.testGetAllFieldsList(FieldUtilsTest.java:167)
 
-testGetAllFields(org.apache.commons.lang3.reflect.FieldUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+testGetAllFields(org.apache.commons.lang3.reflect.FieldUtilsTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: expected:<5> but was:<7>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)

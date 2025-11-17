@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.reflect.TypeUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 105, Failures: 2, Errors: 66, Skipped: 0, Time elapsed: 0.183 sec <<< FAILURE!
-testGetClosestParentType_InterfacePath(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.003 sec  <<< ERROR!
+Tests run: 105, Failures: 2, Errors: 66, Skipped: 0, Time elapsed: 0.019 sec <<< FAILURE!
+testGetClosestParentType_InterfacePath(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -12,7 +12,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_InterfacePath(TypeUtilsTest.java:1308)
 
-testGetTypeArgumentsWithTypeVariable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.013 sec  <<< ERROR!
+testGetTypeArgumentsWithTypeVariable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -50,7 +50,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testDetermineTypeArguments_ParameterizedMidType(TypeUtilsTest.java:1953)
 
-testGetClosestParentType_InterfaceMatching_UsingExistingClasses(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testGetClosestParentType_InterfaceMatching_UsingExistingClasses(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -96,7 +96,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_SuperclassFallback_UsingExistingClasses(TypeUtilsTest.java:2184)
 
-testIsInstance_WithTypeVariableBounds(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+testIsInstance_WithTypeVariableBounds(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: Number should be instance of TypeVariable<? extends Number>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.assertTrue(Assert.java:41)
@@ -223,7 +223,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetTypeArguments_Class_Comprehensive(TypeUtilsTest.java:1497)
 
-testGetClosestParentType_NoInterfaceMatch(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testGetClosestParentType_NoInterfaceMatch(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -261,7 +261,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_AllPaths(TypeUtilsTest.java:1566)
 
-testMapTypeVariablesToArguments_NoMatch(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.034 sec  <<< ERROR!
+testMapTypeVariablesToArguments_NoMatch(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -311,7 +311,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.isInstance(TypeUtils.java:851)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testIsInstance_WithComplexParameterizedTypes(TypeUtilsTest.java:2125)
 
-testGetClosestParentType_UnexpectedInterfaceType(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testGetClosestParentType_UnexpectedInterfaceType(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -321,7 +321,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_UnexpectedInterfaceType(TypeUtilsTest.java:1791)
 
-testIsAssignable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.04 sec  <<< ERROR!
+testIsAssignable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.005 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -345,7 +345,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentTypeWithSuperclass(TypeUtilsTest.java:1078)
 
-testTypesSatisfyVariables_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testTypesSatisfyVariables_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -374,7 +374,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testDetermineTypeArguments_AllPaths(TypeUtilsTest.java:1644)
 
-testGetClosestParentTypeWithInterfaces(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.028 sec  <<< ERROR!
+testGetClosestParentTypeWithInterfaces(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -404,7 +404,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.typesSatisfyVariables(TypeUtils.java:968)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testTypesSatisfyVariables_Comprehensive_Enhanced(TypeUtilsTest.java:2508)
 
-testMapTypeVariablesToArguments_WithOwnerType_UsingExistingClasses(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testMapTypeVariablesToArguments_WithOwnerType_UsingExistingClasses(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -412,7 +412,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testMapTypeVariablesToArguments_WithOwnerType_UsingExistingClasses(TypeUtilsTest.java:2218)
 
-testIsAssignableWithWildcardType(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testIsAssignableWithWildcardType(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -425,7 +425,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:65)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testIsAssignableWithWildcardType(TypeUtilsTest.java:900)
 
-testIsAssignable_TypeVariable_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testIsAssignable_TypeVariable_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.IllegalStateException: found an unhandled type: T
 	at org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:460)
 	at org.apache.commons.lang3.reflect.TypeUtils.isAssignable(TypeUtils.java:97)
@@ -451,7 +451,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetTypeArguments_TypeClassMap_Comprehensive(TypeUtilsTest.java:2420)
 
-testSubstituteTypeVariables_AllPaths(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testSubstituteTypeVariables_AllPaths(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -486,7 +486,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testDetermineTypeVariableAssignments(TypeUtilsTest.java:542)
 
-testDetermineTypeArgumentsWithComplexHierarchy(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testDetermineTypeArgumentsWithComplexHierarchy(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -494,7 +494,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testDetermineTypeArgumentsWithComplexHierarchy(TypeUtilsTest.java:1099)
 
-testMapTypeVariablesToArguments_AllPaths(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testMapTypeVariablesToArguments_AllPaths(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -545,7 +545,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_ParameterizedInterface_UsingExistingClasses(TypeUtilsTest.java:2199)
 
-testSubstituteTypeVariables_ExceptionPath(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testSubstituteTypeVariables_ExceptionPath(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -565,7 +565,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getRawType(TypeUtils.java:1039)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetRawType(TypeUtilsTest.java:563)
 
-testSubstituteTypeVariables_NonTypeVariable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testSubstituteTypeVariables_NonTypeVariable(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -601,7 +601,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.isInstance(TypeUtils.java:851)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testIsInstance_Basic(TypeUtilsTest.java:857)
 
-testGetClosestParentType_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testGetClosestParentType_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -611,7 +611,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetClosestParentType_Comprehensive(TypeUtilsTest.java:2334)
 
-testNormalizeUpperBounds_ComplexScenarios(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testNormalizeUpperBounds_ComplexScenarios(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -630,7 +630,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetTypeArguments_ParameterizedType_AllPaths(TypeUtilsTest.java:1804)
 
-testDetermineTypeArguments_WithNestedGenerics(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testDetermineTypeArguments_WithNestedGenerics(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -638,7 +638,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.determineTypeArguments(TypeUtils.java:715)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testDetermineTypeArguments_WithNestedGenerics(TypeUtilsTest.java:2114)
 
-testMapTypeVariablesToArguments_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+testMapTypeVariablesToArguments_Comprehensive(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
@@ -656,7 +656,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.reflect.TypeUtils.getTypeArguments(TypeUtils.java:534)
 	at org.apache.commons.lang3.reflect.TypeUtilsTest.testGetTypeArguments_ComplexHierarchy_UsingExistingClasses(TypeUtilsTest.java:2294)
 
-testIsInstance_WithAllPrimitiveTypes(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testIsInstance_WithAllPrimitiveTypes(org.apache.commons.lang3.reflect.TypeUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVersion.atLeast(org.apache.commons.lang3.JavaVersion)" because "org.apache.commons.lang3.SystemUtils.JAVA_SPECIFICATION_VERSION_AS_ENUM" is null
 	at org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast(SystemUtils.java:1388)
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)

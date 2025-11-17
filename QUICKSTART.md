@@ -5,7 +5,7 @@
 Your testing automation environment is now configured with:
 - ✅ JaCoCo plugin in [`pom.xml`](pom.xml )
 - ✅ MCP tools in [`server.py`](server.py )
-- ✅ Workflow guide in `.github/prompts/test-workflow.prompt.md`
+- ✅ Workflow guide in `.github/prompts/test-workflow.prompt.md` and `.github/prompts/tester.prompt.md`
 
 ## 📊 Current Status
 

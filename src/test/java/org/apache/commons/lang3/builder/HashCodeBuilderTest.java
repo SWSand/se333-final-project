@@ -495,6 +495,38 @@ public class HashCodeBuilderTest {
         assertEquals(17, HashCodeBuilder.reflectionHashCode(x, new String[]{"one", "two", "three", "xxx"}));
     }
 
+    @Test
+    public void testReflectionHashCodeWithCollection() throws Exception {
+        final TestObjectWithMultipleFields x = new TestObjectWithMultipleFields(1, 2, 3);
+        final java.util.Collection<String> excludeFields = new java.util.ArrayList<String>();
+        
+        assertEquals(((17 * 37 + 1) * 37 + 2) * 37 + 3, HashCodeBuilder.reflectionHashCode(x, excludeFields));
+        
+        excludeFields.add("two");
+        assertEquals((17 * 37 + 1) * 37 + 3, HashCodeBuilder.reflectionHashCode(x, excludeFields));
+        
+        excludeFields.add("three");
+        assertEquals(17 * 37 + 1, HashCodeBuilder.reflectionHashCode(x, excludeFields));
+        
+        excludeFields.add("one");
+        assertEquals(17, HashCodeBuilder.reflectionHashCode(x, excludeFields));
+    }
+
+    @Test
+    public void testReflectionHashCodeWithInitialAndMultiplier() {
+        final TestObject obj = new TestObject(123456);
+        // Test 3-parameter overload: reflectionHashCode(int, int, Object)
+        assertEquals(13 * 19 + 123456, HashCodeBuilder.reflectionHashCode(13, 19, obj));
+        
+        // Test 4-parameter overload: reflectionHashCode(int, int, Object, boolean)
+        assertEquals(13 * 19 + 123456, HashCodeBuilder.reflectionHashCode(13, 19, obj, false));
+        assertEquals(13 * 19 + 123456, HashCodeBuilder.reflectionHashCode(13, 19, obj, true));
+        
+        final TestSubObject subObj = new TestSubObject(123456, 7890, 0);
+        assertEquals((13 * 19 + 7890) * 19 + 123456, HashCodeBuilder.reflectionHashCode(13, 19, subObj, false));
+        assertEquals(((13 * 19 + 7890) * 19 + 0) * 19 + 123456, HashCodeBuilder.reflectionHashCode(13, 19, subObj, true));
+    }
+
     static class TestObjectWithMultipleFields {
         @SuppressWarnings("unused")
         private int one = 0;

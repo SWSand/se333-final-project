@@ -21,6 +21,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Assert;
 
+import java.lang.reflect.Field;
+
 import org.junit.Test;
 
 /**
@@ -221,6 +223,40 @@ public class StopWatchTest  {
             fail("Calling getStartTime on a reset, but unstarted StopWatch should throw an exception");
         } catch (final IllegalStateException expected) {
             // expected
+        }
+    }
+
+    @Test
+    public void testGetNanoTimeSuspended() throws Exception {
+        final StopWatch watch = new StopWatch();
+        watch.start();
+        try {
+            Thread.sleep(100);
+        } catch (final InterruptedException ex) {}
+        watch.suspend();
+        // Test getNanoTime when suspended
+        final long nanoTime = watch.getNanoTime();
+        assertTrue("NanoTime should be >= 0", nanoTime >= 0);
+        // Verify it matches getTime converted to nanoseconds
+        assertEquals(nanoTime / 1000000L, watch.getTime());
+    }
+
+    @Test
+    public void testGetNanoTimeIllegalState() throws Exception {
+        final StopWatch watch = new StopWatch();
+        watch.start();
+        
+        // Use reflection to set an illegal runningState to trigger RuntimeException
+        final Field runningStateField = StopWatch.class.getDeclaredField("runningState");
+        runningStateField.setAccessible(true);
+        runningStateField.setInt(watch, 99); // Illegal state value
+        
+        try {
+            watch.getNanoTime();
+            fail("Should have thrown RuntimeException for illegal state");
+        } catch (final RuntimeException e) {
+            assertTrue("Exception message should mention illegal state", 
+                    e.getMessage().contains("Illegal running state"));
         }
     }
 

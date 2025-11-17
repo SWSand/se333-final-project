@@ -19,6 +19,7 @@ package org.apache.commons.lang3;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -427,6 +428,42 @@ public class StringEscapeUtilsTest {
     }
 
     @Test
+    public void testCsvEscaperTranslateIndexCheck() throws Exception {
+        // Test that CsvEscaper.translate throws IllegalStateException when index != 0
+        final StringWriter writer = new StringWriter();
+        try {
+            // Use reflection to access the inner CsvEscaper class and call translate with index != 0
+            final java.lang.reflect.Method translateMethod = StringEscapeUtils.ESCAPE_CSV.getClass()
+                    .getDeclaredMethod("translate", CharSequence.class, int.class, java.io.Writer.class);
+            translateMethod.setAccessible(true);
+            translateMethod.invoke(StringEscapeUtils.ESCAPE_CSV, "test", 1, writer);
+            fail("Should have thrown IllegalStateException");
+        } catch (final java.lang.reflect.InvocationTargetException e) {
+            final Throwable cause = e.getCause();
+            assertTrue("Should throw IllegalStateException", cause instanceof IllegalStateException);
+            assertTrue("Exception message should mention index", cause.getMessage().contains("index"));
+        }
+    }
+
+    @Test
+    public void testCsvUnescaperTranslateIndexCheck() throws Exception {
+        // Test that CsvUnescaper.translate throws IllegalStateException when index != 0
+        final StringWriter writer = new StringWriter();
+        try {
+            // Use reflection to access the inner CsvUnescaper class and call translate with index != 0
+            final java.lang.reflect.Method translateMethod = StringEscapeUtils.UNESCAPE_CSV.getClass()
+                    .getDeclaredMethod("translate", CharSequence.class, int.class, java.io.Writer.class);
+            translateMethod.setAccessible(true);
+            translateMethod.invoke(StringEscapeUtils.UNESCAPE_CSV, "test", 1, writer);
+            fail("Should have thrown IllegalStateException");
+        } catch (final java.lang.reflect.InvocationTargetException e) {
+            final Throwable cause = e.getCause();
+            assertTrue("Should throw IllegalStateException", cause instanceof IllegalStateException);
+            assertTrue("Exception message should mention index", cause.getMessage().contains("index"));
+        }
+    }
+
+    @Test
     public void testUnescapeCsvString() throws Exception {
         assertEquals("foo.bar",          StringEscapeUtils.unescapeCsv("foo.bar"));
         assertEquals("foo,bar",      StringEscapeUtils.unescapeCsv("\"foo,bar\""));
@@ -554,6 +591,29 @@ public class StringEscapeUtilsTest {
         String input ="\"foo\" isn't \"bar\". specials: \b\r\n\f\t\\/";
 
         assertEquals(expected, StringEscapeUtils.escapeJson(input));
+    }
+
+    @Test
+    public void testUnescapeEcmaScript() {
+        // Test unescapeEcmaScript method
+        assertNull("Null input should return null", StringEscapeUtils.unescapeEcmaScript(null));
+        assertEquals("", StringEscapeUtils.unescapeEcmaScript(""));
+        assertEquals("test", StringEscapeUtils.unescapeEcmaScript("test"));
+        // Test with escaped characters
+        assertEquals("\n", StringEscapeUtils.unescapeEcmaScript("\\n"));
+        assertEquals("\t", StringEscapeUtils.unescapeEcmaScript("\\t"));
+    }
+
+    @Test
+    public void testUnescapeJson() {
+        // Test unescapeJson method
+        assertNull("Null input should return null", StringEscapeUtils.unescapeJson(null));
+        assertEquals("", StringEscapeUtils.unescapeJson(""));
+        assertEquals("test", StringEscapeUtils.unescapeJson("test"));
+        // Test with escaped characters
+        assertEquals("\n", StringEscapeUtils.unescapeJson("\\n"));
+        assertEquals("\t", StringEscapeUtils.unescapeJson("\\t"));
+        assertEquals("\"", StringEscapeUtils.unescapeJson("\\\""));
     }
 
 }

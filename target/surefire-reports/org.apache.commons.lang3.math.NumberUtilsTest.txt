@@ -1,7 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.math.NumberUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 82, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.016 sec <<< FAILURE!
+Tests run: 82, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.013 sec <<< FAILURE!
+testCreateNumber(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0.009 sec  <<< FAILURE!
+java.lang.AssertionError: createNumber with empty mantissa failed expected: java.lang.Float<0.0> but was: java.math.BigDecimal<0.0>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:743)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testCreateNumber(NumberUtilsTest.java:250)
+
+testIsNumber(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: isNumber with valid hex uppercase should pass
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.apache.commons.lang3.math.NumberUtilsTest.testIsNumber(NumberUtilsTest.java:1341)
+
 TestLang747(org.apache.commons.lang3.math.NumberUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.NumberFormatException: For input string: "80000000" under radix 16
 	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
@@ -9,5 +22,5 @@ java.lang.NumberFormatException: For input string: "80000000" under radix 16
 	at java.base/java.lang.Integer.decode(Integer.java:1373)
 	at org.apache.commons.lang3.math.NumberUtils.createInteger(NumberUtils.java:684)
 	at org.apache.commons.lang3.math.NumberUtils.createNumber(NumberUtils.java:474)
-	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:256)
+	at org.apache.commons.lang3.math.NumberUtilsTest.TestLang747(NumberUtilsTest.java:272)
 

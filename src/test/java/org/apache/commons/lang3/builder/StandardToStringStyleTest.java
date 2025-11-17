@@ -143,4 +143,185 @@ public class StandardToStringStyleTest {
         assertEquals(baseStr + "[%NULL%]", new ToStringBuilder(base).append((Object) array).toString());
     }
 
+    // Tests for StandardToStringStyle setter methods - these have 0% coverage
+    @Test
+    public void testSetUseClassName() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setUseClassName(true);
+        assertEquals(true, style.isUseClassName());
+        style.setUseClassName(false);
+        assertEquals(false, style.isUseClassName());
+    }
+
+    @Test
+    public void testSetUseFieldNames() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setUseFieldNames(true);
+        assertEquals(true, style.isUseFieldNames());
+        style.setUseFieldNames(false);
+        assertEquals(false, style.isUseFieldNames());
+    }
+
+    @Test
+    public void testSetDefaultFullDetail() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setDefaultFullDetail(true);
+        assertEquals(true, style.isDefaultFullDetail());
+        style.setDefaultFullDetail(false);
+        assertEquals(false, style.isDefaultFullDetail());
+    }
+
+    @Test
+    public void testSetArrayContentDetail() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setArrayContentDetail(true);
+        assertEquals(true, style.isArrayContentDetail());
+        style.setArrayContentDetail(false);
+        assertEquals(false, style.isArrayContentDetail());
+    }
+
+    @Test
+    public void testSetContentStart() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setContentStart("[");
+        assertEquals("[", style.getContentStart());
+        style.setContentStart(null);
+        assertEquals("", style.getContentStart()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetContentEnd() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setContentEnd("]");
+        assertEquals("]", style.getContentEnd());
+        style.setContentEnd(null);
+        assertEquals("", style.getContentEnd()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetFieldNameValueSeparator() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setFieldNameValueSeparator("=");
+        assertEquals("=", style.getFieldNameValueSeparator());
+        style.setFieldNameValueSeparator(null);
+        assertEquals("", style.getFieldNameValueSeparator()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetFieldSeparator() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setFieldSeparator(",");
+        assertEquals(",", style.getFieldSeparator());
+        style.setFieldSeparator(null);
+        assertEquals("", style.getFieldSeparator()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetFieldSeparatorAtStart() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setFieldSeparatorAtStart(true);
+        assertEquals(true, style.isFieldSeparatorAtStart());
+        style.setFieldSeparatorAtStart(false);
+        assertEquals(false, style.isFieldSeparatorAtStart());
+    }
+
+    @Test
+    public void testSetFieldSeparatorAtEnd() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setFieldSeparatorAtEnd(true);
+        assertEquals(true, style.isFieldSeparatorAtEnd());
+        style.setFieldSeparatorAtEnd(false);
+        assertEquals(false, style.isFieldSeparatorAtEnd());
+    }
+
+    @Test
+    public void testSetUseShortClassName() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setUseShortClassName(true);
+        assertEquals(true, style.isUseShortClassName());
+        style.setUseShortClassName(false);
+        assertEquals(false, style.isUseShortClassName());
+    }
+
+    @Test
+    public void testSetUseIdentityHashCode() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setUseIdentityHashCode(true);
+        assertEquals(true, style.isUseIdentityHashCode());
+        style.setUseIdentityHashCode(false);
+        assertEquals(false, style.isUseIdentityHashCode());
+    }
+
+    @Test
+    public void testSetArrayStart() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setArrayStart("{");
+        assertEquals("{", style.getArrayStart());
+        style.setArrayStart(null);
+        assertEquals("", style.getArrayStart()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetArrayEnd() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setArrayEnd("}");
+        assertEquals("}", style.getArrayEnd());
+        style.setArrayEnd(null);
+        assertEquals("", style.getArrayEnd()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetArraySeparator() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setArraySeparator(",");
+        assertEquals(",", style.getArraySeparator());
+        style.setArraySeparator(null);
+        assertEquals("", style.getArraySeparator()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetNullText() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setNullText("<null>");
+        assertEquals("<null>", style.getNullText());
+        style.setNullText(null);
+        assertEquals("", style.getNullText()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetSizeStartText() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setSizeStartText("<size=");
+        assertEquals("<size=", style.getSizeStartText());
+        style.setSizeStartText(null);
+        assertEquals("", style.getSizeStartText()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetSizeEndText() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setSizeEndText(">");
+        assertEquals(">", style.getSizeEndText());
+        style.setSizeEndText(null);
+        assertEquals("", style.getSizeEndText()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetSummaryObjectStartText() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setSummaryObjectStartText("<");
+        assertEquals("<", style.getSummaryObjectStartText());
+        style.setSummaryObjectStartText(null);
+        assertEquals("", style.getSummaryObjectStartText()); // null is converted to empty string
+    }
+
+    @Test
+    public void testSetSummaryObjectEndText() {
+        final StandardToStringStyle style = new StandardToStringStyle();
+        style.setSummaryObjectEndText(">");
+        assertEquals(">", style.getSummaryObjectEndText());
+        style.setSummaryObjectEndText(null);
+        assertEquals("", style.getSummaryObjectEndText()); // null is converted to empty string
+    }
+
 }

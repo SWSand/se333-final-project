@@ -17,6 +17,13 @@
 package org.apache.commons.lang3.builder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import org.junit.Test;
 
@@ -134,5 +141,300 @@ public class ToStringStyleTest {
          * Test boolean field.
          */
         boolean smoker;
+    }
+
+    /**
+     * Helper method to serialize and deserialize an object.
+     */
+    @SuppressWarnings("unchecked")
+    private <T> T serializeAndDeserialize(T obj) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(obj);
+        oos.close();
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        return (T) ois.readObject();
+    }
+
+    @Test
+    public void testReadResolveDefaultStyle() throws Exception {
+        ToStringStyle original = ToStringStyle.DEFAULT_STYLE;
+        ToStringStyle deserialized = serializeAndDeserialize(original);
+        assertSame("Deserialized DEFAULT_STYLE should be the same singleton", 
+                ToStringStyle.DEFAULT_STYLE, deserialized);
+    }
+
+    @Test
+    public void testReadResolveNoFieldNamesStyle() throws Exception {
+        ToStringStyle original = ToStringStyle.NO_FIELD_NAMES_STYLE;
+        ToStringStyle deserialized = serializeAndDeserialize(original);
+        assertSame("Deserialized NO_FIELD_NAMES_STYLE should be the same singleton", 
+                ToStringStyle.NO_FIELD_NAMES_STYLE, deserialized);
+    }
+
+    @Test
+    public void testReadResolveShortPrefixStyle() throws Exception {
+        ToStringStyle original = ToStringStyle.SHORT_PREFIX_STYLE;
+        ToStringStyle deserialized = serializeAndDeserialize(original);
+        assertSame("Deserialized SHORT_PREFIX_STYLE should be the same singleton", 
+                ToStringStyle.SHORT_PREFIX_STYLE, deserialized);
+    }
+
+    @Test
+    public void testReadResolveSimpleStyle() throws Exception {
+        ToStringStyle original = ToStringStyle.SIMPLE_STYLE;
+        ToStringStyle deserialized = serializeAndDeserialize(original);
+        assertSame("Deserialized SIMPLE_STYLE should be the same singleton", 
+                ToStringStyle.SIMPLE_STYLE, deserialized);
+    }
+
+    @Test
+    public void testReadResolveMultiLineStyle() throws Exception {
+        ToStringStyle original = ToStringStyle.MULTI_LINE_STYLE;
+        ToStringStyle deserialized = serializeAndDeserialize(original);
+        assertSame("Deserialized MULTI_LINE_STYLE should be the same singleton", 
+                ToStringStyle.MULTI_LINE_STYLE, deserialized);
+    }
+
+    // Tests for ToStringStyle.appendInternal - 56 missed instructions (77.4% coverage)
+    @Test
+    public void testAppendInternalWithCollections() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        final StringBuffer buffer = new StringBuffer();
+        
+        // Test with Collection (detail=true)
+        final java.util.List<String> list = new java.util.ArrayList<String>();
+        list.add("item1");
+        list.add("item2");
+        style.append(buffer, "list", list, true);
+        assertTrue("Should contain collection", buffer.toString().contains("list"));
+        
+        // Test with Collection (detail=false)
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "list", list, false);
+        assertTrue("Should contain size", buffer2.toString().contains("<size="));
+        
+        // Test with Map (detail=true)
+        final java.util.Map<String, String> map = new java.util.HashMap<String, String>();
+        map.put("key1", "value1");
+        final StringBuffer buffer3 = new StringBuffer();
+        style.append(buffer3, "map", map, true);
+        assertTrue("Should contain map", buffer3.toString().contains("map"));
+        
+        // Test with Map (detail=false)
+        final StringBuffer buffer4 = new StringBuffer();
+        style.append(buffer4, "map", map, false);
+        assertTrue("Should contain size", buffer4.toString().contains("<size="));
+    }
+
+    @Test
+    public void testAppendInternalWithObjectArray() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        final StringBuffer buffer = new StringBuffer();
+        
+        // Test with Object array (detail=true)
+        final Object[] objArray = new Object[] {"str1", "str2", null};
+        style.append(buffer, "objArray", objArray, true);
+        assertTrue("Should contain array", buffer.toString().contains("objArray"));
+        
+        // Test with Object array (detail=false)
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "objArray", objArray, false);
+        assertTrue("Should contain size", buffer2.toString().contains("<size="));
+    }
+
+    @Test
+    public void testAppendInternalWithCyclicObject() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        final StringBuffer buffer = new StringBuffer();
+        
+        // Create a cyclic reference by registering an object
+        final Person person = new Person();
+        person.name = "John";
+        person.age = 30;
+        
+        // Register the object to simulate cyclic reference
+        ToStringStyle.register(person);
+        try {
+            // appendInternal should detect cyclic reference and use appendCyclicObject
+            style.append(buffer, "person", person, true);
+            assertTrue("Should contain cyclic object representation", buffer.length() > 0);
+        } finally {
+            ToStringStyle.unregister(person);
+        }
+    }
+
+    @Test
+    public void testAppendInternalWithPrimitiveArrays() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test all primitive array types with detail=false
+        final StringBuffer buffer1 = new StringBuffer();
+        style.append(buffer1, "longArr", new long[] {1L, 2L}, false);
+        assertTrue("Should contain size", buffer1.toString().contains("<size="));
+        
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "intArr", new int[] {1, 2}, false);
+        assertTrue("Should contain size", buffer2.toString().contains("<size="));
+        
+        final StringBuffer buffer3 = new StringBuffer();
+        style.append(buffer3, "shortArr", new short[] {1, 2}, false);
+        assertTrue("Should contain size", buffer3.toString().contains("<size="));
+        
+        final StringBuffer buffer4 = new StringBuffer();
+        style.append(buffer4, "byteArr", new byte[] {1, 2}, false);
+        assertTrue("Should contain size", buffer4.toString().contains("<size="));
+        
+        final StringBuffer buffer5 = new StringBuffer();
+        style.append(buffer5, "charArr", new char[] {'a', 'b'}, false);
+        assertTrue("Should contain size", buffer5.toString().contains("<size="));
+        
+        final StringBuffer buffer6 = new StringBuffer();
+        style.append(buffer6, "doubleArr", new double[] {1.0, 2.0}, false);
+        assertTrue("Should contain size", buffer6.toString().contains("<size="));
+        
+        final StringBuffer buffer7 = new StringBuffer();
+        style.append(buffer7, "floatArr", new float[] {1.0f, 2.0f}, false);
+        assertTrue("Should contain size", buffer7.toString().contains("<size="));
+        
+        final StringBuffer buffer8 = new StringBuffer();
+        style.append(buffer8, "boolArr", new boolean[] {true, false}, false);
+        assertTrue("Should contain size", buffer8.toString().contains("<size="));
+    }
+
+    @Test
+    public void testAppendInternalWithPrimitiveArraysDetailTrue() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test all primitive array types with detail=true
+        final StringBuffer buffer1 = new StringBuffer();
+        style.append(buffer1, "longArr", new long[] {1L, 2L}, true);
+        assertTrue("Should contain array", buffer1.toString().contains("longArr"));
+        
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "intArr", new int[] {1, 2}, true);
+        assertTrue("Should contain array", buffer2.toString().contains("intArr"));
+        
+        final StringBuffer buffer3 = new StringBuffer();
+        style.append(buffer3, "shortArr", new short[] {1, 2}, true);
+        assertTrue("Should contain array", buffer3.toString().contains("shortArr"));
+        
+        final StringBuffer buffer4 = new StringBuffer();
+        style.append(buffer4, "byteArr", new byte[] {1, 2}, true);
+        assertTrue("Should contain array", buffer4.toString().contains("byteArr"));
+        
+        final StringBuffer buffer5 = new StringBuffer();
+        style.append(buffer5, "charArr", new char[] {'a', 'b'}, true);
+        assertTrue("Should contain array", buffer5.toString().contains("charArr"));
+        
+        final StringBuffer buffer6 = new StringBuffer();
+        style.append(buffer6, "doubleArr", new double[] {1.0, 2.0}, true);
+        assertTrue("Should contain array", buffer6.toString().contains("doubleArr"));
+        
+        final StringBuffer buffer7 = new StringBuffer();
+        style.append(buffer7, "floatArr", new float[] {1.0f, 2.0f}, true);
+        assertTrue("Should contain array", buffer7.toString().contains("floatArr"));
+        
+        final StringBuffer buffer8 = new StringBuffer();
+        style.append(buffer8, "boolArr", new boolean[] {true, false}, true);
+        assertTrue("Should contain array", buffer8.toString().contains("boolArr"));
+    }
+
+    @Test
+    public void testAppendInternalWithRegularObjects() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test regular objects with detail=true
+        final StringBuffer buffer1 = new StringBuffer();
+        final Person person = new Person();
+        person.name = "John";
+        person.age = 30;
+        style.append(buffer1, "person", person, true);
+        assertTrue("Should contain person", buffer1.toString().contains("person"));
+        
+        // Test regular objects with detail=false
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "person", person, false);
+        assertTrue("Should contain summary", buffer2.toString().contains("<") || buffer2.toString().contains("Person"));
+        
+        // Test String object with detail=true
+        final StringBuffer buffer3 = new StringBuffer();
+        style.append(buffer3, "str", "test", true);
+        assertTrue("Should contain string", buffer3.toString().contains("str"));
+        
+        // Test String object with detail=false
+        final StringBuffer buffer4 = new StringBuffer();
+        style.append(buffer4, "str", "test", false);
+        assertTrue("Should contain summary", buffer4.toString().length() > 0);
+    }
+
+    @Test
+    public void testAppendInternalWithNumberBooleanCharacter() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test that Number, Boolean, and Character are not treated as cyclic even if registered
+        // These should go through normal processing, not cyclic object handling
+        
+        // Test Number (Integer)
+        final Integer num = Integer.valueOf(42);
+        ToStringStyle.register(num);
+        try {
+            final StringBuffer buffer1 = new StringBuffer();
+            style.append(buffer1, "num", num, true);
+            assertTrue("Should contain number", buffer1.toString().contains("num") || buffer1.toString().contains("42"));
+        } finally {
+            ToStringStyle.unregister(num);
+        }
+        
+        // Test Boolean
+        final Boolean bool = Boolean.TRUE;
+        ToStringStyle.register(bool);
+        try {
+            final StringBuffer buffer2 = new StringBuffer();
+            style.append(buffer2, "bool", bool, true);
+            assertTrue("Should contain boolean", buffer2.toString().contains("bool") || buffer2.toString().contains("true"));
+        } finally {
+            ToStringStyle.unregister(bool);
+        }
+        
+        // Test Character
+        final Character ch = Character.valueOf('A');
+        ToStringStyle.register(ch);
+        try {
+            final StringBuffer buffer3 = new StringBuffer();
+            style.append(buffer3, "ch", ch, true);
+            assertTrue("Should contain character", buffer3.toString().contains("ch") || buffer3.toString().contains("A"));
+        } finally {
+            ToStringStyle.unregister(ch);
+        }
+    }
+
+    @Test
+    public void testAppendInternalWithObjectArrayDetailTrue() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test Object array with detail=true (to ensure full coverage of Object[] path)
+        final StringBuffer buffer = new StringBuffer();
+        final Object[] objArray = new Object[] {"str1", "str2", Integer.valueOf(42)};
+        style.append(buffer, "objArray", objArray, true);
+        assertTrue("Should contain array", buffer.toString().contains("objArray"));
+    }
+
+    @Test
+    public void testAppendInternalWithGenericArray() {
+        final ToStringStyle style = new ToStringStyleImpl();
+        
+        // Test generic array (Object[] that is not primitive)
+        // This tests the value.getClass().isArray() path for non-primitive arrays
+        final StringBuffer buffer1 = new StringBuffer();
+        final String[] strArray = new String[] {"a", "b", "c"};
+        style.append(buffer1, "strArray", strArray, true);
+        assertTrue("Should contain array", buffer1.toString().contains("strArray"));
+        
+        final StringBuffer buffer2 = new StringBuffer();
+        style.append(buffer2, "strArray", strArray, false);
+        assertTrue("Should contain size", buffer2.toString().contains("<size="));
     }
 }

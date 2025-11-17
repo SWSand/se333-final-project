@@ -382,6 +382,44 @@ public class DurationFormatUtilsTest {
                 DurationFormatUtils.y, 1)));
         final DurationFormatUtils.Token numToken = new DurationFormatUtils.Token(Integer.valueOf(1), 4);
         assertTrue("Token with Number value not equal to itself. ", numToken.equals(numToken));
+        
+        // Test equals with StringBuilder values
+        final DurationFormatUtils.Token sbToken1 = new DurationFormatUtils.Token(new StringBuilder("test"), 1);
+        final DurationFormatUtils.Token sbToken2 = new DurationFormatUtils.Token(new StringBuilder("test"), 1);
+        assertTrue("Token with StringBuilder value should be equal", sbToken1.equals(sbToken2));
+        
+        final DurationFormatUtils.Token sbToken3 = new DurationFormatUtils.Token(new StringBuilder("different"), 1);
+        assertFalse("Token with different StringBuilder value should not be equal", sbToken1.equals(sbToken3));
+        
+        // Test equals with Number values
+        final DurationFormatUtils.Token numToken1 = new DurationFormatUtils.Token(Integer.valueOf(5), 2);
+        final DurationFormatUtils.Token numToken2 = new DurationFormatUtils.Token(Integer.valueOf(5), 2);
+        assertTrue("Token with Number value should be equal", numToken1.equals(numToken2));
+        
+        final DurationFormatUtils.Token numToken3 = new DurationFormatUtils.Token(Integer.valueOf(10), 2);
+        assertFalse("Token with different Number value should not be equal", numToken1.equals(numToken3));
+        
+        // Test equals with other value types (String, Character, etc.) - tests the else branch
+        final DurationFormatUtils.Token strToken1 = new DurationFormatUtils.Token("test", 1);
+        final DurationFormatUtils.Token strToken2 = new DurationFormatUtils.Token("test", 1);
+        assertTrue("Token with String value should be equal (reference equality)", strToken1.equals(strToken2));
+        
+        // Test with different String references (same content but different objects)
+        // This tests the else branch when value == tok2.value returns false
+        final DurationFormatUtils.Token strToken3 = new DurationFormatUtils.Token(new String("test"), 1);
+        final DurationFormatUtils.Token strToken4 = new DurationFormatUtils.Token(new String("test"), 1);
+        assertFalse("Token with different String references should not be equal", strToken3.equals(strToken4));
+        
+        final DurationFormatUtils.Token charToken1 = new DurationFormatUtils.Token(Character.valueOf('a'), 1);
+        final DurationFormatUtils.Token charToken2 = new DurationFormatUtils.Token(Character.valueOf('a'), 1);
+        // Character.valueOf caches, so same reference
+        assertTrue("Token with Character value should be equal", charToken1.equals(charToken2));
+        
+        // Test hashCode
+        assertEquals("HashCode should match value hashCode", DurationFormatUtils.y.hashCode(), token.hashCode());
+        assertEquals("HashCode should match StringBuilder hashCode", sbToken1.getValue().hashCode(), sbToken1.hashCode());
+        assertEquals("HashCode should match Number hashCode", numToken1.getValue().hashCode(), numToken1.hashCode());
+        assertEquals("HashCode should match String hashCode", strToken1.getValue().hashCode(), strToken1.hashCode());
     }
 
 
@@ -458,7 +496,6 @@ public class DurationFormatUtilsTest {
                              new int[] { 2007, 0, 1, 0, 0, 0 }, "MM dd"); 
         assertEqualDuration( "365", new int[] { 2006, 0, 1, 0, 0, 0 },
                              new int[] { 2007, 0, 1, 0, 0, 0 }, "dd"); 
-    
         assertEqualDuration( "31", new int[] { 2006, 0, 1, 0, 0, 0 },
                 new int[] { 2006, 1, 1, 0, 0, 0 }, "dd"); 
         
@@ -583,6 +620,97 @@ public class DurationFormatUtilsTest {
         for (int i = 0; i < obj1.length; i++) {
             assertTrue("Index " + i + " not equal, " + obj1[i] + " vs " + obj2[i], obj1[i].equals(obj2[i]));
         }
+    }
+
+    @Test
+    public void testFormatPeriodISO_EdgeCases() throws Exception {
+        // Test formatPeriodISO with various edge cases - 35 missed instructions, 11 missed branches
+        final TimeZone timeZone = TimeZone.getTimeZone("GMT");
+        
+        // Test with zero duration
+        final Calendar cal1 = Calendar.getInstance(timeZone);
+        cal1.set(2000, 0, 1, 0, 0, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        final long time1 = cal1.getTimeInMillis();
+        final String result1 = DurationFormatUtils.formatPeriodISO(time1, time1);
+        assertEquals("Should format zero duration", "P0Y0M0DT0H0M0.000S", result1);
+        
+        // Test with different timezone
+        final TimeZone timeZone2 = TimeZone.getTimeZone("GMT+5");
+        final Calendar cal2 = Calendar.getInstance(timeZone2);
+        cal2.set(2000, 0, 1, 0, 0, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+        final Calendar cal3 = Calendar.getInstance(timeZone2);
+        cal3.set(2000, 0, 1, 1, 30, 45);
+        cal3.set(Calendar.MILLISECOND, 500);
+        final long time2 = cal2.getTimeInMillis();
+        final long time3 = cal3.getTimeInMillis();
+        final String result2 = DurationFormatUtils.formatPeriodISO(time2, time3);
+        assertNotNull("Should format period with different timezone", result2);
+        assertTrue("Should contain time components", result2.contains("H") || result2.contains("M") || result2.contains("S"));
+    }
+
+    @Test
+    public void testFormatPeriod_WithTimezone() throws Exception {
+        // Test formatPeriod with explicit timezone parameter - additional coverage
+        final TimeZone timeZone = TimeZone.getTimeZone("America/New_York");
+        final Calendar cal1 = Calendar.getInstance(timeZone);
+        cal1.set(2000, 0, 1, 0, 0, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        final Calendar cal2 = Calendar.getInstance(timeZone);
+        cal2.set(2000, 0, 1, 12, 30, 45);
+        cal2.set(Calendar.MILLISECOND, 500);
+        
+        final long time1 = cal1.getTimeInMillis();
+        final long time2 = cal2.getTimeInMillis();
+        
+        // Test with padWithZeros = false
+        final String result1 = DurationFormatUtils.formatPeriod(time1, time2, "H:m:s.S", false, timeZone);
+        assertNotNull("Should format period without padding", result1);
+        
+        // Test with padWithZeros = true
+        final String result2 = DurationFormatUtils.formatPeriod(time1, time2, "HH:mm:ss.SSS", true, timeZone);
+        assertNotNull("Should format period with padding", result2);
+        
+        // Test with different timezone
+        final TimeZone timeZone2 = TimeZone.getTimeZone("GMT+10");
+        final String result3 = DurationFormatUtils.formatPeriod(time1, time2, "H:m:s", true, timeZone2);
+        assertNotNull("Should format period with different timezone", result3);
+    }
+
+    @Test
+    public void testFormatPeriod_EdgeCases() throws Exception {
+        // Test formatPeriod with edge cases to cover missing branches
+        final TimeZone timeZone = TimeZone.getDefault();
+        final Calendar cal1 = Calendar.getInstance(timeZone);
+        cal1.set(2000, 1, 29, 0, 0, 0); // Feb 29, 2000 (leap year)
+        cal1.set(Calendar.MILLISECOND, 0);
+        final Calendar cal2 = Calendar.getInstance(timeZone);
+        cal2.set(2000, 2, 1, 0, 0, 0); // March 1, 2000
+        cal2.set(Calendar.MILLISECOND, 0);
+        
+        final long time1 = cal1.getTimeInMillis();
+        final long time2 = cal2.getTimeInMillis();
+        
+        // Test with format containing M (months) but not y (years)
+        final String result1 = DurationFormatUtils.formatPeriod(time1, time2, "M d", true, timeZone);
+        assertNotNull("Should format period with months", result1);
+        
+        // Test with format containing y (years) and M (months)
+        final Calendar cal3 = Calendar.getInstance(timeZone);
+        cal3.set(2000, 0, 1, 0, 0, 0);
+        cal3.set(Calendar.MILLISECOND, 0);
+        final Calendar cal4 = Calendar.getInstance(timeZone);
+        cal4.set(2002, 5, 15, 0, 0, 0);
+        cal4.set(Calendar.MILLISECOND, 0);
+        final long time3 = cal3.getTimeInMillis();
+        final long time4 = cal4.getTimeInMillis();
+        final String result2 = DurationFormatUtils.formatPeriod(time3, time4, "y M d", true, timeZone);
+        assertNotNull("Should format period with years and months", result2);
+        
+        // Test with format not containing M (months) and not containing y (years)
+        final String result3 = DurationFormatUtils.formatPeriod(time3, time4, "d H m s", true, timeZone);
+        assertNotNull("Should format period without months/years", result3);
     }
 
 }

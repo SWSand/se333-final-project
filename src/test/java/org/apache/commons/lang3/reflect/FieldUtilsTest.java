@@ -741,6 +741,37 @@ public class FieldUtilsTest {
         } catch (final IllegalAccessException e) {
             // pass
         }
+        
+        // Test IllegalArgumentException for null field
+        try {
+            FieldUtils.writeStaticField((Field) null, "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("The field must not be null"));
+        }
+        
+        try {
+            FieldUtils.writeStaticField((Field) null, "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("The field must not be null"));
+        }
+        
+        // Test IllegalArgumentException for non-static field
+        Field nonStaticField = parentClass.getDeclaredField("s");
+        try {
+            FieldUtils.writeStaticField(nonStaticField, "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("is not static"));
+        }
+        
+        try {
+            FieldUtils.writeStaticField(nonStaticField, "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("is not static"));
+        }
     }
 
     @Test
@@ -824,6 +855,21 @@ public class FieldUtilsTest {
             fail("Expected IllegalAccessException");
         } catch (final IllegalAccessException e) {
             // pass
+        }
+        
+        // Test IllegalArgumentException when field doesn't exist (null field path)
+        try {
+            FieldUtils.writeStaticField(StaticContainer.class, "nonExistentField", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate field"));
+        }
+        
+        try {
+            FieldUtils.writeStaticField(StaticContainer.class, "nonExistentField", "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate field"));
         }
     }
 
@@ -909,6 +955,21 @@ public class FieldUtilsTest {
         } catch (final IllegalAccessException e) {
             // pass
         }
+        
+        // Test IllegalArgumentException when field doesn't exist (null field path)
+        try {
+            FieldUtils.writeDeclaredStaticField(StaticContainer.class, "nonExistentField", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate declared field"));
+        }
+        
+        try {
+            FieldUtils.writeDeclaredStaticField(StaticContainer.class, "nonExistentField", "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate declared field"));
+        }
     }
 
     @Test
@@ -951,6 +1012,33 @@ public class FieldUtilsTest {
         field = parentClass.getDeclaredField("d");
         FieldUtils.writeField(field, publicChild, Double.valueOf(Double.MAX_VALUE), true);
         assertEquals(Double.valueOf(Double.MAX_VALUE), field.get(publicChild));
+        
+        // Test IllegalArgumentException for null field (4-parameter version)
+        try {
+            FieldUtils.writeField((Field) null, publicChild, "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("The field must not be null"));
+        }
+        
+        try {
+            FieldUtils.writeField((Field) null, publicChild, "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("The field must not be null"));
+        }
+        
+        // Test forceAccess=true path when field is not accessible
+        Field privateField = parentClass.getDeclaredField("b");
+        privateField.setAccessible(false);
+        FieldUtils.writeField(privateField, publicChild, Boolean.FALSE, true);
+        assertEquals(Boolean.FALSE, privateField.get(publicChild));
+        
+        // Test forceAccess=false path (else branch - MemberUtils.setAccessibleWorkaround)
+        Field publicField = parentClass.getDeclaredField("s");
+        publicField.setAccessible(false);
+        FieldUtils.writeField(publicField, publicChild, "test", false);
+        assertEquals("test", publicField.get(publicChild));
     }
 
     @Test
@@ -1035,6 +1123,29 @@ public class FieldUtilsTest {
         assertEquals(Integer.valueOf(0), FieldUtils.readField(privatelyShadowedChild, "i", true));
         FieldUtils.writeField(privatelyShadowedChild, "d", Double.valueOf(0.0), true);
         assertEquals(Double.valueOf(0.0), FieldUtils.readField(privatelyShadowedChild, "d", true));
+        
+        // Test IllegalArgumentException for null target (4-parameter version)
+        try {
+            FieldUtils.writeField((Object) null, "s", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("target object must not be null"));
+        }
+        
+        try {
+            FieldUtils.writeField((Object) null, "s", "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("target object must not be null"));
+        }
+        
+        // Test IllegalArgumentException when field doesn't exist
+        try {
+            FieldUtils.writeField(publicChild, "nonExistentField", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate declared field"));
+        }
     }
 
     @Test
@@ -1143,6 +1254,29 @@ public class FieldUtilsTest {
         assertEquals(Integer.valueOf(0), FieldUtils.readDeclaredField(privatelyShadowedChild, "i", true));
         FieldUtils.writeDeclaredField(privatelyShadowedChild, "d", Double.valueOf(0.0), true);
         assertEquals(Double.valueOf(0.0), FieldUtils.readDeclaredField(privatelyShadowedChild, "d", true));
+        
+        // Test IllegalArgumentException for null target (4-parameter version)
+        try {
+            FieldUtils.writeDeclaredField((Object) null, "s", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("target object must not be null"));
+        }
+        
+        try {
+            FieldUtils.writeDeclaredField((Object) null, "s", "value", true);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("target object must not be null"));
+        }
+        
+        // Test IllegalArgumentException when field doesn't exist
+        try {
+            FieldUtils.writeDeclaredField(publiclyShadowedChild, "nonExistentField", "value", false);
+            fail("Expected IllegalArgumentException");
+        } catch (final IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("Cannot locate declared field"));
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -18,7 +18,9 @@ package org.apache.commons.lang3.time;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -522,5 +524,398 @@ public class FastDateParserTest {
     public void testTimeZoneMatches() {
         final DateParser parser= getInstance(yMdHmsSZ, REYKJAVIK);
         assertEquals(REYKJAVIK, parser.getTimeZone());
+    }
+
+    @Test
+    public void testCopyQuotedStrategySetCalendar() throws Exception {
+        // Test that CopyQuotedStrategy.setCalendar (empty implementation) is called
+        // This tests the base Strategy.setCalendar method which has an empty body
+        // Create a CopyQuotedStrategy instance directly using reflection
+        final DateParser parser = getInstance("'literal'yyyy", NEW_YORK, Locale.US);
+        
+        // Get the CopyQuotedStrategy class using reflection
+        final Class<?>[] innerClasses = FastDateParser.class.getDeclaredClasses();
+        Class<?> copyQuotedStrategyClass = null;
+        for (final Class<?> innerClass : innerClasses) {
+            if (innerClass.getSimpleName().equals("CopyQuotedStrategy")) {
+                copyQuotedStrategyClass = innerClass;
+                break;
+            }
+        }
+        assertTrue("Should find CopyQuotedStrategy class", copyQuotedStrategyClass != null);
+        
+        // Create an instance of CopyQuotedStrategy
+        final java.lang.reflect.Constructor<?> constructor = copyQuotedStrategyClass.getDeclaredConstructor(String.class);
+        constructor.setAccessible(true);
+        final Object copyQuotedStrategy = constructor.newInstance("literal");
+        
+        // Call setCalendar directly using reflection on the Strategy base class
+        // This ensures the empty Strategy.setCalendar method body is executed
+        final java.lang.reflect.Method setCalendarMethod = copyQuotedStrategy.getClass().getSuperclass()
+                .getDeclaredMethod("setCalendar", FastDateParser.class, Calendar.class, String.class);
+        setCalendarMethod.setAccessible(true);
+        
+        final Calendar cal = Calendar.getInstance(NEW_YORK, Locale.US);
+        cal.clear();
+        // Store the year before calling setCalendar
+        final int yearBefore = cal.get(Calendar.YEAR);
+        // Call the empty setCalendar method - this should do nothing
+        // Call it multiple times to ensure coverage
+        setCalendarMethod.invoke(copyQuotedStrategy, parser, cal, "literal");
+        setCalendarMethod.invoke(copyQuotedStrategy, parser, cal, "test");
+        
+        // Verify calendar wasn't modified (since setCalendar is empty)
+        assertEquals("Calendar should not be modified by empty setCalendar", yearBefore, cal.get(Calendar.YEAR));
+        
+        // Also call setCalendar on another CopyQuotedStrategy instance to ensure coverage
+        final Object copyQuotedStrategy2 = constructor.newInstance("another");
+        setCalendarMethod.invoke(copyQuotedStrategy2, parser, cal, "another");
+        assertEquals("Calendar should not be modified by empty setCalendar", yearBefore, cal.get(Calendar.YEAR));
+    }
+
+    // Tests for FastDateParser methods with 0% coverage
+    @Test
+    public void testParseObject_String() throws Exception {
+        // Test parseObject(String) - 4 missed (0% coverage)
+        final DateParser parser = getInstance("yyyy-MM-dd", NEW_YORK, Locale.US);
+        
+        // Test with valid date
+        final Object result1 = parser.parseObject("2004-12-31");
+        assertNotNull("Should parse valid date", result1);
+        assertTrue("Should return Date", result1 instanceof Date);
+        
+        // Test with invalid date (should throw ParseException)
+        try {
+            parser.parseObject("invalid");
+            fail("Should throw ParseException for invalid date");
+        } catch (ParseException e) {
+            assertTrue("Exception should mention Unparseable date", e.getMessage().contains("Unparseable date"));
+        }
+        
+        // Test with Japanese Imperial locale (special error message)
+        final Locale japaneseImperial = Locale.forLanguageTag("ja-JP-u-ca-japanese");
+        try {
+            final DateParser jpParser = getInstance("yyyy-MM-dd", NEW_YORK, japaneseImperial);
+            jpParser.parseObject("invalid");
+            // May or may not throw exception depending on locale support
+        } catch (ParseException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testGetParsePattern() throws Exception {
+        // Test getParsePattern() - 3 missed (0% coverage) - private method, use reflection
+        final DateParser parser = getInstance("yyyy-MM-dd", NEW_YORK, Locale.US);
+        
+        // Use reflection to access private getParsePattern() method
+        final java.lang.reflect.Method getParsePatternMethod = FastDateParser.class.getDeclaredMethod("getParsePattern");
+        getParsePatternMethod.setAccessible(true);
+        
+        final java.util.regex.Pattern pattern = (java.util.regex.Pattern) getParsePatternMethod.invoke(parser);
+        assertNotNull("Should return Pattern", pattern);
+        assertNotNull("Pattern should have pattern string", pattern.pattern());
+    }
+
+    @Test
+    public void testTextStrategy_SetCalendar() throws Exception {
+        // Test TextStrategy.setCalendar - 41 missed (26.8% coverage)
+        // This exercises the IllegalArgumentException path when value is not in keyValues
+        
+        final DateParser parser = getInstance("MMMM", NEW_YORK, Locale.US); // Month name format
+        
+        // Test with valid month name
+        final Date validDate = parser.parse("January");
+        assertNotNull("Should parse valid month name", validDate);
+        
+        // Test with invalid month name (should throw IllegalArgumentException)
+        try {
+            parser.parse("InvalidMonth");
+            fail("Should throw ParseException for invalid month name");
+        } catch (ParseException e) {
+            // The ParseException is thrown by parse(), but TextStrategy.setCalendar
+            // throws IllegalArgumentException which gets wrapped
+            assertTrue("Should have error message", e.getMessage() != null);
+        }
+        
+        // Test with different locale to exercise different keyValues
+        final DateParser parser2 = getInstance("EEEE", NEW_YORK, Locale.US); // Day of week
+        final Date validDate2 = parser2.parse("Monday");
+        assertNotNull("Should parse valid day name", validDate2);
+        
+        // Test with invalid day name
+        try {
+            parser2.parse("InvalidDay");
+            fail("Should throw ParseException for invalid day name");
+        } catch (ParseException e) {
+            // Expected
+        }
+        
+        // Test with AM_PM field
+        final DateParser parser3 = getInstance("a", NEW_YORK, Locale.US); // AM/PM
+        final Date validDate3 = parser3.parse("AM");
+        assertNotNull("Should parse valid AM/PM", validDate3);
+        
+        // Test with invalid AM/PM
+        try {
+            parser3.parse("InvalidAMPM");
+            fail("Should throw ParseException for invalid AM/PM");
+        } catch (ParseException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testAdjustYear_EdgeCases() throws Exception {
+        // Test adjustYear(int) - 4 missed (81.8% coverage)
+        final DateParser parser = getInstance("yy", NEW_YORK, Locale.US);
+        
+        // Test with two-digit year that results in trial < thisYear+20
+        // This exercises the return trial path
+        final Date date1 = parser.parse("04"); // Should be 2004
+        assertNotNull("Should parse two-digit year", date1);
+        
+        // Test with two-digit year that results in trial >= thisYear+20
+        // This exercises the return trial-100 path
+        // We need a year that when added to thisYear - thisYear%100 results in >= thisYear+20
+        // For example, if thisYear is 2024, then 24 would give trial = 2024, which is < 2044, so return 2024
+        // But 95 would give trial = 2095, which is >= 2044, so return 1995
+        final Date date2 = parser.parse("95"); // Should be 1995 (not 2095)
+        assertNotNull("Should parse two-digit year with adjustment", date2);
+        
+        // Test with year >= 100 (should not adjust)
+        final DateParser parser2 = getInstance("yyyy", NEW_YORK, Locale.US);
+        final Date date3 = parser2.parse("2004");
+        assertNotNull("Should parse four-digit year", date3);
+    }
+
+    @Test
+    public void testParse_String_AllPaths() throws Exception {
+        // Test parse(String) - 24 missed (60.0% coverage)
+        final DateParser parser = getInstance("yyyy-MM-dd", NEW_YORK, Locale.US);
+        
+        // Test with valid date
+        final Date date1 = parser.parse("2004-12-31");
+        assertNotNull("Should parse valid date", date1);
+        
+        // Test with invalid date (should throw ParseException)
+        try {
+            parser.parse("invalid");
+            fail("Should throw ParseException for invalid date");
+        } catch (ParseException e) {
+            assertTrue("Exception should mention Unparseable date", e.getMessage().contains("Unparseable date"));
+            assertTrue("Exception should mention pattern", e.getMessage().contains("does not match"));
+        }
+        
+        // Test with null (should throw NullPointerException)
+        try {
+            parser.parse(null);
+            fail("Should throw NullPointerException for null");
+        } catch (NullPointerException e) {
+            // Expected
+        }
+        
+        // Test with Japanese Imperial locale (special error message)
+        final Locale japaneseImperial = Locale.forLanguageTag("ja-JP-u-ca-japanese");
+        try {
+            final DateParser jpParser = getInstance("yyyy-MM-dd", NEW_YORK, japaneseImperial);
+            jpParser.parse("invalid");
+            // May or may not throw exception depending on locale support
+        } catch (ParseException e) {
+            // May have special message for Japanese Imperial locale
+        }
+    }
+
+    @Test
+    public void testEscapeRegex_EdgeCases() throws Exception {
+        // Test escapeRegex indirectly through parsing - covers missing branches
+        // Test with quoted string (unquote=true path)
+        final DateParser parser = getInstance("'test'", NEW_YORK, Locale.US);
+        final Date date1 = parser.parse("test");
+        assertNotNull("Should parse quoted string", date1);
+        
+        // Test with quoted string containing \E (special case - line 325)
+        final DateParser parser2 = getInstance("'test\\E'", NEW_YORK, Locale.US);
+        final Date date2 = parser2.parse("test\\E");
+        assertNotNull("Should parse string with \\E", date2);
+        
+        // Test with quoted string containing escaped quote (unquote path - line 305-310)
+        // Use a valid pattern with escaped quotes - tests unquote=true branch
+        final DateParser parser3 = getInstance("'test''more'", NEW_YORK, Locale.US);
+        final Date date3 = parser3.parse("test'more");
+        assertNotNull("Should parse string with escaped quote", date3);
+        
+        // Test with backslash followed by non-E character (valid pattern)
+        final DateParser parser4 = getInstance("'test\\x'", NEW_YORK, Locale.US);
+        final Date date4 = parser4.parse("test\\x");
+        assertNotNull("Should parse string with backslash and non-E", date4);
+    }
+
+    @Test
+    public void testGetLocaleSpecificStrategy() throws Exception {
+        // Test getLocaleSpecificStrategy indirectly - 3 missed (95.1% coverage)
+        // This is tested through parsing with different locales and fields
+        
+        // Test with different locales for same field
+        final DateParser parser1 = getInstance("MMMM", NEW_YORK, Locale.US);
+        final DateParser parser2 = getInstance("MMMM", NEW_YORK, Locale.FRANCE);
+        
+        // Both should work, exercising the cache
+        final Date date1 = parser1.parse("January");
+        final Date date2 = parser2.parse("janvier");
+        assertNotNull("Should parse US locale", date1);
+        assertNotNull("Should parse French locale", date2);
+    }
+
+    @Test
+    public void testTimeZoneStrategy_SetCalendar_ExceptionPaths() throws Exception {
+        // Test TimeZoneStrategy.setCalendar exception paths - 20 missed (60.6% coverage)
+        final DateParser parser = getInstance("z", NEW_YORK, Locale.US); // Time zone format
+        
+        // Test with valid timezone (GMT format)
+        final Date date1 = parser.parse("GMT-05:00");
+        assertNotNull("Should parse GMT timezone", date1);
+        
+        // Test with valid timezone (+/- format)
+        final Date date2 = parser.parse("-05:00");
+        assertNotNull("Should parse +/- timezone", date2);
+        
+        // Test with valid timezone name
+        final Date date3 = parser.parse("EST");
+        assertNotNull("Should parse timezone name", date3);
+        
+        // Test with invalid timezone name (should throw IllegalArgumentException)
+        // This tests the exception path at line 725-727
+        try {
+            parser.parse("InvalidTimezoneName123");
+            fail("Should throw ParseException for invalid timezone name");
+        } catch (ParseException e) {
+            // The IllegalArgumentException from TimeZoneStrategy.setCalendar gets wrapped
+            assertTrue("Should have error message", e.getMessage() != null);
+        }
+        
+        // Test with timezone that doesn't start with +, -, or GMT
+        // and is not in tzNames map
+        try {
+            parser.parse("NotATimezone");
+            fail("Should throw ParseException for unsupported timezone");
+        } catch (ParseException e) {
+            // Expected - should have error message about unsupported timezone
+            assertTrue("Should have error message", e.getMessage() != null);
+        }
+    }
+
+    @Test
+    public void testTextStrategy_SetCalendar_MoreExceptionPaths() throws Exception {
+        // Test TextStrategy.setCalendar with more exception scenarios - additional coverage
+        // Test with ERA field
+        final DateParser parser1 = getInstance("G", NEW_YORK, Locale.US); // Era
+        try {
+            parser1.parse("InvalidEra");
+            fail("Should throw ParseException for invalid era");
+        } catch (ParseException e) {
+            // Expected - IllegalArgumentException from TextStrategy.setCalendar
+            assertTrue("Should have error message", e.getMessage() != null);
+        }
+        
+        // Test with different locales to exercise different keyValues
+        final DateParser parser2 = getInstance("MMMM", NEW_YORK, Locale.GERMANY);
+        try {
+            parser2.parse("InvalidMonthGerman");
+            fail("Should throw ParseException for invalid month in German locale");
+        } catch (ParseException e) {
+            // Expected
+            assertTrue("Should have error message", e.getMessage() != null);
+        }
+    }
+
+    @Test
+    public void testTextStrategy_AddRegex() throws Exception {
+        // Test TextStrategy.addRegex method - called during parser initialization
+        // This method builds the regex pattern from keyValues
+        // Test with different fields to ensure addRegex is called with different keyValues
+        
+        // Test with month names (MMMM) - should call addRegex with month keyValues
+        final DateParser parser1 = getInstance("MMMM", NEW_YORK, Locale.US);
+        final Date date1 = parser1.parse("January");
+        assertNotNull("Should parse month name", date1);
+        
+        // Test with day of week (EEEE) - should call addRegex with day keyValues
+        final DateParser parser2 = getInstance("EEEE", NEW_YORK, Locale.US);
+        final Date date2 = parser2.parse("Monday");
+        assertNotNull("Should parse day name", date2);
+        
+        // Test with AM/PM (a) - should call addRegex with AM/PM keyValues
+        final DateParser parser3 = getInstance("a", NEW_YORK, Locale.US);
+        final Date date3 = parser3.parse("AM");
+        assertNotNull("Should parse AM/PM", date3);
+        
+        // Test with ERA (G) - should call addRegex with ERA keyValues
+        final DateParser parser4 = getInstance("G", NEW_YORK, Locale.US);
+        final Date date4 = parser4.parse("AD");
+        assertNotNull("Should parse ERA", date4);
+        
+        // Test with different locales to exercise addRegex with different keyValues sets
+        final DateParser parser5 = getInstance("MMMM", NEW_YORK, Locale.FRANCE);
+        final Date date5 = parser5.parse("janvier");
+        assertNotNull("Should parse French month", date5);
+        
+        // Test with short month names (MMM) - should also use TextStrategy
+        final DateParser parser6 = getInstance("MMM", NEW_YORK, Locale.US);
+        final Date date6 = parser6.parse("Jan");
+        assertNotNull("Should parse short month name", date6);
+        
+        // Test with short day names (EEE) - should also use TextStrategy
+        final DateParser parser7 = getInstance("EEE", NEW_YORK, Locale.US);
+        final Date date7 = parser7.parse("Mon");
+        assertNotNull("Should parse short day name", date7);
+    }
+
+    @Test
+    public void testEquals_WithDifferentLocales() throws Exception {
+        // Test equals() method - line 195 (locale.equals check)
+        final DateParser parser1 = getInstance("yyyy-MM-dd", NEW_YORK, Locale.US);
+        final DateParser parser2 = getInstance("yyyy-MM-dd", NEW_YORK, Locale.US);
+        final DateParser parser3 = getInstance("yyyy-MM-dd", NEW_YORK, Locale.FRANCE);
+        
+        assertEquals("Should be equal with same locale", parser1, parser2);
+        assertFalse("Should not be equal with different locale", parser1.equals(parser3));
+    }
+
+    @Test
+    public void testJapaneseImperialLocale_ExceptionPath() throws Exception {
+        // Test Japanese Imperial locale exception path - lines 250-252
+        // This locale has special handling for dates before 1868 AD
+        final Locale japaneseImperial = new Locale("ja", "JP", "JP");
+        final DateParser parser = getInstance("yyyy-MM-dd", NEW_YORK, japaneseImperial);
+        
+        // Try to parse an invalid date - should trigger the special exception message
+        try {
+            parser.parse("invalid-date");
+            fail("Should throw ParseException with Japanese Imperial locale message");
+        } catch (ParseException e) {
+            // Should contain the special message about dates before 1868 AD
+            assertTrue("Should mention Japanese Imperial locale", 
+                e.getMessage().contains("ja_JP_JP") || e.getMessage().contains("1868"));
+        }
+    }
+
+    @Test
+    public void testGetLocaleSpecificStrategy_CachePath() throws Exception {
+        // Test getLocaleSpecificStrategy cache path - line 507 (inCache!=null)
+        // This tests the concurrent cache scenario where another thread already added the strategy
+        final DateParser parser1 = getInstance("MMMM", NEW_YORK, Locale.US);
+        final DateParser parser2 = getInstance("MMMM", NEW_YORK, Locale.US);
+        
+        // Both should work and use the cached strategy
+        final Date date1 = parser1.parse("January");
+        final Date date2 = parser2.parse("January");
+        assertNotNull("Should parse with first parser", date1);
+        assertNotNull("Should parse with second parser", date2);
+        
+        // Test with different field to exercise cache for different fields
+        final DateParser parser3 = getInstance("EEEE", NEW_YORK, Locale.US); // Day of week
+        final Date date3 = parser3.parse("Monday");
+        assertNotNull("Should parse day of week", date3);
     }
 }

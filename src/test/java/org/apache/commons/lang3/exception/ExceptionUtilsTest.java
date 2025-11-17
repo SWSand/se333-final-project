@@ -481,6 +481,116 @@ public class ExceptionUtilsTest {
         assertEquals("IllegalArgumentException: Base", ExceptionUtils.getRootCauseMessage(th));
     }
 
+    @SuppressWarnings("deprecation") // Specifically tests the deprecated method
+    @Test
+    public void testGetDefaultCauseMethodNames() {
+        String[] methodNames = ExceptionUtils.getDefaultCauseMethodNames();
+        assertNotNull(methodNames);
+        assertTrue(methodNames.length > 0);
+        // Verify it returns a clone (not the same reference)
+        String[] methodNames2 = ExceptionUtils.getDefaultCauseMethodNames();
+        assertNotSame(methodNames, methodNames2);
+        assertArrayEquals(methodNames, methodNames2);
+    }
+
+    @Test
+    public void testGetStackFrames_Throwable() {
+        String[] frames = ExceptionUtils.getStackFrames((Throwable) null);
+        assertNotNull(frames);
+        assertEquals(0, frames.length);
+        
+        Throwable th = new IllegalArgumentException("Test");
+        frames = ExceptionUtils.getStackFrames(th);
+        assertNotNull(frames);
+        assertTrue(frames.length > 0);
+        // Verify frames contain stack trace information
+        boolean foundAt = false;
+        for (String frame : frames) {
+            if (frame.contains("at")) {
+                foundAt = true;
+                break;
+            }
+        }
+        assertTrue("Stack frames should contain 'at'", foundAt);
+    }
+
+    @Test
+    public void testGetStackFrames_String() throws Exception {
+        // getStackFrames(String) is package-private static method, accessible from same package
+        // Test with a stack trace string
+        Throwable th = new IllegalArgumentException("Test");
+        String stackTrace = ExceptionUtils.getStackTrace(th);
+        assertNotNull(stackTrace);
+        assertTrue(stackTrace.length() > 0);
+        
+        // Call getStackFrames(String) directly using reflection since it's package-private
+        java.lang.reflect.Method method = ExceptionUtils.class.getDeclaredMethod("getStackFrames", String.class);
+        method.setAccessible(true);
+        String[] frames = (String[]) method.invoke(null, stackTrace);
+        assertNotNull(frames);
+        assertTrue(frames.length > 0);
+        
+        // Test with empty string
+        frames = (String[]) method.invoke(null, "");
+        assertNotNull(frames);
+        assertEquals(0, frames.length);
+        
+        // Test with multi-line string
+        String multiLine = "Line1\nLine2\nLine3";
+        frames = (String[]) method.invoke(null, multiLine);
+        assertNotNull(frames);
+        assertEquals(3, frames.length);
+        assertEquals("Line1", frames[0]);
+        assertEquals("Line2", frames[1]);
+        assertEquals("Line3", frames[2]);
+    }
+
+    @Test
+    public void testGetCauseUsingMethodName() throws Exception {
+        // Test getCauseUsingMethodName - private method, use reflection
+        java.lang.reflect.Method method = ExceptionUtils.class.getDeclaredMethod("getCauseUsingMethodName", Throwable.class, String.class);
+        method.setAccessible(true);
+        
+        // Test with exception that has getCause() method
+        final Throwable cause = new Exception("Cause");
+        final Throwable wrapper = new Exception("Wrapper", cause);
+        final Throwable result = (Throwable) method.invoke(null, wrapper, "getCause");
+        assertSame("Should return the cause", cause, result);
+        
+        // Test with exception that doesn't have the method
+        final Throwable noMethod = new Exception("No method");
+        final Throwable result2 = (Throwable) method.invoke(null, noMethod, "getNonExistentMethod");
+        assertNull("Should return null when method doesn't exist", result2);
+        
+        // Test with exception that has method but returns non-Throwable
+        // We can't override getCause() to return String, so we'll use a different method name
+        // that returns String to test the non-Throwable return type path
+        final Throwable wrongReturnType = new Exception("Wrong return type") {
+            @SuppressWarnings("unused")
+            public String getNonThrowableCause() {
+                return "not a throwable";
+            }
+        };
+        final Throwable result3 = (Throwable) method.invoke(null, wrongReturnType, "getNonThrowableCause");
+        assertNull("Should return null when method doesn't return Throwable", result3);
+        
+        // Test with SecurityException - create a custom SecurityManager that throws SecurityException
+        // This is hard to test directly, but we can test with a method that throws SecurityException
+        // Actually, SecurityException is thrown by getMethod, so we can't easily test that path
+        // Let's test with IllegalArgumentException and InvocationTargetException instead
+        
+        // Test with method that throws exception when invoked (InvocationTargetException)
+        // We can't override getCause() to throw Exception, so we'll use a different method name
+        final Throwable throwsException = new Exception("Throws") {
+            @SuppressWarnings("unused")
+            public Throwable getThrowingCause() {
+                throw new RuntimeException("Invocation exception");
+            }
+        };
+        final Throwable result4 = (Throwable) method.invoke(null, throwsException, "getThrowingCause");
+        assertNull("Should return null when method throws exception", result4);
+    }
+
     //-----------------------------------------------------------------------
     /**
      * Provides a method with a well known chained/nested exception

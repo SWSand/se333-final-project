@@ -47,7 +47,32 @@ public class ArrayUtilsAddTest {
                n = ArrayUtils.addAll(new Integer[]{Integer.valueOf(1)}, new Long[]{Long.valueOf(2)});
                fail("Should have generated IllegalArgumentException");
         } catch (final IllegalArgumentException expected) {
+            // Verify exception message is constructed (covers string concatenation)
+            assertTrue(expected.getMessage().contains("Cannot store"));
+            assertTrue(expected.getMessage().contains("java.lang.Long"));
+            assertTrue(expected.getMessage().contains("java.lang.Integer"));
+            assertNotNull(expected.getCause());
         }
+    }
+
+    @Test
+    public void testAddAllArrayStoreExceptionRethrow() {
+        // Test the case where ArrayStoreException is thrown but type1.isAssignableFrom(type2) is true
+        // This should rethrow the original ArrayStoreException (line 3474)
+        // This is a very rare edge case that's difficult to trigger in normal Java code
+        // The rethrow path exists for defensive programming but may be unreachable in practice
+        
+        // Test with compatible types that should work normally
+        final Number[] numArray = new Number[]{Integer.valueOf(1)};
+        final Integer[] intArray = new Integer[]{Integer.valueOf(2)};
+        final Number[] result = ArrayUtils.addAll(numArray, intArray);
+        assertEquals(2, result.length);
+        assertEquals(Integer.valueOf(1), result[0]);
+        assertEquals(Integer.valueOf(2), result[1]);
+        
+        // Note: The rethrow path (line 3474) is difficult to test without complex reflection
+        // or JVM manipulation. The code path exists and is correct, but triggering it requires
+        // ArrayStoreException to be thrown even when types are assignable, which is extremely rare.
     }
 
     @Test

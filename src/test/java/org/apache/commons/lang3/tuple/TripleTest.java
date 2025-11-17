@@ -123,5 +123,50 @@ public class TripleTest {
         assertEquals("         (Key,Something,Value)", String.format("%1$30s", triple));
     }
 
+    @Test
+    public void testHashCodeNullCases() throws Exception {
+        // Test all combinations of null/non-null for hashCode coverage
+        // All null
+        final Triple<String, String, String> triple1 = ImmutableTriple.of(null, null, null);
+        final Triple<String, String, String> triple2 = ImmutableTriple.of(null, null, null);
+        assertEquals(triple1.hashCode(), triple2.hashCode());
+        assertEquals(0, triple1.hashCode()); // All null should give 0 ^ 0 ^ 0 = 0
+
+        // Only left non-null
+        final Triple<String, String, String> triple3 = ImmutableTriple.of("left", null, null);
+        final Triple<String, String, String> triple4 = ImmutableTriple.of("left", null, null);
+        assertEquals(triple3.hashCode(), triple4.hashCode());
+
+        // Only middle non-null
+        final Triple<String, String, String> triple5 = ImmutableTriple.of(null, "middle", null);
+        final Triple<String, String, String> triple6 = ImmutableTriple.of(null, "middle", null);
+        assertEquals(triple5.hashCode(), triple6.hashCode());
+
+        // Only right non-null
+        final Triple<String, String, String> triple7 = ImmutableTriple.of(null, null, "right");
+        final Triple<String, String, String> triple8 = ImmutableTriple.of(null, null, "right");
+        assertEquals(triple7.hashCode(), triple8.hashCode());
+
+        // Left and middle non-null, right null
+        final Triple<String, String, String> triple9 = ImmutableTriple.of("left", "middle", null);
+        final Triple<String, String, String> triple10 = ImmutableTriple.of("left", "middle", null);
+        assertEquals(triple9.hashCode(), triple10.hashCode());
+
+        // Left and right non-null, middle null
+        final Triple<String, String, String> triple11 = ImmutableTriple.of("left", null, "right");
+        final Triple<String, String, String> triple12 = ImmutableTriple.of("left", null, "right");
+        assertEquals(triple11.hashCode(), triple12.hashCode());
+
+        // Middle and right non-null, left null
+        final Triple<String, String, String> triple13 = ImmutableTriple.of(null, "middle", "right");
+        final Triple<String, String, String> triple14 = ImmutableTriple.of(null, "middle", "right");
+        assertEquals(triple13.hashCode(), triple14.hashCode());
+
+        // All non-null
+        final Triple<String, String, String> triple15 = ImmutableTriple.of("left", "middle", "right");
+        final Triple<String, String, String> triple16 = ImmutableTriple.of("left", "middle", "right");
+        assertEquals(triple15.hashCode(), triple16.hashCode());
+    }
+
 }
 

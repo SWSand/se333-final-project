@@ -110,6 +110,29 @@ public class ConstructorUtilsTest {
                 TestBean.class, NumberUtils.LONG_ONE).toString());
         assertEquals("(double)", ConstructorUtils.invokeConstructor(
                 TestBean.class, NumberUtils.DOUBLE_ONE).toString());
+        
+        // Test invokeConstructor with explicit parameter types (3-parameter overload)
+        assertEquals("()", ConstructorUtils.invokeConstructor(TestBean.class,
+                (Object[]) null, (Class<?>[]) null).toString());
+        assertEquals("()", ConstructorUtils.invokeConstructor(TestBean.class,
+                ArrayUtils.EMPTY_OBJECT_ARRAY, ArrayUtils.EMPTY_CLASS_ARRAY).toString());
+        assertEquals("(String)", ConstructorUtils.invokeConstructor(
+                TestBean.class, new Object[] { "" }, new Class[] { String.class }).toString());
+        assertEquals("(Integer)", ConstructorUtils.invokeConstructor(
+                TestBean.class, new Object[] { NumberUtils.INTEGER_ONE }, 
+                new Class[] { Integer.class }).toString());
+        assertEquals("(int)", ConstructorUtils.invokeConstructor(
+                TestBean.class, new Object[] { NumberUtils.BYTE_ONE }, 
+                new Class[] { Byte.TYPE }).toString());
+        
+        // Test NoSuchMethodException when no matching constructor found
+        try {
+            ConstructorUtils.invokeConstructor(TestBean.class,
+                    new Object[] { new int[10] }, new Class[] { int[].class });
+            fail("Should have thrown NoSuchMethodException");
+        } catch (final NoSuchMethodException e) {
+            assertTrue(e.getMessage().contains("No such accessible constructor"));
+        }
     }
 
     @Test

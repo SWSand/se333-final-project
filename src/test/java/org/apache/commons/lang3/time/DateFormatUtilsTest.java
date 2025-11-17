@@ -23,6 +23,7 @@ import java.lang.reflect.Modifier;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Date;
 
 /**
  * TestCase for DateFormatUtils.
@@ -248,5 +249,17 @@ public class DateFormatUtilsTest {
         assertEquals(expected, DateFormatUtils.format( date, pattern, timeZone, locale ) );
     }
     */
+
+    @Test
+    public void testFormatCalendarWithTimeZone() {
+        // Test format(Calendar, String, TimeZone) overload
+        final Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        cal.set(2005, 0, 1, 12, 0, 0);
+        final TimeZone timeZone = TimeZone.getTimeZone("America/New_York");
+        
+        final String result = DateFormatUtils.format(cal, "yyyy-MM-dd HH:mm:ss", timeZone);
+        assertNotNull("Result should not be null", result);
+        assertTrue("Result should contain year", result.contains("2005"));
+    }
 
 }

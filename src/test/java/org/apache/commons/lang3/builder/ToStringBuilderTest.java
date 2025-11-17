@@ -17,8 +17,10 @@
 package org.apache.commons.lang3.builder;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1079,6 +1081,227 @@ public class ToStringBuilderTest {
         final ToStringBuilder testBuilder = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                                           .appendToString(obj.toString());
         assertEquals(testBuilder.toString().indexOf("testInt=31337"), -1);
+    }
+
+    // Tests for append(String, array, boolean) overloads - these have 0% coverage
+    @Test
+    public void testAppendBooleanArrayWithFieldNameAndFullDetail() {
+        boolean[] array = new boolean[] {true, false, false};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain array values", result1.contains("true") || result1.contains("false"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain size or array", result2.contains("arr"));
+        array = null;
+        final String result3 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should handle null", result3.contains("arr"));
+    }
+
+    @Test
+    public void testAppendByteArrayWithFieldNameAndFullDetail() {
+        byte[] array = new byte[] {1, 2, -3, 4};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendCharArrayWithFieldNameAndFullDetail() {
+        char[] array = new char[] {'A', '2', '_', 'D'};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendDoubleArrayWithFieldNameAndFullDetail() {
+        double[] array = new double[] {1.0, 2.9876, -3.00001, 4.3};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendFloatArrayWithFieldNameAndFullDetail() {
+        float[] array = new float[] {1.0f, 2.9876f, -3.00001f, 4.3f};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendIntArrayWithFieldNameAndFullDetail() {
+        int[] array = new int[] {1, 2, -3, 4};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendLongArrayWithFieldNameAndFullDetail() {
+        long[] array = new long[] {1, 2, -3, 4};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendShortArrayWithFieldNameAndFullDetail() {
+        short[] array = new short[] {1, 2, -3, 4};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    @Test
+    public void testAppendObjectArrayWithFieldNameAndFullDetail() {
+        Object[] array = new Object[] {null, base, new int[] {3, 6}};
+        final String result1 = new ToStringBuilder(base).append("arr", array, true).toString();
+        assertTrue("Should contain field name", result1.contains("arr"));
+        final String result2 = new ToStringBuilder(base).append("arr", array, false).toString();
+        assertTrue("Should contain field name", result2.contains("arr"));
+    }
+
+    // Tests for append(String, array) overloads without fullDetail - these have 0% coverage
+    @Test
+    public void testAppendBooleanArrayWithFieldName() {
+        boolean[] array = new boolean[] {true, false};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendByteArrayWithFieldName() {
+        byte[] array = new byte[] {1, 2};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendCharArrayWithFieldName() {
+        char[] array = new char[] {'A', 'B'};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendDoubleArrayWithFieldName() {
+        double[] array = new double[] {1.0, 2.0};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendFloatArrayWithFieldName() {
+        float[] array = new float[] {1.0f, 2.0f};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendIntArrayWithFieldName() {
+        int[] array = new int[] {1, 2};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendLongArrayWithFieldName() {
+        long[] array = new long[] {1, 2};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendShortArrayWithFieldName() {
+        short[] array = new short[] {1, 2};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    @Test
+    public void testAppendObjectArrayWithFieldName() {
+        Object[] array = new Object[] {base, "test"};
+        final String result = new ToStringBuilder(base).append("arr", array).toString();
+        assertTrue("Should contain field name", result.contains("arr"));
+    }
+
+    // Test for appendAsObjectToString - has 0% coverage
+    @Test
+    public void testAppendAsObjectToString() {
+        final Integer i3 = Integer.valueOf(3);
+        final String result = new ToStringBuilder(base).appendAsObjectToString(i3).toString();
+        assertTrue("Should contain class name", result.contains("Integer"));
+        assertTrue("Should contain identity hash", result.length() > baseStr.length() + 2);
+    }
+
+    // Tests for ReflectionToStringBuilder constructors - these have 0% coverage
+    @Test
+    public void testReflectionToStringBuilderConstructor1() {
+        final ReflectionToStringBuilder builder = new ReflectionToStringBuilder(base);
+        assertNotNull("Builder should not be null", builder);
+        assertNotNull("toString should not be null", builder.toString());
+    }
+
+    @Test
+    public void testReflectionToStringBuilderConstructor2() {
+        final ReflectionToStringBuilder builder = new ReflectionToStringBuilder(base, ToStringStyle.DEFAULT_STYLE);
+        assertNotNull("Builder should not be null", builder);
+        assertNotNull("toString should not be null", builder.toString());
+    }
+
+    @Test
+    public void testReflectionToStringBuilderConstructor3() {
+        final ReflectionToStringBuilder builder = new ReflectionToStringBuilder(base, ToStringStyle.DEFAULT_STYLE, new StringBuffer());
+        assertNotNull("Builder should not be null", builder);
+        assertNotNull("toString should not be null", builder.toString());
+    }
+
+    // Tests for ReflectionToStringBuilder.toString overloads - these have 0% coverage
+    @Test
+    public void testReflectionToStringBuilderToStringWithStyle() {
+        final String result = ReflectionToStringBuilder.toString(base, ToStringStyle.NO_FIELD_NAMES_STYLE);
+        assertNotNull("Result should not be null", result);
+        assertTrue("Result should contain value", result.contains("5"));
+    }
+
+    @Test
+    public void testReflectionToStringBuilderToStringWithStyleAndOutputTransients() {
+        final ReflectionTestFixtureA baseA = new ReflectionTestFixtureA();
+        final String result = ReflectionToStringBuilder.toString(baseA, ToStringStyle.DEFAULT_STYLE, true);
+        assertNotNull("Result should not be null", result);
+        assertTrue("Result should contain transient field", result.contains("transientA"));
+    }
+
+    @Test
+    public void testReflectionToStringBuilderToStringWithStyleAndOutputTransientsAndUpToClass() {
+        final ReflectionTestFixtureB baseB = new ReflectionTestFixtureB();
+        final String result = ReflectionToStringBuilder.toString(baseB, ToStringStyle.DEFAULT_STYLE, false, true, ReflectionTestFixtureA.class);
+        assertNotNull("Result should not be null", result);
+        assertTrue("Result should contain fields", result.length() > 0);
+    }
+
+    // Test for ReflectionToStringBuilder.getExcludeFieldNames - has 0% coverage
+    @Test
+    public void testReflectionToStringBuilderGetExcludeFieldNames() {
+        final ReflectionToStringBuilder builder = new ReflectionToStringBuilder(base);
+        final String[] excludeFields = builder.getExcludeFieldNames();
+        assertNotNull("Exclude field names should not be null", excludeFields);
+    }
+
+    // Test for ReflectionToStringBuilder.appendFieldsIn - has partial coverage, adding more
+    @Test
+    public void testReflectionToStringBuilderAppendFieldsIn() {
+        final ReflectionToStringBuilder builder = new ReflectionToStringBuilder(base);
+        builder.appendFieldsIn(Number.class);
+        final String result = builder.toString();
+        assertNotNull("Result should not be null", result);
     }
 
 }

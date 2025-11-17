@@ -582,4 +582,45 @@ public class LocaleUtilsTest  {
 //         }
 //     }
 
+    @Test
+    public void testSyncAvoidClassInitialization() throws Exception {
+        // Test that SyncAvoid static initializer is executed
+        // Accessing availableLocaleList() or availableLocaleSet() will trigger SyncAvoid initialization
+        final List<Locale> list1 = LocaleUtils.availableLocaleList();
+        assertNotNull("Available locale list should not be null", list1);
+        
+        final Set<Locale> set1 = LocaleUtils.availableLocaleSet();
+        assertNotNull("Available locale set should not be null", set1);
+        
+        // Access again to ensure static initialization happened
+        final List<Locale> list2 = LocaleUtils.availableLocaleList();
+        final Set<Locale> set2 = LocaleUtils.availableLocaleSet();
+        
+        // Should return the same instances (singleton pattern)
+        assertSame("Should return same list instance", list1, list2);
+        assertSame("Should return same set instance", set1, set2);
+        
+        // Verify the lists contain locales
+        assertTrue("List should contain locales", list1.size() > 0);
+        assertTrue("Set should contain locales", set1.size() > 0);
+        
+        // Test SyncAvoid constructor by instantiating it using reflection
+        // This covers the default constructor which has 3 missed instructions
+        final Class<?>[] innerClasses = LocaleUtils.class.getDeclaredClasses();
+        Class<?> syncAvoidClass = null;
+        for (final Class<?> innerClass : innerClasses) {
+            if ("SyncAvoid".equals(innerClass.getSimpleName())) {
+                syncAvoidClass = innerClass;
+                break;
+            }
+        }
+        assertNotNull("SyncAvoid class should exist", syncAvoidClass);
+        
+        // Get the default constructor and instantiate SyncAvoid
+        final java.lang.reflect.Constructor<?> constructor = syncAvoidClass.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        final Object syncAvoid = constructor.newInstance();
+        assertNotNull("SyncAvoid instance should not be null", syncAvoid);
+    }
+
 }

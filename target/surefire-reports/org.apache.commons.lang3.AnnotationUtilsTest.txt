@@ -1,4 +1,23 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.AnnotationUtilsTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec
+Tests run: 13, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0.032 sec <<< FAILURE!
+testToString_WithException(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.005 sec  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[Test exception]> but was:<[Cannot invoke "java.lang.Integer.intValue()" because the return value of "java.lang.reflect.InvocationHandler.invoke(Object, java.lang.reflect.Method, Object[])" is null]>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.apache.commons.lang3.AnnotationUtilsTest.testToString_WithException(AnnotationUtilsTest.java:605)
+
+testToString_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0.002 sec  <<< ERROR!
+java.lang.IllegalArgumentException: object of type jdk.proxy2.$Proxy11 is not an instance of org.junit.Test
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.checkReceiver(DirectMethodHandleAccessor.java:199)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:100)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.apache.commons.lang3.AnnotationUtils.toString(AnnotationUtils.java:202)
+	at org.apache.commons.lang3.AnnotationUtilsTest.testToString_EdgeCases(AnnotationUtilsTest.java:565)
+
+testHashCode_EdgeCases(org.apache.commons.lang3.AnnotationUtilsTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.lang.annotation.Annotation.annotationType()" because "a" is null
+	at org.apache.commons.lang3.AnnotationUtils.hashCode(AnnotationUtils.java:169)
+	at org.apache.commons.lang3.AnnotationUtilsTest.testHashCode_EdgeCases(AnnotationUtilsTest.java:520)
+

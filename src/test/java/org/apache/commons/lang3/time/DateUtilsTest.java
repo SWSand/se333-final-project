@@ -1218,6 +1218,150 @@ public class DateUtilsTest {
     }
     
     /**
+     * Tests truncatedEquals with Calendar objects
+     */
+    @Test
+    public void testTruncatedEquals_Calendar() throws Exception {
+        final Calendar cal1 = Calendar.getInstance();
+        cal1.set(2002, Calendar.FEBRUARY, 12, 12, 34, 56);
+        cal1.set(Calendar.MILLISECOND, 789);
+        
+        final Calendar cal2 = Calendar.getInstance();
+        cal2.set(2002, Calendar.FEBRUARY, 12, 12, 34, 56);
+        cal2.set(Calendar.MILLISECOND, 123);
+        
+        // Same date/time when truncated to SECOND
+        assertTrue("truncatedEquals Calendar SECOND", DateUtils.truncatedEquals(cal1, cal2, Calendar.SECOND));
+        
+        // Different dates
+        final Calendar cal3 = Calendar.getInstance();
+        cal3.set(2002, Calendar.FEBRUARY, 13, 12, 34, 56);
+        assertFalse("truncatedEquals Calendar different DATE", DateUtils.truncatedEquals(cal1, cal3, Calendar.SECOND));
+        
+        // Same date when truncated to DATE
+        final Calendar cal4 = Calendar.getInstance();
+        cal4.set(2002, Calendar.FEBRUARY, 12, 13, 45, 00);
+        assertTrue("truncatedEquals Calendar DATE", DateUtils.truncatedEquals(cal1, cal4, Calendar.DATE));
+        
+        // Null checks
+        try {
+            DateUtils.truncatedEquals((Calendar) null, cal2, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+        
+        try {
+            DateUtils.truncatedEquals(cal1, (Calendar) null, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+    }
+    
+    /**
+     * Tests truncatedEquals with Date objects
+     */
+    @Test
+    public void testTruncatedEquals_Date() throws Exception {
+        final Date date1 = dateTimeParser.parse("February 12, 2002 12:34:56.789");
+        final Date date2 = dateTimeParser.parse("February 12, 2002 12:34:56.123");
+        
+        // Same date/time when truncated to SECOND
+        assertTrue("truncatedEquals Date SECOND", DateUtils.truncatedEquals(date1, date2, Calendar.SECOND));
+        
+        // Different dates
+        final Date date3 = dateTimeParser.parse("February 13, 2002 12:34:56.789");
+        assertFalse("truncatedEquals Date different DATE", DateUtils.truncatedEquals(date1, date3, Calendar.SECOND));
+        
+        // Same date when truncated to DATE
+        final Date date4 = dateTimeParser.parse("February 12, 2002 13:45:00.000");
+        assertTrue("truncatedEquals Date DATE", DateUtils.truncatedEquals(date1, date4, Calendar.DATE));
+        
+        // Null checks
+        try {
+            DateUtils.truncatedEquals((Date) null, date2, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+        
+        try {
+            DateUtils.truncatedEquals(date1, (Date) null, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+    }
+    
+    /**
+     * Tests truncatedCompareTo with Calendar objects
+     */
+    @Test
+    public void testTruncatedCompareTo_Calendar() throws Exception {
+        final Calendar cal1 = Calendar.getInstance();
+        cal1.set(2002, Calendar.FEBRUARY, 12, 12, 34, 56);
+        cal1.set(Calendar.MILLISECOND, 789);
+        
+        final Calendar cal2 = Calendar.getInstance();
+        cal2.set(2002, Calendar.FEBRUARY, 12, 12, 34, 56);
+        cal2.set(Calendar.MILLISECOND, 123);
+        
+        // Equal when truncated to SECOND
+        assertEquals("truncatedCompareTo Calendar SECOND equal", 0, DateUtils.truncatedCompareTo(cal1, cal2, Calendar.SECOND));
+        
+        // cal1 < cal3 when truncated to DATE
+        final Calendar cal3 = Calendar.getInstance();
+        cal3.set(2002, Calendar.FEBRUARY, 13, 12, 34, 56);
+        assertTrue("truncatedCompareTo Calendar DATE less", DateUtils.truncatedCompareTo(cal1, cal3, Calendar.DATE) < 0);
+        
+        // cal3 > cal1 when truncated to DATE
+        assertTrue("truncatedCompareTo Calendar DATE greater", DateUtils.truncatedCompareTo(cal3, cal1, Calendar.DATE) > 0);
+        
+        // Same date when truncated to DATE
+        final Calendar cal4 = Calendar.getInstance();
+        cal4.set(2002, Calendar.FEBRUARY, 12, 13, 45, 00);
+        assertEquals("truncatedCompareTo Calendar DATE equal", 0, DateUtils.truncatedCompareTo(cal1, cal4, Calendar.DATE));
+        
+        // Null checks
+        try {
+            DateUtils.truncatedCompareTo((Calendar) null, cal2, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+        
+        try {
+            DateUtils.truncatedCompareTo(cal1, (Calendar) null, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+    }
+    
+    /**
+     * Tests truncatedCompareTo with Date objects
+     */
+    @Test
+    public void testTruncatedCompareTo_Date() throws Exception {
+        final Date date1 = dateTimeParser.parse("February 12, 2002 12:34:56.789");
+        final Date date2 = dateTimeParser.parse("February 12, 2002 12:34:56.123");
+        
+        // Equal when truncated to SECOND
+        assertEquals("truncatedCompareTo Date SECOND equal", 0, DateUtils.truncatedCompareTo(date1, date2, Calendar.SECOND));
+        
+        // date1 < date3 when truncated to DATE
+        final Date date3 = dateTimeParser.parse("February 13, 2002 12:34:56.789");
+        assertTrue("truncatedCompareTo Date DATE less", DateUtils.truncatedCompareTo(date1, date3, Calendar.DATE) < 0);
+        
+        // date3 > date1 when truncated to DATE
+        assertTrue("truncatedCompareTo Date DATE greater", DateUtils.truncatedCompareTo(date3, date1, Calendar.DATE) > 0);
+        
+        // Same date when truncated to DATE
+        final Date date4 = dateTimeParser.parse("February 12, 2002 13:45:00.000");
+        assertEquals("truncatedCompareTo Date DATE equal", 0, DateUtils.truncatedCompareTo(date1, date4, Calendar.DATE));
+        
+        // Null checks
+        try {
+            DateUtils.truncatedCompareTo((Date) null, date2, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+        
+        try {
+            DateUtils.truncatedCompareTo(date1, (Date) null, Calendar.SECOND);
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {}
+    }
+    
+    /**
      * Tests various values with the ceiling method
      */
     @Test

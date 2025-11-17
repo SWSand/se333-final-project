@@ -19,6 +19,7 @@ package org.apache.commons.lang3.builder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -1125,6 +1126,128 @@ public class EqualsBuilderTest {
         public boolean equals(final Object obj) {
             return EqualsBuilder.reflectionEquals(this, obj);
         }
+    }
+
+    // Tests for EqualsBuilder methods with missed instructions
+    @Test
+    public void testReflectionEqualsWithCollection() {
+        // Test reflectionEquals(Object, Object, Collection) - 0% coverage
+        final TestObject o1 = new TestObject(4);
+        final TestObject o2 = new TestObject(4);
+        final java.util.Collection<String> excludeFields = new java.util.ArrayList<String>();
+        excludeFields.add("nonexistent");
+        
+        assertTrue("Should be equal with empty exclude collection", 
+            EqualsBuilder.reflectionEquals(o1, o2, excludeFields));
+        
+        // Test with null collection
+        assertTrue("Should be equal with null collection", 
+            EqualsBuilder.reflectionEquals(o1, o2, (java.util.Collection<String>) null));
+    }
+
+    @Test
+    public void testAppendArrayEdgeCases() {
+        // Test array append methods with different dimensions - 7 missed each
+        final EqualsBuilder builder1 = new EqualsBuilder();
+        final long[] arr1 = new long[] {1L, 2L};
+        final long[] arr2 = new long[] {1L, 2L};
+        assertTrue("Equal long arrays", builder1.append(arr1, arr2).isEquals());
+        
+        final EqualsBuilder builder2 = new EqualsBuilder();
+        final int[] arr3 = new int[] {1, 2};
+        final int[] arr4 = new int[] {1, 2};
+        assertTrue("Equal int arrays", builder2.append(arr3, arr4).isEquals());
+        
+        final EqualsBuilder builder3 = new EqualsBuilder();
+        final short[] arr5 = new short[] {1, 2};
+        final short[] arr6 = new short[] {1, 2};
+        assertTrue("Equal short arrays", builder3.append(arr5, arr6).isEquals());
+        
+        final EqualsBuilder builder4 = new EqualsBuilder();
+        final char[] arr7 = new char[] {'a', 'b'};
+        final char[] arr8 = new char[] {'a', 'b'};
+        assertTrue("Equal char arrays", builder4.append(arr7, arr8).isEquals());
+        
+        final EqualsBuilder builder5 = new EqualsBuilder();
+        final byte[] arr9 = new byte[] {1, 2};
+        final byte[] arr10 = new byte[] {1, 2};
+        assertTrue("Equal byte arrays", builder5.append(arr9, arr10).isEquals());
+        
+        final EqualsBuilder builder6 = new EqualsBuilder();
+        final double[] arr11 = new double[] {1.0, 2.0};
+        final double[] arr12 = new double[] {1.0, 2.0};
+        assertTrue("Equal double arrays", builder6.append(arr11, arr12).isEquals());
+        
+        final EqualsBuilder builder7 = new EqualsBuilder();
+        final float[] arr13 = new float[] {1.0f, 2.0f};
+        final float[] arr14 = new float[] {1.0f, 2.0f};
+        assertTrue("Equal float arrays", builder7.append(arr13, arr14).isEquals());
+        
+        final EqualsBuilder builder8 = new EqualsBuilder();
+        final boolean[] arr15 = new boolean[] {true, false};
+        final boolean[] arr16 = new boolean[] {true, false};
+        assertTrue("Equal boolean arrays", builder8.append(arr15, arr16).isEquals());
+        
+        // Test with different dimensions (boolean[][] vs boolean[])
+        final EqualsBuilder builder9 = new EqualsBuilder();
+        final boolean[][] arr17 = new boolean[][] {{true}};
+        final boolean[] arr18 = new boolean[] {true};
+        assertFalse("Different dimensions should not be equal", builder9.append(arr17, arr18).isEquals());
+    }
+
+    // Tests for EqualsBuilder methods with missed instructions - appendSuper and primitive append
+    @Test
+    public void testAppendSuper_WhenIsEqualsFalse() {
+        // Test appendSuper when isEquals is already false (early return path)
+        final EqualsBuilder builder = new EqualsBuilder();
+        builder.setEquals(false);
+        final EqualsBuilder result = builder.appendSuper(true);
+        assertFalse("Should remain false", result.isEquals());
+        assertSame("Should return same builder", builder, result);
+    }
+
+    @Test
+    public void testAppendPrimitives_WhenIsEqualsFalse() {
+        // Test primitive append methods when isEquals is already false (early return path)
+        final EqualsBuilder builder1 = new EqualsBuilder();
+        builder1.setEquals(false);
+        assertSame("Should return same builder", builder1, builder1.append(1L, 2L));
+        assertFalse("Should remain false", builder1.isEquals());
+
+        final EqualsBuilder builder2 = new EqualsBuilder();
+        builder2.setEquals(false);
+        assertSame("Should return same builder", builder2, builder2.append(1, 2));
+        assertFalse("Should remain false", builder2.isEquals());
+
+        final EqualsBuilder builder3 = new EqualsBuilder();
+        builder3.setEquals(false);
+        assertSame("Should return same builder", builder3, builder3.append((short)1, (short)2));
+        assertFalse("Should remain false", builder3.isEquals());
+
+        final EqualsBuilder builder4 = new EqualsBuilder();
+        builder4.setEquals(false);
+        assertSame("Should return same builder", builder4, builder4.append('a', 'b'));
+        assertFalse("Should remain false", builder4.isEquals());
+
+        final EqualsBuilder builder5 = new EqualsBuilder();
+        builder5.setEquals(false);
+        assertSame("Should return same builder", builder5, builder5.append((byte)1, (byte)2));
+        assertFalse("Should remain false", builder5.isEquals());
+
+        final EqualsBuilder builder6 = new EqualsBuilder();
+        builder6.setEquals(false);
+        assertSame("Should return same builder", builder6, builder6.append(1.0, 2.0));
+        assertFalse("Should remain false", builder6.isEquals());
+
+        final EqualsBuilder builder7 = new EqualsBuilder();
+        builder7.setEquals(false);
+        assertSame("Should return same builder", builder7, builder7.append(1.0f, 2.0f));
+        assertFalse("Should remain false", builder7.isEquals());
+
+        final EqualsBuilder builder8 = new EqualsBuilder();
+        builder8.setEquals(false);
+        assertSame("Should return same builder", builder8, builder8.append(true, false));
+        assertFalse("Should remain false", builder8.isEquals());
     }
 }
 

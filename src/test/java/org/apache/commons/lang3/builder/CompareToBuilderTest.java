@@ -109,6 +109,36 @@ public class CompareToBuilderTest {
         assertTrue(CompareToBuilder.reflectionCompare(o2, o1) > 0);
     }
 
+    @Test
+    public void testReflectionCompareWithVarargs() {
+        final TestObject o1 = new TestObject(4);
+        final TestObject o2 = new TestObject(4);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2) == 0);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, (String[]) null) == 0);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, new String[]{}) == 0);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, new String[]{"xxx"}) == 0);
+        
+        o2.setA(5);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2) < 0);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, new String[]{}) < 0);
+    }
+
+    @Test
+    public void testReflectionCompareWithCollection() {
+        final TestObject o1 = new TestObject(4);
+        final TestObject o2 = new TestObject(4);
+        final java.util.Collection<String> excludeFields = new java.util.ArrayList<String>();
+        
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, excludeFields) == 0);
+        
+        excludeFields.add("a");
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, excludeFields) == 0);
+        
+        o2.setA(5);
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2, excludeFields) == 0); // 'a' is excluded
+        assertTrue(CompareToBuilder.reflectionCompare(o1, o2) < 0); // 'a' is not excluded
+    }
+
     @Test(expected=NullPointerException.class)
     public void testReflectionCompareEx1() {
         final TestObject o1 = new TestObject(4);

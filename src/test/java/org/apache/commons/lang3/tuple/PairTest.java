@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -60,6 +61,30 @@ public class PairTest {
         pair2.setValue("bar");
         assertFalse(pair.equals(pair2));
         assertFalse(pair.hashCode() == pair2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeNullCases() throws Exception {
+        // Test all combinations of null/non-null for hashCode coverage
+        final Pair<String, String> pair1 = ImmutablePair.of(null, null);
+        final Pair<String, String> pair2 = ImmutablePair.of(null, null);
+        assertEquals(pair1.hashCode(), pair2.hashCode());
+        assertEquals(0, pair1.hashCode()); // Both null should give 0 ^ 0 = 0
+
+        final Pair<String, String> pair3 = ImmutablePair.of(null, "value");
+        final Pair<String, String> pair4 = ImmutablePair.of(null, "value");
+        assertEquals(pair3.hashCode(), pair4.hashCode());
+        assertEquals("value".hashCode(), pair3.hashCode()); // null ^ value.hashCode() = value.hashCode()
+
+        final Pair<String, String> pair5 = ImmutablePair.of("key", null);
+        final Pair<String, String> pair6 = ImmutablePair.of("key", null);
+        assertEquals(pair5.hashCode(), pair6.hashCode());
+        assertEquals("key".hashCode(), pair5.hashCode()); // key.hashCode() ^ null = key.hashCode()
+
+        final Pair<String, String> pair7 = ImmutablePair.of("key", "value");
+        final Pair<String, String> pair8 = ImmutablePair.of("key", "value");
+        assertEquals(pair7.hashCode(), pair8.hashCode());
+        assertEquals("key".hashCode() ^ "value".hashCode(), pair7.hashCode());
     }
 
     @Test
@@ -116,6 +141,19 @@ public class PairTest {
     public void testFormattable_padded() throws Exception {
         final Pair<String, String> pair = Pair.of("Key", "Value");
         assertEquals("         (Key,Value)", String.format("%1$20s", pair));
+    }
+
+    @Test
+    public void testImmutablePairSetValue() throws Exception {
+        final ImmutablePair<String, String> pair = ImmutablePair.of("key", "value");
+        try {
+            pair.setValue("newValue");
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (final UnsupportedOperationException e) {
+            // Expected
+        }
+        // Verify the value didn't change
+        assertEquals("value", pair.getRight());
     }
 
 }

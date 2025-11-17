@@ -8,7 +8,7 @@ java.lang.NullPointerException: Cannot invoke "org.apache.commons.lang3.JavaVers
 	at org.apache.commons.lang3.ClassUtils.isAssignable(ClassUtils.java:586)
 	at org.apache.commons.lang3.reflect.MemberUtils.getObjectTransformationCost(MemberUtils.java:137)
 	at org.apache.commons.lang3.reflect.MemberUtils.getTotalTransformationCost(MemberUtils.java:118)
-	at org.apache.commons.lang3.reflect.MemberUtils.compareParameterTypes(MemberUtils.java:100)
+	at org.apache.commons.lang3.reflect.MemberUtils.compareParameterTypes(MemberUtils.java:101)
 	at org.apache.commons.lang3.reflect.MethodUtils.getMatchingAccessibleMethod(MethodUtils.java:508)
 	at org.apache.commons.lang3.reflect.MethodUtilsTest.expectMatchingAccessibleMethodParameterTypes(MethodUtilsTest.java:382)
 	at org.apache.commons.lang3.reflect.MethodUtilsTest.testGetMatchingAccessibleMethod(MethodUtilsTest.java:370)

@@ -18,6 +18,7 @@ package org.apache.commons.lang3.time;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -309,5 +310,31 @@ public class FastDateFormatTest {
         }
         assertEquals(0, failures.get());
         return totalElapsed.get();
+    }
+
+    @Test
+    public void testFormat_Date_StringBuffer() throws Exception {
+        // Test FastDateFormat.format(Date, StringBuffer) - 6 missed instructions, 1 missed method
+        final FastDateFormat format = FastDateFormat.getInstance("yyyy-MM-dd");
+        final Date date = new Date();
+        final StringBuffer buf = new StringBuffer();
+        
+        // Test format(Date, StringBuffer) method
+        final StringBuffer result = format.format(date, buf);
+        assertNotNull("Should return StringBuffer", result);
+        assertSame("Should return same buffer", buf, result);
+        assertTrue("Should format date", result.length() > 0);
+        
+        // Test with empty buffer
+        final StringBuffer buf2 = new StringBuffer();
+        final StringBuffer result2 = format.format(date, buf2);
+        assertSame("Should return same buffer", buf2, result2);
+        assertTrue("Should format date in empty buffer", result2.length() > 0);
+        
+        // Test with buffer that already has content
+        final StringBuffer buf3 = new StringBuffer("Prefix: ");
+        final StringBuffer result3 = format.format(date, buf3);
+        assertSame("Should return same buffer", buf3, result3);
+        assertTrue("Should append to existing buffer", result3.toString().startsWith("Prefix: "));
     }
 }

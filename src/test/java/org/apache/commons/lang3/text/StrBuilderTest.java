@@ -1855,4 +1855,130 @@ public class StrBuilderTest {
         assertEquals(sb.toString(), sb.build());
     }
 
+    @Test
+    public void testInsertInt() {
+        final StrBuilder sb = new StrBuilder("abc");
+        sb.insert(1, 123);
+        assertEquals("a123bc", sb.toString());
+        
+        sb.clear().append("abc");
+        sb.insert(0, 0);
+        assertEquals("0abc", sb.toString());
+        
+        sb.clear().append("abc");
+        sb.insert(3, -456);
+        assertEquals("abc-456", sb.toString());
+    }
+
+    @Test
+    public void testInsertLong() {
+        final StrBuilder sb = new StrBuilder("abc");
+        sb.insert(1, 123L);
+        assertEquals("a123bc", sb.toString());
+        
+        sb.clear().append("abc");
+        sb.insert(0, 0L);
+        assertEquals("0abc", sb.toString());
+        
+        sb.clear().append("abc");
+        sb.insert(3, -456L);
+        assertEquals("abc-456", sb.toString());
+    }
+
+    @Test
+    public void testAppendlnInt() {
+        final StrBuilder sb = new StrBuilder("test");
+        sb.appendln(123);
+        assertTrue(sb.toString().endsWith("\n"));
+        assertTrue(sb.toString().contains("123"));
+        
+        sb.clear();
+        sb.appendln(0);
+        assertTrue(sb.toString().endsWith("\n"));
+        assertTrue(sb.toString().contains("0"));
+        
+        sb.clear();
+        sb.appendln(-456);
+        assertTrue(sb.toString().endsWith("\n"));
+        assertTrue(sb.toString().contains("-456"));
+    }
+
+    @Test
+    public void testAppendlnChar() {
+        final StrBuilder sb = new StrBuilder("test");
+        sb.appendln('x');
+        assertTrue(sb.toString().endsWith("\n"));
+        assertTrue(sb.toString().contains("x"));
+        assertEquals("testx\n", sb.toString());
+        
+        sb.clear();
+        sb.appendln('A');
+        assertEquals("A\n", sb.toString());
+    }
+
+    @Test
+    public void testEqualsIgnoreCaseNull() {
+        final StrBuilder sb1 = new StrBuilder("test");
+        final StrBuilder sb2 = null;
+        assertFalse(sb1.equalsIgnoreCase(sb2));
+        
+        final StrBuilder sb3 = new StrBuilder("TEST");
+        assertTrue(sb1.equalsIgnoreCase(sb3));
+        
+        final StrBuilder sb4 = new StrBuilder("TeSt");
+        assertTrue(sb1.equalsIgnoreCase(sb4));
+        
+        final StrBuilder sb5 = new StrBuilder("testx");
+        assertFalse(sb1.equalsIgnoreCase(sb5));
+    }
+
+    @Test
+    public void testStrBuilderTokenizerTokenize() throws Exception {
+        // Test StrBuilderTokenizer.tokenize with null chars (to cover chars == null branch)
+        final StrBuilder sb = new StrBuilder("a b c");
+        final StrTokenizer tokenizer = sb.asTokenizer();
+        
+        // Use reflection to call tokenize with null chars
+        final java.lang.reflect.Method tokenizeMethod = tokenizer.getClass().getSuperclass()
+                .getDeclaredMethod("tokenize", char[].class, int.class, int.class);
+        tokenizeMethod.setAccessible(true);
+        
+        // Test with null chars - should use StrBuilder.this.buffer
+        final java.util.List<String> result1 = (java.util.List<String>) tokenizeMethod.invoke(tokenizer, (char[]) null, 0, 0);
+        assertNotNull("Result should not be null", result1);
+        
+        // Test with non-null chars - should use provided chars
+        final char[] chars = new char[]{'x', ' ', 'y'};
+        final java.util.List<String> result2 = (java.util.List<String>) tokenizeMethod.invoke(tokenizer, chars, 0, chars.length);
+        assertNotNull("Result should not be null", result2);
+        assertEquals(2, result2.size());
+    }
+
+    @Test
+    public void testStrBuilderTokenizerGetContent() throws Exception {
+        // Test StrBuilderTokenizer.getContent with null from super.getContent()
+        final StrBuilder sb = new StrBuilder("test content");
+        final StrTokenizer tokenizer = sb.asTokenizer();
+        
+        // First, ensure tokenizer has been used so it's initialized
+        tokenizer.hasNext();
+        
+        // Use reflection to set chars to null in the tokenizer to simulate null getContent
+        final java.lang.reflect.Field charsField = tokenizer.getClass().getSuperclass().getDeclaredField("chars");
+        charsField.setAccessible(true);
+        charsField.set(tokenizer, null);
+        
+        // Now getContent should return StrBuilder.this.toString() because super.getContent() returns null
+        final String content = tokenizer.getContent();
+        assertEquals("test content", content);
+        
+        // Test with non-null chars - should return super.getContent() (non-null branch)
+        final StrBuilder sb2 = new StrBuilder("another test");
+        final StrTokenizer tokenizer2 = sb2.asTokenizer();
+        tokenizer2.hasNext(); // Initialize
+        final String content2 = tokenizer2.getContent();
+        assertNotNull("Content should not be null", content2);
+        assertEquals("another test", content2);
+    }
+
 }

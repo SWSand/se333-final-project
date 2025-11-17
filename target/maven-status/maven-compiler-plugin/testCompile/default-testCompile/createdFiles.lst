@@ -12,6 +12,7 @@ org/apache/commons/lang3/text/StrBuilderAppendInsertTest$3.class
 org/apache/commons/lang3/text/ExtendedMessageFormatTest$UpperCaseFormat.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestObjectReference.class
 org/apache/commons/lang3/Traffic.class
+org/apache/commons/lang3/SerializationUtilsTest$3.class
 org/apache/commons/lang3/time/FastDateFormatTest$2.class
 org/apache/commons/lang3/builder/HashCodeBuilderTest$ReflectionTestCycleB.class
 org/apache/commons/lang3/mutable/MutableBooleanTest.class
@@ -30,12 +31,14 @@ org/apache/commons/lang3/builder/ToStringBuilderTest$ReflectionTestFixtureA.clas
 org/apache/commons/lang3/reflect/AAAClass$BBBClass.class
 org/apache/commons/lang3/event/EventUtilsTest$1.class
 org/apache/commons/lang3/math/NumberUtilsTest.class
+org/apache/commons/lang3/text/translate/CharSequenceTranslatorTest.class
 org/apache/commons/lang3/text/StrMatcherTest.class
 org/apache/commons/lang3/builder/ShortPrefixToStringStyleTest.class
 org/apache/commons/lang3/RangeTest.class
 org/apache/commons/lang3/time/DateUtilsRoundingTest.class
 org/apache/commons/lang3/mutable/MutableByteTest.class
 org/apache/commons/lang3/ClassUtilsTest$IF.class
+org/apache/commons/lang3/exception/CloneFailedExceptionTest.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest$9.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestSubObject.class
 org/apache/commons/lang3/CharEncodingTest.class
@@ -48,6 +51,8 @@ org/apache/commons/lang3/exception/DefaultExceptionContextTest.class
 org/apache/commons/lang3/tuple/ImmutableTripleTest.class
 org/apache/commons/lang3/text/StrTokenizerTest.class
 org/apache/commons/lang3/CharSetUtilsTest.class
+org/apache/commons/lang3/text/StrLookupTest$1.class
+org/apache/commons/lang3/text/translate/CharSequenceTranslatorTest$4.class
 org/apache/commons/lang3/text/CompositeFormatTest$1.class
 org/apache/commons/lang3/tuple/ImmutablePairTest.class
 org/apache/commons/lang3/text/ExtendedMessageFormatTest.class
@@ -69,6 +74,7 @@ org/apache/commons/lang3/StringUtilsEqualsIndexOfTest.class
 org/apache/commons/lang3/builder/ToStringBuilderTest$ReflectionTestCycleA.class
 org/apache/commons/lang3/builder/MultiLineToStringStyleTest.class
 org/apache/commons/lang3/reflect/FieldUtilsTest.class
+org/apache/commons/lang3/SerializationUtilsTest$2.class
 org/apache/commons/lang3/ClassUtilsTest$4Named.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest.class
 org/apache/commons/lang3/StringUtilsSubstringTest.class
@@ -81,6 +87,7 @@ org/apache/commons/lang3/ArrayUtilsTest$1.class
 org/apache/commons/lang3/event/EventUtilsTest.class
 org/apache/commons/lang3/mutable/MutableFloatTest.class
 org/apache/commons/lang3/reflect/testbed/StaticContainer.class
+org/apache/commons/lang3/concurrent/BackgroundInitializerTest$2.class
 org/apache/commons/lang3/exception/ExceptionUtilsTest$ExceptionWithCause.class
 org/apache/commons/lang3/reflect/TypeUtilsTest$Other.class
 org/apache/commons/lang3/reflect/testbed/PubliclyShadowedChild.class
@@ -115,6 +122,7 @@ org/apache/commons/lang3/builder/ToStringBuilderTest$SelfInstanceTwoVarsReflecti
 org/apache/commons/lang3/exception/AbstractExceptionContextTest$ObjectWithFaultyToString.class
 org/apache/commons/lang3/concurrent/TimedSemaphoreTest.class
 org/apache/commons/lang3/builder/ToStringStyleTest$1.class
+org/apache/commons/lang3/text/translate/CharSequenceTranslatorTest$1.class
 org/apache/commons/lang3/event/EventListenerSupportTest$2$1.class
 org/apache/commons/lang3/time/DateUtilsFragmentTest.class
 org/apache/commons/lang3/text/StrBuilderTest.class
@@ -151,14 +159,17 @@ org/apache/commons/lang3/tuple/TripleTest.class
 org/apache/commons/lang3/RangeTest$2.class
 org/apache/commons/lang3/ArrayUtilsTest.class
 org/apache/commons/lang3/mutable/MutableIntTest.class
+org/apache/commons/lang3/reflect/TypeUtilsTest$TypeVarClass.class
 org/apache/commons/lang3/StringUtilsTrimEmptyTest.class
 org/apache/commons/lang3/reflect/AAAClass.class
 org/apache/commons/lang3/time/DateFormatUtilsTest.class
+org/apache/commons/lang3/builder/IDKeyTest.class
 org/apache/commons/lang3/ClassUtilsTest$IC.class
 org/apache/commons/lang3/builder/CompareToBuilderTest$TestObject.class
 org/apache/commons/lang3/text/translate/LookupTranslatorTest.class
 org/apache/commons/lang3/ClassUtilsTest$9.class
 org/apache/commons/lang3/SerializationUtilsTest.class
+org/apache/commons/lang3/text/translate/CharSequenceTranslatorTest$2.class
 org/apache/commons/lang3/concurrent/TimedSemaphoreTest$TimedSemaphoreTestImpl.class
 org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest$AllTransientFixture.class
 org/apache/commons/lang3/text/FormattableUtilsTest.class
@@ -176,6 +187,7 @@ org/apache/commons/lang3/event/EventListenerSupportTest$3.class
 org/apache/commons/lang3/mutable/MutableDoubleTest.class
 org/apache/commons/lang3/ObjectUtilsTest$NonComparableCharSequence.class
 org/apache/commons/lang3/math/FractionTest.class
+org/apache/commons/lang3/concurrent/ConcurrentExceptionTest.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest$1.class
 org/apache/commons/lang3/builder/ToStringBuilderTest$SimpleReflectionStaticFieldsFixture.class
 org/apache/commons/lang3/AnnotationUtilsTest$Stooge.class
@@ -219,9 +231,12 @@ org/apache/commons/lang3/text/StrSubstitutorTest.class
 org/apache/commons/lang3/builder/HashCodeBuilderAndEqualsBuilderTest$SubTestFixture.class
 org/apache/commons/lang3/builder/ToStringStyleTest$Person.class
 org/apache/commons/lang3/BooleanUtilsTest.class
+org/apache/commons/lang3/AnnotationUtilsTest$2.class
 org/apache/commons/lang3/event/EventListenerSupportTest$4.class
 org/apache/commons/lang3/reflect/testbed/StringParameterizedChild.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest$12.class
+org/apache/commons/lang3/text/translate/CharSequenceTranslatorTest$3.class
+org/apache/commons/lang3/reflect/TypeUtilsTest$TypeVarInterface.class
 org/apache/commons/lang3/builder/ToStringStyleTest.class
 org/apache/commons/lang3/StringUtilsStartsEndsWithTest.class
 org/apache/commons/lang3/reflect/MethodUtilsTest$GrandParentObject.class
@@ -251,6 +266,7 @@ org/apache/commons/lang3/reflect/MethodUtilsTest$InheritanceBean.class
 org/apache/commons/lang3/concurrent/MultiBackgroundInitializerTest.class
 org/apache/commons/lang3/reflect/testbed/GenericParent.class
 org/apache/commons/lang3/event/EventListenerSupportTest$2.class
+org/apache/commons/lang3/AnnotationUtilsTest$3.class
 org/apache/commons/lang3/builder/HashCodeBuilderTest$TestObjectWithMultipleFields.class
 org/apache/commons/lang3/ClassUtilsTest$2.class
 org/apache/commons/lang3/builder/EqualsBuilderTest$TestBCanEqualA.class
@@ -276,6 +292,7 @@ org/apache/commons/lang3/reflect/AClass$CClass.class
 org/apache/commons/lang3/builder/ReflectionToStringBuilderConcurrencyTest$2.class
 org/apache/commons/lang3/text/ExtendedMessageFormatTest$LowerCaseFormat.class
 org/apache/commons/lang3/concurrent/TimedSemaphoreTest$SemaphoreThread.class
+org/apache/commons/lang3/exception/ExceptionUtilsTest$2.class
 org/apache/commons/lang3/ClassUtilsTest$3.class
 org/apache/commons/lang3/text/StrBuilderAppendInsertTest$5.class
 org/apache/commons/lang3/SystemUtilsTest.class

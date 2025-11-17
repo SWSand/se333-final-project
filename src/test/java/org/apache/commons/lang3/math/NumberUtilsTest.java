@@ -244,6 +244,22 @@ public class NumberUtilsTest {
         final Number bigNum = NumberUtils.createNumber("-1.1E-700F");
         assertNotNull(bigNum);
         assertEquals(BigDecimal.class, bigNum.getClass());
+        
+        // Test cases to cover isAllZeros edge cases
+        // Empty mantissa (e.g., ".0" or ".00")
+        assertEquals("createNumber with empty mantissa failed", Float.valueOf("0.0"), NumberUtils.createNumber(".0"));
+        assertEquals("createNumber with empty mantissa failed", Float.valueOf("0.0"), NumberUtils.createNumber(".00"));
+        assertEquals("createNumber with empty mantissa and exponent failed", Float.valueOf("0.0"), NumberUtils.createNumber(".0E0"));
+        assertEquals("createNumber with empty mantissa and negative exponent failed", Float.valueOf("0.0"), NumberUtils.createNumber(".0E-0"));
+        
+        // Numbers with null exponent (no exponent part)
+        assertEquals("createNumber with null exponent failed", Float.valueOf("0.0"), NumberUtils.createNumber("0.0"));
+        assertEquals("createNumber with null exponent failed", Float.valueOf("0.00"), NumberUtils.createNumber("0.00"));
+        
+        // Numbers with empty exponent string (edge case)
+        // These should trigger isAllZeros with empty string
+        assertEquals("createNumber with zero mantissa and null exp failed", Float.valueOf("0.0"), NumberUtils.createNumber("0.0F"));
+        assertEquals("createNumber with zero mantissa and null exp failed", Double.valueOf("0.0"), NumberUtils.createNumber("0.0D"));
     }
 
     @Test
@@ -1315,6 +1331,54 @@ public class NumberUtilsTest {
         // LANG-664
         val = "1.1L";
         assertFalse("isNumber(String) LANG-664 failed", NumberUtils.isNumber(val));
+        
+        // Additional edge cases to improve coverage
+        // Test hex number edge cases
+        assertFalse("isNumber with just '0x' should fail", NumberUtils.isNumber("0x"));
+        assertFalse("isNumber with '-0x' should fail", NumberUtils.isNumber("-0x"));
+        assertTrue("isNumber with valid hex should pass", NumberUtils.isNumber("0x1"));
+        assertTrue("isNumber with valid hex should pass", NumberUtils.isNumber("-0x1"));
+        assertTrue("isNumber with valid hex uppercase should pass", NumberUtils.isNumber("0XABCDEF"));
+        assertTrue("isNumber with valid hex lowercase should pass", NumberUtils.isNumber("0xabcdef"));
+        
+        // Test edge cases with trailing decimal point
+        assertTrue("isNumber with trailing decimal should pass", NumberUtils.isNumber("123."));
+        assertTrue("isNumber with trailing decimal should pass", NumberUtils.isNumber("-123."));
+        assertFalse("isNumber with just '.' should fail", NumberUtils.isNumber("."));
+        
+        // Test edge cases with type qualifiers
+        assertTrue("isNumber with 'd' qualifier should pass", NumberUtils.isNumber("123d"));
+        assertTrue("isNumber with 'D' qualifier should pass", NumberUtils.isNumber("123D"));
+        assertTrue("isNumber with 'f' qualifier should pass", NumberUtils.isNumber("123f"));
+        assertTrue("isNumber with 'F' qualifier should pass", NumberUtils.isNumber("123F"));
+        assertTrue("isNumber with 'l' qualifier should pass", NumberUtils.isNumber("123l"));
+        assertTrue("isNumber with 'L' qualifier should pass", NumberUtils.isNumber("123L"));
+        assertFalse("isNumber with 'l' qualifier and decimal should fail", NumberUtils.isNumber("123.0l"));
+        assertFalse("isNumber with 'L' qualifier and exponent should fail", NumberUtils.isNumber("123E5L"));
+        
+        // Test edge cases with exponents
+        assertFalse("isNumber ending with 'E' should fail", NumberUtils.isNumber("123E"));
+        assertFalse("isNumber ending with 'e' should fail", NumberUtils.isNumber("123e"));
+        assertTrue("isNumber with 'E+' should pass", NumberUtils.isNumber("123E+5"));
+        assertTrue("isNumber with 'E-' should pass", NumberUtils.isNumber("123E-5"));
+        assertFalse("isNumber with 'E' at end should fail", NumberUtils.isNumber("123E"));
+        
+        // Test edge cases with complex while loop condition
+        // Cases where allowSigns && !foundDigit at end
+        assertFalse("isNumber with 'E' but no digit after should fail", NumberUtils.isNumber("E"));
+        assertFalse("isNumber with 'E+' but no digit should fail", NumberUtils.isNumber("E+"));
+        assertFalse("isNumber with 'E-' but no digit should fail", NumberUtils.isNumber("E-"));
+        
+        // Test edge cases with decimal and exponent combinations
+        assertFalse("isNumber with two decimal points should fail", NumberUtils.isNumber("1.2.3"));
+        assertFalse("isNumber with decimal in exponent should fail", NumberUtils.isNumber("1E2.3"));
+        assertFalse("isNumber with two E's should fail", NumberUtils.isNumber("1E2E3"));
+        
+        // Test edge cases with signs
+        assertFalse("isNumber with sign not after E should fail", NumberUtils.isNumber("1+2"));
+        assertFalse("isNumber with sign not after E should fail", NumberUtils.isNumber("1-2"));
+        assertTrue("isNumber with sign after E should pass", NumberUtils.isNumber("1E+2"));
+        assertTrue("isNumber with sign after E should pass", NumberUtils.isNumber("1E-2"));
     }
 
     private boolean checkCreateNumber(final String val) {
@@ -1395,9 +1459,18 @@ public class NumberUtilsTest {
 
         final float[] aF = new float[] { 1.2f, Float.NaN, 3.7f, 27.0f, 42.0f, Float.NaN };
         assertTrue(Float.isNaN(NumberUtils.max(aF)));
+        assertTrue(Float.isNaN(NumberUtils.min(aF)));
 
         final float[] bF = new float[] { Float.NaN, 1.2f, Float.NaN, 3.7f, 27.0f, 42.0f, Float.NaN };
         assertTrue(Float.isNaN(NumberUtils.max(bF)));
+        assertTrue(Float.isNaN(NumberUtils.min(bF)));
+        
+        // Test NaN at different positions
+        final float[] cF = new float[] { 1.2f, 3.7f, Float.NaN };
+        assertTrue(Float.isNaN(NumberUtils.min(cF)));
+        
+        final float[] dF = new float[] { Float.NaN, 1.2f, 3.7f };
+        assertTrue(Float.isNaN(NumberUtils.min(dF)));
     }
 
 }

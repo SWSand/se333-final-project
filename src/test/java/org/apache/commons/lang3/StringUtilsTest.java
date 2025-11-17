@@ -193,6 +193,17 @@ public class StringUtilsTest {
         final String test = "This String contains a TitleCase character: \u01C8";
         final String expect = "tHIS sTRING CONTAINS A tITLEcASE CHARACTER: \u01C9";
         assertEquals(expect, WordUtils.swapCase(test));
+        
+        // Test StringUtils.swapCase with title case characters
+        // Title case characters should be converted to lowercase
+        final String titleCaseStr = "\u01C5"; // Latin capital letter D with small letter Z with caron (ǅ)
+        final String swapped = StringUtils.swapCase(titleCaseStr);
+        assertTrue("Title case character should be converted", Character.isLowerCase(swapped.charAt(0)));
+        
+        // Test mixed case string with title case
+        final String mixedWithTitle = "A\u01C5B";
+        final String swappedMixed = StringUtils.swapCase(mixedWithTitle);
+        assertEquals("Mixed case with title case", "a" + Character.toLowerCase('\u01C5') + "b", swappedMixed);
     }
 
     //-----------------------------------------------------------------------
@@ -359,6 +370,78 @@ public class StringUtilsTest {
         assertEquals("", StringUtils.join(Arrays.asList(EMPTY_ARRAY_LIST), SEPARATOR));
 
         assertEquals(TEXT_LIST, StringUtils.join(Arrays.asList(ARRAY_LIST), SEPARATOR));
+    }
+
+    /**
+     * Tests for 4-parameter join methods with startIndex and endIndex
+     * These tests cover edge cases that were previously untested
+     */
+    @Test
+    public void testJoin_WithStartEndIndex() {
+        // Test Object[] with char separator - edge cases
+        final Object[] testArray = {"a", "b", "c"};
+        assertEquals("", StringUtils.join(testArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(testArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(testArray, ',', 2, 1)); // startIndex > endIndex
+        assertEquals("a", StringUtils.join(testArray, ',', 0, 1)); // single element
+        assertEquals("a,b", StringUtils.join(testArray, ',', 0, 2)); // two elements
+        assertEquals("a,b,c", StringUtils.join(testArray, ',', 0, 3)); // all elements
+        
+        // Test primitive arrays with char separator - edge cases
+        final int[] intArray = {1, 2, 3};
+        assertEquals("", StringUtils.join(intArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(intArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(intArray, ',', 2, 1)); // startIndex > endIndex
+        assertEquals("1", StringUtils.join(intArray, ',', 0, 1)); // single element
+        assertEquals("1,2", StringUtils.join(intArray, ',', 0, 2)); // two elements
+        
+        final long[] longArray = {1L, 2L, 3L};
+        assertEquals("", StringUtils.join(longArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(longArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(longArray, ',', 2, 1)); // startIndex > endIndex
+        
+        final byte[] byteArray = {1, 2, 3};
+        assertEquals("", StringUtils.join(byteArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(byteArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(byteArray, ',', 2, 1)); // startIndex > endIndex
+        
+        final short[] shortArray = {1, 2, 3};
+        assertEquals("", StringUtils.join(shortArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(shortArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(shortArray, ',', 2, 1)); // startIndex > endIndex
+        
+        final char[] charArray = {'a', 'b', 'c'};
+        assertEquals("", StringUtils.join(charArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(charArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(charArray, ',', 2, 1)); // startIndex > endIndex
+        
+        final float[] floatArray = {1.0f, 2.0f, 3.0f};
+        assertEquals("", StringUtils.join(floatArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(floatArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(floatArray, ',', 2, 1)); // startIndex > endIndex
+        
+        final double[] doubleArray = {1.0, 2.0, 3.0};
+        assertEquals("", StringUtils.join(doubleArray, ',', 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(doubleArray, ',', 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(doubleArray, ',', 2, 1)); // startIndex > endIndex
+        
+        // Test Object[] with String separator - edge cases
+        assertEquals("", StringUtils.join(testArray, ",", 0, 0)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(testArray, ",", 1, 1)); // startIndex == endIndex
+        assertEquals("", StringUtils.join(testArray, ",", 2, 1)); // startIndex > endIndex
+        assertEquals("a", StringUtils.join(testArray, ",", 0, 1)); // single element
+        assertEquals("a,b", StringUtils.join(testArray, ",", 0, 2)); // two elements
+        
+        // Test Object[] with null elements
+        final Object[] arrayWithNulls = {null, "b", null, "d"};
+        assertEquals("", StringUtils.join(arrayWithNulls, ',', 0, 0)); // startIndex == endIndex
+        assertEquals(",b", StringUtils.join(arrayWithNulls, ',', 0, 2)); // null at start
+        assertEquals("b,", StringUtils.join(arrayWithNulls, ',', 1, 3)); // null at end
+        assertEquals(",b,,d", StringUtils.join(arrayWithNulls, ',', 0, 4)); // nulls in middle
+        assertEquals("b", StringUtils.join(arrayWithNulls, ',', 1, 2)); // single non-null element
+        assertEquals(",", StringUtils.join(arrayWithNulls, ',', 0, 2)); // null and non-null
+        assertEquals("", StringUtils.join(arrayWithNulls, ",", 0, 0)); // startIndex == endIndex with String separator
+        assertEquals(",b,,d", StringUtils.join(arrayWithNulls, ",", 0, 4)); // nulls with String separator
     }
 
     @Test
@@ -540,6 +623,52 @@ public class StringUtilsTest {
         assertEquals( splitOnStringExpectedResults.length, splitOnStringResults.length ) ;
         for ( int i = 0 ; i < splitOnStringExpectedResults.length ; i++ ) {
             assertEquals( splitOnStringExpectedResults[i], splitOnStringResults[i] ) ;
+        }
+    }
+
+    @Test
+    public void testSplitByWholeSeparatorPreserveAllTokens_StringString() {
+        assertArrayEquals( null, StringUtils.splitByWholeSeparatorPreserveAllTokens( null, "." ) ) ;
+
+        assertEquals( 0, StringUtils.splitByWholeSeparatorPreserveAllTokens( "", "." ).length ) ;
+
+        // test whitespace
+        String input = "ab   de fg" ;
+        String[] expected = new String[] { "ab", "", "", "de", "fg" } ;
+
+        String[] actual = StringUtils.splitByWholeSeparatorPreserveAllTokens( input, null ) ;
+        assertEquals( expected.length, actual.length ) ;
+        for ( int i = 0 ; i < actual.length ; i+= 1 ) {
+            assertEquals( expected[i], actual[i] );
+        }
+
+        // test delimiter singlechar
+        input = "1::2:::3::::4";
+        expected = new String[] { "1", "", "2", "", "", "3", "", "", "", "4" };
+
+        actual = StringUtils.splitByWholeSeparatorPreserveAllTokens( input, ":" ) ;
+        assertEquals( expected.length, actual.length ) ;
+        for ( int i = 0 ; i < actual.length ; i+= 1 ) {
+            assertEquals( expected[i], actual[i] );
+        }
+
+        // test delimiter multichar
+        input = "1::2:::3::::4";
+        expected = new String[] { "1", "2", ":3", "", "4" };
+
+        actual = StringUtils.splitByWholeSeparatorPreserveAllTokens( input, "::" ) ;
+        assertEquals( expected.length, actual.length ) ;
+        for ( int i = 0 ; i < actual.length ; i+= 1 ) {
+            assertEquals( expected[i], actual[i] );
+        }
+
+        // test empty separator
+        input = "ab de fg";
+        expected = new String[] { "ab", "de", "fg" };
+        actual = StringUtils.splitByWholeSeparatorPreserveAllTokens( input, "" ) ;
+        assertEquals( expected.length, actual.length ) ;
+        for ( int i = 0 ; i < actual.length ; i+= 1 ) {
+            assertEquals( expected[i], actual[i] );
         }
     }
 
@@ -1138,6 +1267,21 @@ public class StringUtilsTest {
         // Test null safety inside arrays - LANG-552
         assertEquals(StringUtils.replaceEach("aba", new String[]{"a"}, new String[]{null}),"aba");
         assertEquals(StringUtils.replaceEach("aba", new String[]{"a", "b"}, new String[]{"c", null}),"cbc");
+        
+        // Test IllegalArgumentException when array lengths don't match
+        try {
+            StringUtils.replaceEach("aba", new String[]{"a"}, new String[]{"b", "c"});
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {
+            assertTrue("Exception message should mention array lengths", ex.getMessage().contains("length"));
+        }
+        
+        try {
+            StringUtils.replaceEach("aba", new String[]{"a", "b"}, new String[]{"c"});
+            fail("Should have thrown IllegalArgumentException");
+        } catch (final IllegalArgumentException ex) {
+            assertTrue("Exception message should mention array lengths", ex.getMessage().contains("length"));
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 @mcp.tool
-def find_source_files(base_path: str = "/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase") -> List[Dict[str, str]]:
+def find_source_files(base_path: str = "/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project") -> List[Dict[str, str]]:
     """
     Find all Java source files in the project that need testing.
     Returns a list of dictionaries with file paths, class names, and package names.
@@ -52,7 +52,7 @@ def find_source_files(base_path: str = "/Users/evo/Documents/DePaul/2025/Autumn2
     return source_files
 
 @mcp.tool
-def jacoco_find_path(base_path: str = "/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase") -> str:
+def jacoco_find_path(base_path: str = "/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project") -> str:
     """
     Find the JaCoCo XML report path after running tests.
     
@@ -292,6 +292,157 @@ def get_uncovered_methods(class_info: Dict, coverage_info: Dict) -> List[Dict]:
             uncovered_methods.append(method)
     
     return uncovered_methods
+
+@mcp.tool
+def search_codebase(query: str, base_path: str = "/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project", file_pattern: str = "*.java") -> List[Dict[str, str]]:
+    """
+    Search for text patterns in Java source files. Useful for finding method usages, 
+    class references, or understanding code relationships.
+    
+    Args:
+        query: Text pattern to search for (case-sensitive)
+        base_path: Root directory of the project
+        file_pattern: File pattern to search (default: *.java)
+    
+    Returns:
+        List of matches with file path, line number, and context
+    """
+    import fnmatch
+    matches = []
+    src_main_java = os.path.join(base_path, "src", "main", "java")
+    src_test_java = os.path.join(base_path, "src", "test", "java")
+    
+    search_dirs = []
+    if os.path.exists(src_main_java):
+        search_dirs.append(src_main_java)
+    if os.path.exists(src_test_java):
+        search_dirs.append(src_test_java)
+    
+    for search_dir in search_dirs:
+        for root, dirs, files in os.walk(search_dir):
+            for file in files:
+                if fnmatch.fnmatch(file, file_pattern):
+                    file_path = os.path.join(root, file)
+                    try:
+                        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                            for line_num, line in enumerate(f, 1):
+                                if query in line:
+                                    matches.append({
+                                        "file_path": file_path,
+                                        "line_number": line_num,
+                                        "line_content": line.strip(),
+                                        "relative_path": os.path.relpath(file_path, base_path)
+                                    })
+                    except Exception as e:
+                        continue
+    
+    return matches
+
+@mcp.tool
+def get_class_coverage_summary(jacoco_xml_path: str, sort_by: str = "coverage") -> List[Dict]:
+    """
+    Get a summary of all classes with their coverage percentages, sorted by coverage.
+    Useful for identifying which classes need the most work.
+    
+    Args:
+        jacoco_xml_path: Path to the jacoco.xml file
+        sort_by: Sort order - "coverage" (ascending, lowest first) or "name" (alphabetical)
+    
+    Returns:
+        List of classes with coverage information
+    """
+    if not os.path.exists(jacoco_xml_path):
+        return [{"error": f"JaCoCo XML not found at {jacoco_xml_path}"}]
+    
+    try:
+        tree = ET.parse(jacoco_xml_path)
+        root = tree.getroot()
+        
+        class_summaries = []
+        
+        for package in root.findall('.//package'):
+            package_name = package.get('name', '').replace('/', '.')
+            
+            for cls in package.findall('class'):
+                class_name = cls.get('name', '').split('/')[-1]
+                source_file = cls.get('sourcefilename', '')
+                
+                class_total = 0
+                class_covered = 0
+                
+                # Calculate coverage
+                for line in cls.findall('.//line'):
+                    missed_instructions = int(line.get('mi', 0))
+                    covered_instr = int(line.get('ci', 0))
+                    class_total += missed_instructions + covered_instr
+                    class_covered += covered_instr
+                
+                coverage_pct = (class_covered / class_total * 100) if class_total > 0 else 100.0
+                
+                class_summaries.append({
+                    "package": package_name,
+                    "class": class_name,
+                    "source_file": source_file,
+                    "coverage_percentage": round(coverage_pct, 2),
+                    "covered_instructions": class_covered,
+                    "total_instructions": class_total,
+                    "missed_instructions": class_total - class_covered
+                })
+        
+        # Sort
+        if sort_by == "coverage":
+            class_summaries.sort(key=lambda x: x["coverage_percentage"])
+        elif sort_by == "name":
+            class_summaries.sort(key=lambda x: (x["package"], x["class"]))
+        
+        return class_summaries
+    
+    except Exception as e:
+        return [{"error": f"Error parsing JaCoCo XML: {str(e)}"}]
+
+@mcp.tool
+def read_java_file(file_path: str, start_line: int = 1, end_line: int = None) -> Dict:
+    """
+    Read a Java source file or specific lines from it. Useful for understanding
+    class structure before writing tests.
+    
+    Args:
+        file_path: Path to the Java file
+        start_line: Starting line number (1-indexed)
+        end_line: Ending line number (None for entire file)
+    
+    Returns:
+        Dictionary with file content and metadata
+    """
+    if not os.path.exists(file_path):
+        return {"error": f"File not found: {file_path}"}
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            lines = f.readlines()
+        
+        total_lines = len(lines)
+        
+        if end_line is None:
+            end_line = total_lines
+        
+        # Adjust for 1-indexed
+        start_idx = max(0, start_line - 1)
+        end_idx = min(total_lines, end_line)
+        
+        selected_lines = lines[start_idx:end_idx]
+        
+        return {
+            "file_path": file_path,
+            "total_lines": total_lines,
+            "start_line": start_line,
+            "end_line": end_line,
+            "content": ''.join(selected_lines),
+            "line_count": len(selected_lines)
+        }
+    
+    except Exception as e:
+        return {"error": f"Error reading file: {str(e)}"}
 
 if __name__ == "__main__":
     mcp.run(transport="sse")

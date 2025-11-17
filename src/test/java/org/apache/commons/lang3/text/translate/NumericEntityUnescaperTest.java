@@ -18,7 +18,11 @@
 package org.apache.commons.lang3.text.translate;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.lang.reflect.Field;
 
 import org.junit.Test;
 
@@ -75,6 +79,42 @@ public class NumericEntityUnescaperTest  {
             fail("IllegalArgumentException expected");
         } catch(final IllegalArgumentException iae) {
             // expected
+        }
+    }
+
+    @Test
+    public void testIsSet() {
+        // Test with semiColonOptional option
+        NumericEntityUnescaper neu = new NumericEntityUnescaper(NumericEntityUnescaper.OPTION.semiColonOptional);
+        assertTrue("semiColonOptional should be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonOptional));
+        assertFalse("semiColonRequired should not be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonRequired));
+        assertFalse("errorIfNoSemiColon should not be set", neu.isSet(NumericEntityUnescaper.OPTION.errorIfNoSemiColon));
+
+        // Test with errorIfNoSemiColon option
+        neu = new NumericEntityUnescaper(NumericEntityUnescaper.OPTION.errorIfNoSemiColon);
+        assertTrue("errorIfNoSemiColon should be set", neu.isSet(NumericEntityUnescaper.OPTION.errorIfNoSemiColon));
+        assertFalse("semiColonOptional should not be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonOptional));
+
+        // Test with default constructor (semiColonRequired)
+        neu = new NumericEntityUnescaper();
+        assertTrue("semiColonRequired should be set by default", neu.isSet(NumericEntityUnescaper.OPTION.semiColonRequired));
+        assertFalse("semiColonOptional should not be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonOptional));
+
+        // Test with multiple options
+        neu = new NumericEntityUnescaper(NumericEntityUnescaper.OPTION.semiColonOptional, NumericEntityUnescaper.OPTION.errorIfNoSemiColon);
+        assertTrue("semiColonOptional should be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonOptional));
+        assertTrue("errorIfNoSemiColon should be set", neu.isSet(NumericEntityUnescaper.OPTION.errorIfNoSemiColon));
+        assertFalse("semiColonRequired should not be set", neu.isSet(NumericEntityUnescaper.OPTION.semiColonRequired));
+
+        // Test null options case using reflection to cover the null branch
+        neu = new NumericEntityUnescaper();
+        try {
+            Field optionsField = NumericEntityUnescaper.class.getDeclaredField("options");
+            optionsField.setAccessible(true);
+            optionsField.set(neu, null);
+            assertFalse("isSet should return false when options is null", neu.isSet(NumericEntityUnescaper.OPTION.semiColonRequired));
+        } catch (Exception e) {
+            fail("Failed to test null options case: " + e.getMessage());
         }
     }
 

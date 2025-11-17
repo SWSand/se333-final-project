@@ -399,4 +399,20 @@ public class CharRangeTest  {
         assertEquals(range, SerializationUtils.clone(range)); 
     }
 
+    @Test
+    public void testIteratorRemove() {
+        final CharRange range = CharRange.is('a');
+        final Iterator<Character> iterator = range.iterator();
+        assertTrue(iterator.hasNext());
+        iterator.next();
+        
+        // Test that remove() throws UnsupportedOperationException
+        try {
+            iterator.remove();
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (final UnsupportedOperationException e) {
+            // Expected
+        }
+    }
+
 }

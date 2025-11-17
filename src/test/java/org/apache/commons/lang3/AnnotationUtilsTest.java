@@ -24,7 +24,9 @@ import static org.apache.commons.lang3.AnnotationUtilsTest.Stooge.MOE;
 import static org.apache.commons.lang3.AnnotationUtilsTest.Stooge.SHEMP;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -503,6 +505,105 @@ public class AnnotationUtilsTest {
         assertTrue(toString.contains("expected=class org.junit.Test$None"));
         assertTrue(toString.contains("timeout=666000"));
         assertTrue(toString.contains(", "));
+    }
+
+    // Tests for AnnotationUtils methods with missed instructions
+    @Test
+    public void testHashCode_EdgeCases() throws Exception {
+        // Test hashCode with arrays - 21 missed (65.6% coverage)
+        final TestAnnotation testAnnotation1 = field1.getAnnotation(TestAnnotation.class);
+        final int hash1 = AnnotationUtils.hashCode(testAnnotation1);
+        assertTrue("Hash code should be non-zero", hash1 != 0);
+        
+        // Test hashCode with nested annotations
+        final NestAnnotation nestAnnotation = field4.getAnnotation(NestAnnotation.class);
+        final int hash2 = AnnotationUtils.hashCode(nestAnnotation);
+        assertTrue("Hash code should be non-zero", hash2 != 0);
+        
+        // Test hashCode with various array types
+        final TestAnnotation testAnnotation3 = field3.getAnnotation(TestAnnotation.class);
+        final int hash3 = AnnotationUtils.hashCode(testAnnotation3);
+        assertTrue("Hash code should be non-zero", hash3 != 0);
+        
+        // Test hashCode with annotations that have array members
+        // This exercises the arrayMemberHash code paths
+        final TestAnnotation testAnnotation2 = field2.getAnnotation(TestAnnotation.class);
+        final int hash4 = AnnotationUtils.hashCode(testAnnotation2);
+        assertTrue("Hash code should be non-zero", hash4 != 0);
+    }
+
+    @Test
+    public void testToString_EdgeCases() throws Exception {
+        // Test toString with methods that have parameters (should be skipped) - 10 missed (80.8% coverage)
+        // Create a custom annotation proxy that has methods with parameters
+        final InvocationHandler handler = new InvocationHandler() {
+            @Override
+            public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+                if ("annotationType".equals(method.getName())) {
+                    return Test.class;
+                }
+                if ("toString".equals(method.getName())) {
+                    return AnnotationUtils.toString((java.lang.annotation.Annotation) proxy);
+                }
+                // Return a method that has parameters (should be skipped in toString)
+                if ("getDeclaredMethods".equals(method.getName())) {
+                    final Method[] methods = Test.class.getDeclaredMethods();
+                    // Add a method with parameters to test the skip logic
+                    return methods;
+                }
+                return method.invoke(Test.class, args);
+            }
+        };
+        
+        final java.lang.annotation.Annotation proxy = (java.lang.annotation.Annotation) 
+            java.lang.reflect.Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(),
+                new Class[] { java.lang.annotation.Annotation.class },
+                handler);
+        
+        // This should handle methods with parameters gracefully
+        final String result = AnnotationUtils.toString(proxy);
+        assertNotNull("Result should not be null", result);
+    }
+
+    @Test
+    public void testToString_WithException() throws Exception {
+        // Test toString with RuntimeException from method invocation
+        final InvocationHandler handler = new InvocationHandler() {
+            @Override
+            public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+                if ("annotationType".equals(method.getName())) {
+                    return Test.class;
+                }
+                if ("getDeclaredMethods".equals(method.getName())) {
+                    return Test.class.getDeclaredMethods();
+                }
+                if ("getName".equals(method.getName())) {
+                    return "testMethod";
+                }
+                if ("getParameterTypes".equals(method.getName())) {
+                    return new Class[0];
+                }
+                if ("invoke".equals(method.getName())) {
+                    throw new RuntimeException("Test exception");
+                }
+                return null;
+            }
+        };
+        
+        final java.lang.annotation.Annotation proxy = (java.lang.annotation.Annotation) 
+            java.lang.reflect.Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(),
+                new Class[] { java.lang.annotation.Annotation.class },
+                handler);
+        
+        try {
+            AnnotationUtils.toString(proxy);
+            // Should throw RuntimeException
+            fail("Should throw RuntimeException");
+        } catch (final RuntimeException e) {
+            assertEquals("Test exception", e.getMessage());
+        }
     }
 
 }

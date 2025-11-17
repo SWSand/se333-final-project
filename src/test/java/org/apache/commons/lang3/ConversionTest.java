@@ -20,6 +20,7 @@ package org.apache.commons.lang3;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.UUID;
@@ -1820,5 +1821,438 @@ public class ConversionTest {
                 0, 0, (byte)0x88, (byte)0x99, (byte)0xaa, (byte)0xbb, (byte)0xcc, (byte)0xdd,
                 (byte)0xee, (byte)0xff, (byte)0x00, (byte)0x11, (byte)0x22, (byte)0x33,
                 (byte)0x44, (byte)0x55, (byte)0x66, (byte)0x77}, 2));
+    }
+
+    // Tests for Conversion methods with missed instructions - edge cases
+    @Test
+    public void testBinaryToHexDigitMsb0_4bits_EdgeCases() {
+        // Test with array length > 8
+        try {
+            Conversion.binaryToHexDigitMsb0_4bits(new boolean[9], 0);
+            fail("Should throw IllegalArgumentException for array length > 8");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with src.length - srcPos < 4
+        try {
+            Conversion.binaryToHexDigitMsb0_4bits(new boolean[3], 0);
+            fail("Should throw IllegalArgumentException for insufficient length");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with srcPos that makes length insufficient
+        try {
+            Conversion.binaryToHexDigitMsb0_4bits(new boolean[5], 2);
+            fail("Should throw IllegalArgumentException for insufficient length with srcPos");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortToBinary_EdgeCases() {
+        // Test with nBools-1+srcPos >= 16
+        try {
+            Conversion.shortToBinary((short)0x1234, 0, new boolean[20], 0, 17);
+            fail("Should throw IllegalArgumentException for nBools-1+srcPos >= 16");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with srcPos that makes it exceed 16
+        try {
+            Conversion.shortToBinary((short)0x1234, 10, new boolean[20], 0, 7);
+            fail("Should throw IllegalArgumentException for exceeding 16 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testIntArrayToLong_EdgeCases() {
+        // Test with (nInts-1)*32+dstPos >= 64
+        try {
+            Conversion.intArrayToLong(new int[3], 0, 0L, 0, 3);
+            fail("Should throw IllegalArgumentException for exceeding 64 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with dstPos that makes it exceed 64
+        try {
+            Conversion.intArrayToLong(new int[2], 0, 0L, 33, 2);
+            fail("Should throw IllegalArgumentException for exceeding 64 bits with dstPos");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortArrayToLong_EdgeCases() {
+        // Test with (nShorts-1)*16+dstPos >= 64
+        try {
+            Conversion.shortArrayToLong(new short[5], 0, 0L, 0, 5);
+            fail("Should throw IllegalArgumentException for exceeding 64 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortArrayToInt_EdgeCases() {
+        // Test with (nShorts-1)*16+dstPos >= 32
+        try {
+            Conversion.shortArrayToInt(new short[3], 0, 0, 0, 3);
+            fail("Should throw IllegalArgumentException for exceeding 32 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteArrayToLong_EdgeCases() {
+        // Test with (nBytes-1)*8+dstPos >= 64
+        try {
+            Conversion.byteArrayToLong(new byte[9], 0, 0L, 0, 9);
+            fail("Should throw IllegalArgumentException for exceeding 64 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteArrayToInt_EdgeCases() {
+        // Test with (nBytes-1)*8+dstPos >= 32
+        try {
+            Conversion.byteArrayToInt(new byte[5], 0, 0, 0, 5);
+            fail("Should throw IllegalArgumentException for exceeding 32 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteArrayToShort_EdgeCases() {
+        // Test with (nBytes-1)*8+dstPos >= 16
+        try {
+            Conversion.byteArrayToShort(new byte[3], 0, (short)0, 0, 3);
+            fail("Should throw IllegalArgumentException for exceeding 16 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testBinaryToLong_EdgeCases() {
+        // Test with nBools-1+dstPos >= 64
+        try {
+            Conversion.binaryToLong(new boolean[65], 0, 0L, 0, 65);
+            fail("Should throw IllegalArgumentException for exceeding 64 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testBinaryToInt_EdgeCases() {
+        // Test with nBools-1+dstPos >= 32
+        try {
+            Conversion.binaryToInt(new boolean[33], 0, 0, 0, 33);
+            fail("Should throw IllegalArgumentException for exceeding 32 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testBinaryToShort_EdgeCases() {
+        // Test with nBools-1+dstPos >= 16
+        try {
+            Conversion.binaryToShort(new boolean[17], 0, (short)0, 0, 17);
+            fail("Should throw IllegalArgumentException for exceeding 16 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testBinaryToByte_EdgeCases() {
+        // Test with nBools-1+dstPos >= 8
+        try {
+            Conversion.binaryToByte(new boolean[9], 0, (byte)0, 0, 9);
+            fail("Should throw IllegalArgumentException for exceeding 8 bits");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testUuidToByteArray_EdgeCases() {
+        // Test with nBytes > 16
+        try {
+            Conversion.uuidToByteArray(new UUID(0L, 0L), new byte[20], 0, 17);
+            fail("Should throw IllegalArgumentException for nBytes > 16");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteArrayToUuid_EdgeCases() {
+        // Test with insufficient bytes
+        try {
+            Conversion.byteArrayToUuid(new byte[15], 0);
+            fail("Should throw IllegalArgumentException for insufficient bytes");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with srcPos that makes insufficient bytes
+        try {
+            Conversion.byteArrayToUuid(new byte[20], 5);
+            fail("Should throw IllegalArgumentException for insufficient bytes with srcPos");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    // Tests for Conversion methods with missed instructions - IllegalArgumentException paths
+    @Test
+    public void testLongToHex_IllegalArgumentException() {
+        // Test with (nHexs-1)*4+srcPos >= 64
+        try {
+            Conversion.longToHex(0L, 0, "", 0, 17); // 16*4+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        
+        // Test with srcPos that makes it exceed 64
+        try {
+            Conversion.longToHex(0L, 1, "", 0, 16); // 15*4+1 = 61, but let's try 17*4+0 = 68
+            Conversion.longToHex(0L, 60, "", 0, 2); // 1*4+60 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testIntToHex_IllegalArgumentException() {
+        // Test with (nHexs-1)*4+srcPos >= 32
+        try {
+            Conversion.intToHex(0, 0, "", 0, 9); // 8*4+0 = 32
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortToHex_IllegalArgumentException() {
+        // Test with (nHexs-1)*4+srcPos >= 16
+        try {
+            Conversion.shortToHex((short)0, 0, "", 0, 5); // 4*4+0 = 16
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteToHex_IllegalArgumentException() {
+        // Test with (nHexs-1)*4+srcPos >= 8
+        try {
+            Conversion.byteToHex((byte)0, 0, "", 0, 3); // 2*4+0 = 8
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testHexToLong_IllegalArgumentException() {
+        // Test with (nHex-1)*4+dstPos >= 64
+        try {
+            Conversion.hexToLong("0123456789ABCDEF0", 0, 0L, 0, 17); // 16*4+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testHexToInt_IllegalArgumentException() {
+        // Test with (nHex-1)*4+dstPos >= 32
+        try {
+            Conversion.hexToInt("012345678", 0, 0, 0, 9); // 8*4+0 = 32
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testHexToShort_IllegalArgumentException() {
+        // Test with (nHex-1)*4+dstPos >= 16
+        try {
+            Conversion.hexToShort("01234", 0, (short)0, 0, 5); // 4*4+0 = 16
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testHexToByte_IllegalArgumentException() {
+        // Test with (nHex-1)*4+dstPos >= 8
+        try {
+            Conversion.hexToByte("012", 0, (byte)0, 0, 3); // 2*4+0 = 8
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testLongToBinary_IllegalArgumentException() {
+        // Test with nBools-1+srcPos >= 64
+        try {
+            Conversion.longToBinary(0L, 0, new boolean[65], 0, 65); // 64+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testIntToBinary_IllegalArgumentException() {
+        // Test with nBools-1+srcPos >= 32
+        try {
+            Conversion.intToBinary(0, 0, new boolean[33], 0, 33); // 32+0 = 32
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testByteToBinary_IllegalArgumentException() {
+        // Test with nBools-1+srcPos >= 8
+        try {
+            Conversion.byteToBinary((byte)0, 0, new boolean[9], 0, 9); // 8+0 = 8
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testLongToShortArray_IllegalArgumentException() {
+        // Test with (nShorts-1)*16+srcPos >= 64
+        try {
+            Conversion.longToShortArray(0L, 0, new short[5], 0, 5); // 4*16+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testLongToByteArray_IllegalArgumentException() {
+        // Test with (nBytes-1)*8+srcPos >= 64
+        try {
+            Conversion.longToByteArray(0L, 0, new byte[9], 0, 9); // 8*8+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testLongToIntArray_IllegalArgumentException() {
+        // Test with (nInts-1)*32+srcPos >= 64
+        try {
+            Conversion.longToIntArray(0L, 0, new int[3], 0, 3); // 2*32+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testIntToShortArray_IllegalArgumentException() {
+        // Test with (nShorts-1)*16+srcPos >= 32
+        try {
+            Conversion.intToShortArray(0, 0, new short[3], 0, 3); // 2*16+0 = 32
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testIntToByteArray_IllegalArgumentException() {
+        // Test with (nBytes-1)*8+srcPos >= 32
+        try {
+            Conversion.intToByteArray(0, 0, new byte[5], 0, 5); // 4*8+0 = 32
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortToByteArray_IllegalArgumentException() {
+        // Test with (nBytes-1)*8+srcPos >= 16
+        try {
+            Conversion.shortToByteArray((short)0, 0, new byte[3], 0, 3); // 2*8+0 = 16
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testShortArrayToLong_IllegalArgumentException() {
+        // Test with (nShorts-1)*16+dstPos >= 64
+        try {
+            Conversion.shortArrayToLong(new short[5], 0, 0L, 0, 5); // 4*16+0 = 64
+            fail("Should throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testLongToHex_SetCharAt() {
+        // Test the setCharAt path (when dstPos + i != append)
+        // This happens when dstInit already has characters at dstPos
+        final String result = Conversion.longToHex(0x1234L, 0, "ABCD", 0, 2);
+        assertNotNull("Should return result", result);
+        // The first 2 characters should be replaced
+    }
+
+    @Test
+    public void testIntToHex_SetCharAt() {
+        // Test the setCharAt path
+        final String result = Conversion.intToHex(0x12, 0, "ABCD", 0, 2);
+        assertNotNull("Should return result", result);
+    }
+
+    @Test
+    public void testShortToHex_SetCharAt() {
+        // Test the setCharAt path
+        final String result = Conversion.shortToHex((short)0x12, 0, "ABCD", 0, 2);
+        assertNotNull("Should return result", result);
+    }
+
+    @Test
+    public void testByteToHex_SetCharAt() {
+        // Test the setCharAt path
+        final String result = Conversion.byteToHex((byte)0x12, 0, "ABCD", 0, 2);
+        assertNotNull("Should return result", result);
     }
 }

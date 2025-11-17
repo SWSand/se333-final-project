@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectStreamClass;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -414,6 +415,90 @@ public class SerializationUtilsTest {
             final Class<?> clone = SerializationUtils.clone(primitiveType);
             assertEquals(primitiveType, clone);
         }
+    }
+
+    @Test
+    public void testClassLoaderAwareObjectInputStreamResolveClass() throws Exception {
+        // Test ClassLoaderAwareObjectInputStream.resolveClass with various scenarios
+        // Use reflection to access the inner class
+        final Class<?>[] innerClasses = SerializationUtils.class.getDeclaredClasses();
+        Class<?> classLoaderAwareClass = null;
+        for (final Class<?> innerClass : innerClasses) {
+            if ("ClassLoaderAwareObjectInputStream".equals(innerClass.getSimpleName())) {
+                classLoaderAwareClass = innerClass;
+                break;
+            }
+        }
+        assertNotNull("ClassLoaderAwareObjectInputStream class should exist", classLoaderAwareClass);
+        
+        // Test with primitive type - should use primitiveTypes map
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(int.class);
+        oos.close();
+        
+        final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        final java.lang.reflect.Constructor<?> constructor = classLoaderAwareClass.getDeclaredConstructor(
+                InputStream.class, ClassLoader.class);
+        constructor.setAccessible(true);
+        final ObjectInputStream ois = (ObjectInputStream) constructor.newInstance(bais, Thread.currentThread().getContextClassLoader());
+        
+        // Use reflection to call resolveClass
+        final java.lang.reflect.Method resolveClassMethod = classLoaderAwareClass.getDeclaredMethod(
+                "resolveClass", ObjectStreamClass.class);
+        resolveClassMethod.setAccessible(true);
+        
+        // Get ObjectStreamClass for int
+        final ObjectStreamClass intDesc = ObjectStreamClass.lookup(int.class);
+        final Class<?> resolvedInt = (Class<?>) resolveClassMethod.invoke(ois, intDesc);
+        assertEquals(int.class, resolvedInt);
+        
+        // Test with a class that can be found by context classLoader but not by provided classLoader
+        // Create a custom classLoader that can't find String class
+        final ClassLoader customLoader = new ClassLoader() {
+            @Override
+            public Class<?> loadClass(String name) throws ClassNotFoundException {
+                if ("java.lang.String".equals(name)) {
+                    throw new ClassNotFoundException("Custom loader can't find String");
+                }
+                return super.loadClass(name);
+            }
+        };
+        
+        final ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+        final ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
+        oos2.writeObject("test");
+        oos2.close();
+        
+        final ByteArrayInputStream bais2 = new ByteArrayInputStream(baos2.toByteArray());
+        final ObjectInputStream ois2 = (ObjectInputStream) constructor.newInstance(bais2, customLoader);
+        
+        // Get ObjectStreamClass for String
+        final ObjectStreamClass stringDesc = ObjectStreamClass.lookup(String.class);
+        // Should fall back to context classLoader and find String
+        final Class<?> resolvedString = (Class<?>) resolveClassMethod.invoke(ois2, stringDesc);
+        assertEquals(String.class, resolvedString);
+        
+        // Test with a class that can't be found by either classLoader but is a primitive
+        final ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
+        final ObjectOutputStream oos3 = new ObjectOutputStream(baos3);
+        oos3.writeObject(byte.class);
+        oos3.close();
+        
+        final ByteArrayInputStream bais3 = new ByteArrayInputStream(baos3.toByteArray());
+        final ClassLoader nullLoader = new ClassLoader() {
+            @Override
+            public Class<?> loadClass(String name) throws ClassNotFoundException {
+                throw new ClassNotFoundException("Can't find: " + name);
+            }
+        };
+        final ObjectInputStream ois3 = (ObjectInputStream) constructor.newInstance(bais3, nullLoader);
+        
+        // Get ObjectStreamClass for byte
+        final ObjectStreamClass byteDesc = ObjectStreamClass.lookup(byte.class);
+        // Should use primitiveTypes map
+        final Class<?> resolvedByte = (Class<?>) resolveClassMethod.invoke(ois3, byteDesc);
+        assertEquals(byte.class, resolvedByte);
     }
 
 }

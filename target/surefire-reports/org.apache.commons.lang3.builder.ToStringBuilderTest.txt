@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.builder.ToStringBuilderTest
 -------------------------------------------------------------------------------
-Tests run: 79, Failures: 31, Errors: 5, Skipped: 0, Time elapsed: 0.01 sec <<< FAILURE!
-test_setUpToClass_valid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< ERROR!
+Tests run: 112, Failures: 55, Errors: 11, Skipped: 0, Time elapsed: 0.02 sec <<< FAILURE!
+test_setUpToClass_valid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
@@ -11,15 +11,15 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field static final
 	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.test_setUpToClass_valid(ToStringBuilderTest.java:1012)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.test_setUpToClass_valid(ToStringBuilderTest.java:1014)
 
-test_setUpToClass_valid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+test_setUpToClass_valid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionBoolean(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field private final boolean java.lang.Boolean.value accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
@@ -33,191 +33,289 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field private fina
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:283)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:113)
 	at org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString(ToStringBuilder.java:152)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionBoolean(ToStringBuilderTest.java:114)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionBoolean(ToStringBuilderTest.java:116)
 
 testReflectionBoolean(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testObjectArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testObjectBuild(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testObjectCycle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testReflectionHierarchy(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+testAppendIntArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionHierarchy(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendShortArrayWithFieldNameAndFullDetail(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testSelfInstanceTwoVarsReflectionObjectCycle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testAppendToStringUsingMultiLineStyle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testShortArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendFloatArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testBooleanArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendIntArrayWithFieldNameAndFullDetail(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderAppendFieldsIn(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make field private static final long java.lang.Number.serialVersionUID accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderAppendFieldsIn(ToStringBuilderTest.java:1302)
+
+testReflectionToStringBuilderAppendFieldsIn(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null, 5=null} expected null, but was:<{true=null, 5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendObjectArrayWithFieldNameAndFullDetail(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testFloatArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendShortArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testInt(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testByteArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+testByteArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendDoubleArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionArrayCycle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionLongArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testBlank(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testFloat(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testShort(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+testShort(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionArrayArrayCycle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testByte(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testChar(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testLong(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionFloatArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendAsObjectToString(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendDoubleArrayWithFieldNameAndFullDetail(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testLongArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderToStringWithStyleAndOutputTransientsAndUpToClass(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 test_setUpToClass_invalid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.Exception: Unexpected exception, expected<java.lang.IllegalArgumentException> but was<java.lang.reflect.InaccessibleObjectException>
@@ -228,33 +326,65 @@ java.lang.Exception: Unexpected exception, expected<java.lang.IllegalArgumentExc
 	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.test_setUpToClass_invalid(ToStringBuilderTest.java:1025)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.test_setUpToClass_invalid(ToStringBuilderTest.java:1027)
 
 test_setUpToClass_invalid(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null, 5=null} expected null, but was:<{true=null, 5=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendLongArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendCharArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testAppendFloatArrayWithFieldNameAndFullDetail(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testBoolean(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testReflectionDoubleArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+testAppendByteArrayWithFieldName(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testReflectionInteger(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< ERROR!
+testReflectionDoubleArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {true=null} expected null, but was:<{true=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionInteger(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
@@ -266,17 +396,83 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field static final
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:283)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:113)
 	at org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString(ToStringBuilder.java:152)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionInteger(ToStringBuilderTest.java:95)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionInteger(ToStringBuilderTest.java:97)
 
 testReflectionInteger(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
-testReflectionCharacter(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+testReflectionToStringBuilderGetExcludeFieldNames(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "[Ljava.lang.String;.clone()" because "this.excludeFieldNames" is null
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.getExcludeFieldNames(ReflectionToStringBuilder.java:538)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderGetExcludeFieldNames(ToStringBuilderTest.java:1294)
+
+testReflectionToStringBuilderGetExcludeFieldNames(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionStatics(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionLongArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionhortArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testConstructorEx1(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderToStringWithStyle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:283)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:145)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderToStringWithStyle(ToStringBuilderTest.java:1269)
+
+testReflectionToStringBuilderToStringWithStyle(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null} expected null, but was:<{5=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionCharacter(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.reflect.InaccessibleObjectException: Unable to make field static final int java.lang.Character.ERROR accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
 	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
 	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
@@ -288,29 +484,86 @@ java.lang.reflect.InaccessibleObjectException: Unable to make field static final
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:283)
 	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:113)
 	at org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString(ToStringBuilder.java:152)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionCharacter(ToStringBuilderTest.java:104)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionCharacter(ToStringBuilderTest.java:106)
 
-testReflectionCharacter(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+testReflectionCharacter(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0.001 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {A=null} expected null, but was:<{A=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderConstructor1(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderConstructor1(ToStringBuilderTest.java:1249)
+
+testReflectionToStringBuilderConstructor1(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null, A=null} expected null, but was:<{5=null, A=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderConstructor2(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderConstructor2(ToStringBuilderTest.java:1256)
+
+testReflectionToStringBuilderConstructor2(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null, A=null} expected null, but was:<{5=null, A=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
+
+testReflectionToStringBuilderConstructor3(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< ERROR!
+java.lang.reflect.InaccessibleObjectException: Unable to make field static final byte[] java.lang.Integer.digits accessible: module java.base does not "opens java.lang" to unnamed module @28d25987
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:353)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:329)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:277)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:179)
+	at java.base/java.lang.reflect.AccessibleObject.setAccessible(AccessibleObject.java:107)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.appendFieldsIn(ReflectionToStringBuilder.java:514)
+	at org.apache.commons.lang3.builder.ReflectionToStringBuilder.toString(ReflectionToStringBuilder.java:683)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.testReflectionToStringBuilderConstructor3(ToStringBuilderTest.java:1263)
+
+testReflectionToStringBuilderConstructor3(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.AssertionError: Expected null, actual: {5=null, A=null} expected null, but was:<{5=null, A=null}>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:664)
+	at org.junit.Assert.assertNull(Assert.java:646)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testDoubleArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {A=null} expected null, but was:<{A=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 
 testReflectionFloatArrayArray(org.apache.commons.lang3.builder.ToStringBuilderTest)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Expected null, actual: {A=null} expected null, but was:<{A=null}>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotNull(Assert.java:664)
 	at org.junit.Assert.assertNull(Assert.java:646)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:609)
-	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:46)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.validateNullToStringStyleRegistry(ToStringBuilderTest.java:611)
+	at org.apache.commons.lang3.builder.ToStringBuilderTest.after(ToStringBuilderTest.java:48)
 

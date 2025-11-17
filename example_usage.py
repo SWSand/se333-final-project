@@ -10,7 +10,7 @@ import sys
 import os
 
 # Add the codebase directory to path so we can import server
-sys.path.insert(0, '/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase')
+sys.path.insert(0, '/SE333-final-project/')
 
 from server import (
     find_source_files,
@@ -23,7 +23,7 @@ from server import (
 )
 
 def main():
-    workspace = "/Users/evo/Documents/DePaul/2025/Autumn25/SE333/final_project/codebase"
+    workspace = "/SE333-final-project/"
     
     print("=" * 80)
     print("TESTING AGENT - MCP TOOLS DEMONSTRATION")

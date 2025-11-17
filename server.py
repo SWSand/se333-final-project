@@ -692,9 +692,10 @@ def git_commit(message: str,
         # Construct final message
         final_message = message + coverage_info
         
-        # Commit
+        # Commit with MCP/Agent author information
         commit_result = subprocess.run(
-            ["git", "commit", "-m", final_message],
+            ["git", "commit", "-m", final_message, 
+             "--author", "Jose Sandoval - MCP/Agent <noreply@mcp-agent>"],
             capture_output=True,
             text=True,
             timeout=10

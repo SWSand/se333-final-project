@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: org.apache.commons.lang3.text.StrBuilderTest
 -------------------------------------------------------------------------------
-Tests run: 86, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.005 sec <<< FAILURE!
+Tests run: 86, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.004 sec <<< FAILURE!
 testEqualsIgnoreCaseNull(org.apache.commons.lang3.text.StrBuilderTest)  Time elapsed: 0.001 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot read field "size" because "other" is null
 	at org.apache.commons.lang3.text.StrBuilder.equalsIgnoreCase(StrBuilder.java:2650)

@@ -58,7 +58,7 @@ You are an automated testing agent. Your goal is to achieve 100% code coverage f
    - Mock dependencies if needed using EasyMock (available in project)
 
 4. **Run Tests**
-   - Execute `mvn clean test` to run all tests
+   - Execute `mvn -f codebase/pom.xml clean test` to run all tests
    - If compilation errors occur, fix the test code
    - If test failures occur, debug and fix the tests
 

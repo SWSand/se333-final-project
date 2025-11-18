@@ -74,7 +74,7 @@ For each uncovered/under-covered class:
 ### Phase 3: Validation
 1. **Final coverage check**: Ensure 100% line and branch coverage
 2. **Test quality review**: Verify tests are meaningful, not just coverage-chasing
-3. **Build verification**: Run `mvn clean test` to ensure everything passes
+3. **Build verification**: Run `mvn -f codebase/pom.xml clean test` to ensure everything passes
 
 ## Test Generation Guidelines
 

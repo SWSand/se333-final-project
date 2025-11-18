@@ -16,7 +16,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 @mcp.tool
-def find_source_files(base_path: str = "/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project") -> List[Dict[str, str]]:
+def find_source_files(base_path: str = ".") -> List[Dict[str, str]]:
     """
     Find all Java source files in the project that need testing.
     Returns a list of dictionaries with file paths, class names, and package names.
@@ -28,10 +28,18 @@ def find_source_files(base_path: str = "/Users/jsandoval/Documents/book-of-pract
         List of source files with metadata
     """
     source_files = []
-    src_main_java = os.path.join(base_path, "src", "main", "java")
-    
-    if not os.path.exists(src_main_java):
-        return []
+    # If a `codebase/` directory exists, prefer it. Otherwise use base_path directly.
+    root_path = base_path
+    if not os.path.exists(os.path.join(root_path, "src", "main", "java")):
+        # check for codebase/ layout
+        candidate = os.path.join(root_path, "codebase")
+        if os.path.exists(os.path.join(candidate, "src", "main", "java")):
+            root_path = candidate
+        else:
+            # nothing to scan
+            return []
+
+    src_main_java = os.path.join(root_path, "src", "main", "java")
     
     for root, dirs, files in os.walk(src_main_java):
         for file in files:
@@ -48,13 +56,13 @@ def find_source_files(base_path: str = "/Users/jsandoval/Documents/book-of-pract
                     "relative_path": rel_path,
                     "package": package_name,
                     "class_name": class_name,
-                    "test_path": os.path.join(base_path, "src", "test", "java", rel_path.replace(".java", "Test.java"))
+                    "test_path": os.path.join(root_path, "src", "test", "java", rel_path.replace(".java", "Test.java"))
                 })
     
     return source_files
 
 @mcp.tool
-def jacoco_find_path(base_path: str = "/Users/jsandoval/Documents/book-of-practice/final_project/se333-final-project") -> str:
+def jacoco_find_path(base_path: str = ".") -> str:
     """
     Find the JaCoCo XML report path after running tests.
     
@@ -64,16 +72,21 @@ def jacoco_find_path(base_path: str = "/Users/jsandoval/Documents/book-of-practi
     Returns:
         Path to jacoco.xml or error message
     """
-    jacoco_path = os.path.join(base_path, "target", "site", "jacoco", "jacoco.xml")
-    
-    if os.path.exists(jacoco_path):
-        return jacoco_path
-    else:
-        # Check alternative location
-        alt_path = os.path.join(base_path, "target", "jacoco", "jacoco.xml")
-        if os.path.exists(alt_path):
-            return alt_path
-        return f"JaCoCo report not found. Run 'mvn test' first. Expected at: {jacoco_path}"
+    # Look for jacoco report under base_path; prefer codebase/ if present
+    candidates = [
+        os.path.join(base_path, "codebase", "target", "site", "jacoco", "jacoco.xml"),
+        os.path.join(base_path, "target", "site", "jacoco", "jacoco.xml"),
+        os.path.join(base_path, "codebase", "target", "jacoco", "jacoco.xml"),
+        os.path.join(base_path, "target", "jacoco", "jacoco.xml"),
+    ]
+
+    for jacoco_path in candidates:
+        if os.path.exists(jacoco_path):
+            return jacoco_path
+
+    # Not found
+    expected = candidates[0]
+    return f"JaCoCo report not found. Run 'mvn test' first. Expected at: {expected}"
 
 @mcp.tool
 def missing_coverage(jacoco_xml_path: str) -> Dict:

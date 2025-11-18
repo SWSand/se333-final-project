@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: org.apache.commons.lang3.time.FastDateParserTest
+-------------------------------------------------------------------------------
+Tests run: 45, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 41.577 sec <<< FAILURE!
+testTextStrategy_SetCalendar_InvalidValue(org.apache.commons.lang3.time.FastDateParserTest)  Time elapsed: 0.001 sec  <<< ERROR!
+java.text.ParseException: Unparseable date: "InvalidMonth" does not match (\QSeptember\E|\QDecember\E|\QFebruary\E|\QNovember\E|\QJanuary\E|\QOctober\E|\QAugust\E|\QApril\E|\QMarch\E|\QJuly\E|\QJune\E|\QApr\E|\QAug\E|\QDec\E|\QFeb\E|\QJan\E|\QJul\E|\QJun\E|\QMar\E|\QMay\E|\QNov\E|\QOct\E|\QSep\E)
+	at org.apache.commons.lang3.time.FastDateParser.parse(FastDateParser.java:254)
+	at org.apache.commons.lang3.time.FastDateParserTest.testTextStrategy_SetCalendar_InvalidValue(FastDateParserTest.java:948)
+

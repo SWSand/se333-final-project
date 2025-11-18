@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: org.apache.commons.lang3.reflect.ConstructorUtilsTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec <<< FAILURE!
+testInvokeConstructor(org.apache.commons.lang3.reflect.ConstructorUtilsTest)  Time elapsed: 0.003 sec  <<< FAILURE!
+java.lang.AssertionError: Should have thrown NoSuchMethodException
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.apache.commons.lang3.reflect.ConstructorUtilsTest.testInvokeConstructor(ConstructorUtilsTest.java:132)
+

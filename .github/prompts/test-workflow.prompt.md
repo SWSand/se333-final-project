@@ -22,7 +22,7 @@ You have access to the following custom MCP tools in #mcp_my_mcp_add (example) p
 ### Phase 1: Initial Assessment
 1. **Run baseline coverage**:
    ```bash
-   mvn clean test jacoco:report
+   mvn -f codebase/pom.xml clean test jacoco:report
    ```
 
 2. **Get current coverage** using `jacoco_coverage()` and `missing_coverage()`
@@ -58,7 +58,7 @@ For each uncovered/under-covered class:
 
 4. **Run tests and check coverage**:
    ```bash
-   mvn clean test jacoco:report
+   mvn -f codebase/pom.xml clean test jacoco:report
    ```
 
 5. **Analyze results**:
@@ -147,8 +147,8 @@ public class ExampleClassTest {
 
 ## Commands Reference
 ```bash
-# Clean build and run tests with coverage
-mvn clean test jacoco:report
+# Clean build and run tests with coverage (for the Java project in `codebase/`)
+mvn -f codebase/pom.xml clean test jacoco:report
 
 # Run specific test class
 mvn test -Dtest=ClassName
@@ -165,9 +165,9 @@ mvn clean compile -DskipTests
 - **Build Tool**: Maven
 - **Test Framework**: JUnit 4
 - **Coverage Tool**: JaCoCo 0.8.11
-- **Source Dir**: `src/main/java`
-- **Test Dir**: `src/test/java`
-- **Coverage Report**: `target/site/jacoco/jacoco.xml`
+- **Source Dir**: `codebase/src/main/java`
+- **Test Dir**: `codebase/src/test/java`
+- **Coverage Report**: `codebase/target/site/jacoco/jacoco.xml`
 
 ## Known Issues in This Project
 - Java version compatibility issues (use Java 8-11 compatible syntax)

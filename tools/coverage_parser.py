@@ -2,7 +2,7 @@
 """Parse JaCoCo XML report and emit a JSON summary and exit non-zero when below threshold.
 
 Usage:
-  python3 tools/coverage_parser.py --input target/site/jacoco/jacoco.xml --min-line 80
+    python3 tools/coverage_parser.py --input codebase/target/site/jacoco/jacoco.xml --min-line 80
 
 This script also writes a small summary to the GitHub Actions GITHUB_OUTPUT file
 if present so workflow steps can reference the summary as an output.
@@ -58,7 +58,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--input', required=True)
     p.add_argument('--min-line', required=False, type=float, default=0.0)
-    p.add_argument('--json-out', required=False, default='target/site/jacoco/coverage-summary.json')
+    p.add_argument('--json-out', required=False, default='codebase/target/site/jacoco/coverage-summary.json')
     args = p.parse_args()
 
     try:

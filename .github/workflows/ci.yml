@@ -34,24 +34,26 @@ jobs:
             ${{ runner.os }}-m2-
 
       - name: Run static analysis (Checkstyle)
+        working-directory: codebase
         run: mvn -B validate
 
       - name: Run Maven tests and JaCoCo
+        working-directory: codebase
         run: mvn -B -DskipTests=false clean test jacoco:report
 
       - name: Upload Surefire JUnit test reports
         uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
-          path: target/surefire-reports
+          path: codebase/target/surefire-reports
 
       - name: Upload JaCoCo XML and HTML
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
           path: |
-            target/site/jacoco/jacoco.xml
-            target/site/jacoco/index.html
+            codebase/target/site/jacoco/jacoco.xml
+            codebase/target/site/jacoco/index.html
 
       - name: Set up Python for coverage parsing
         uses: actions/setup-python@v4
@@ -61,7 +63,7 @@ jobs:
       - name: Parse JaCoCo and fail if below threshold
         id: coverage
         run: |
-          python3 tools/coverage_parser.py --input target/site/jacoco/jacoco.xml --min-line 80
+          python3 tools/coverage_parser.py --input codebase/target/site/jacoco/jacoco.xml --min-line 80
 
       - name: Comment coverage summary on PR
         if: github.event_name == 'pull_request'

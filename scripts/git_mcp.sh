@@ -34,7 +34,7 @@ case "$cmd" in
     fi
     msg="$*"
     # Attempt to include coverage summary if present
-    cov_file="target/site/jacoco/coverage-summary.json"
+  cov_file="codebase/target/site/jacoco/coverage-summary.json"
     if [ -f "$cov_file" ]; then
       cov=$(cat "$cov_file" | python3 -c "import sys,json;print(json.load(sys.stdin).get('line_coverage_percent'))")
       git commit -m "$msg (coverage=${cov}%)" || git commit -m "$msg"

@@ -13,20 +13,22 @@ This project implements an automated test generation system for Java projects us
 
 ```
 se333-final-project/
-├── README.md                  # Project overview
-├── QUICKSTART.md              # Getting started guide
-├── PROJECT_SUMMARY.md         # Detailed project summary
-├── PROGRESS_CHECKLIST.md      # Development progress tracking
-├── PHASE_3_4_5_DOCUMENTATION.md # Phase 3-5 implementation documentation
-├── IMPLEMENTATION_SUMMARY.md  # Quick reference summary
+├── README.md                  # Project overview (this file)
+├── docs/                      # All markdown docs and example scripts
+│   ├── QUICKSTART.md
+│   ├── PROJECT_SUMMARY.md
+│   ├── PROGRESS_CHECKLIST.md
+│   ├── PHASE_3_4_5_DOCUMENTATION.md
+│   └── IMPLEMENTATION_SUMMARY.md
 ├── server.py                  # MCP tools server (19 tools)
-├── pom.xml                    # Maven configuration with JaCoCo
+├── codebase/                  # Java project (moved here)
+│   ├── pom.xml                # Maven configuration with JaCoCo
+│   └── src/
+│       ├── main/java/         # Source code to test
+│       └── test/java/         # Test code
 ├── .github/prompts/
 │   ├── tester.prompt.md       # Agent instructions
 │   └── test-workflow.prompt.md # Detailed workflow
-└── src/
-    ├── main/java/             # Source code to test
-    └── test/java/             # Test code
 ```
 
 ## Project Status
@@ -56,7 +58,7 @@ Current test coverage: 94.13% instruction coverage (51,743/54,972 instructions c
 
 1. Clone the repository
 2. Install dependencies: `mvn clean install`
-3. Generate initial coverage report: `mvn clean test jacoco:report`
+3. Generate initial coverage report: `mvn -f codebase/pom.xml clean test jacoco:report`
 4. Start MCP server: `python server.py`
 
 ### Usage
@@ -108,11 +110,11 @@ The project uses MCP tools accessible through GitHub Copilot Agent Mode. See QUI
 ## Documentation Files
 
 - **[README.md](README.md)** - Project overview (this file)
-- **[QUICKSTART.md](QUICKSTART.md)** - Setup guide and first steps
-- **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** - Complete project overview
-- **[PROGRESS_CHECKLIST.md](PROGRESS_CHECKLIST.md)** - Development progress tracking
-- **[PHASE_3_4_5_DOCUMENTATION.md](PHASE_3_4_5_DOCUMENTATION.md)** - Comprehensive Phase 3-5 documentation
-- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Quick reference for all implementations
+- **[QUICKSTART.md](docs/QUICKSTART.md)** - Setup guide and first steps
+- **[PROJECT_SUMMARY.md](docs/PROJECT_SUMMARY.md)** - Complete project overview
+- **[PROGRESS_CHECKLIST.md](docs/PROGRESS_CHECKLIST.md)** - Development progress tracking
+- **[PHASE_3_4_5_DOCUMENTATION.md](docs/PHASE_3_4_5_DOCUMENTATION.md)** - Comprehensive Phase 3-5 documentation
+- **[IMPLEMENTATION_SUMMARY.md](docs/IMPLEMENTATION_SUMMARY.md)** - Quick reference for all implementations
 - **[.github/prompts/test-workflow.prompt.md](.github/prompts/test-workflow.prompt.md)** - Detailed workflow
 - **[.github/prompts/tester.prompt.md](.github/prompts/tester.prompt.md)** - Agent instructions
 
@@ -131,8 +133,8 @@ The project uses MCP tools accessible through GitHub Copilot Agent Mode. See QUI
 MCP tools provide reusable automation capabilities:
 
 ```python
-# Find all source files
-files = find_source_files(".")
+# Find all source files (point at codebase/ if needed)
+files = find_source_files("codebase")
 
 # Analyze specific class
 info = analyze_java_class("src/main/java/.../MyClass.java")
@@ -161,8 +163,8 @@ Tools automatically:
 ## Common Commands
 
 ```bash
-# Clean build and test with coverage
-mvn clean test jacoco:report
+# Clean build and test with coverage (for Java project in `codebase/`)
+mvn -f codebase/pom.xml clean test jacoco:report
 
 # Run specific test
 mvn test -Dtest=ClassNameTest
@@ -171,23 +173,23 @@ mvn test -Dtest=ClassNameTest
 mvn clean compile -DskipTests
 
 # View coverage HTML report
-open target/site/jacoco/index.html
+open codebase/target/site/jacoco/index.html
 ```
 
 ## Troubleshooting
 
 ### Tests fail to run
 ```bash
-# Clean everything and rebuild
-rm -rf target/
-mvn clean compile test
+# Clean everything and rebuild (Java build artifacts under codebase/target)
+rm -rf codebase/target/
+mvn -f codebase/pom.xml clean compile test
 ```
 
 ### Coverage report missing
 ```bash
-# Ensure JaCoCo ran
-mvn clean test jacoco:report
-ls -la target/site/jacoco/jacoco.xml
+# Ensure JaCoCo ran (run in codebase)
+mvn -f codebase/pom.xml clean test jacoco:report
+ls -la codebase/target/site/jacoco/jacoco.xml
 ```
 
 ### MCP tools not working
